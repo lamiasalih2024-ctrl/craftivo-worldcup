@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white p-6">
+    <div class="max-w-md mx-auto">
+        <h1 class="text-3xl font-bold text-yellow-500 text-center mb-6">كأس العالم 2026</h1>
+        
+        <div class="bg-slate-900 p-4 rounded-xl border border-yellow-700">
+            <h2 class="text-center font-bold mb-4">جدول المباريات</h2>
+            <div class="space-y-3">
+                <div class="bg-slate-800 p-3 rounded flex justify-between">
+                    <span>البرازيل 2 - 0 صربيا</span>
+                    <span class="text-green-500">منتهية</span>
+                </div>
+                <div class="bg-slate-800 p-3 rounded flex justify-between">
+                    <span>ألمانيا 1 - 1 إسبانيا</span>
+                    <span class="text-yellow-500">قريباً</span>
+                </div>
+                <div class="bg-slate-800 p-3 rounded flex justify-between">
+                    <span>فرنسا 3 - 0 الأرجنتين</span>
+                    <span class="text-yellow-500">قريباً</span>
+                </div>
+            </div>
+        </div>
+        <p class="text-center mt-4 text-xs">تصميم Craftivo</p>
+    </div>
+</body>
+</html>
 # craftivo-worldcup
