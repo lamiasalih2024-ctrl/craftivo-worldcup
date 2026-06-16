@@ -5,50 +5,111 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Craftivo | تغطية كأس العالم 2026</title>
 </head>
-<body class="bg-slate-950 text-white p-6">
+<body class="bg-slate-950 text-white p-4">
     <div class="max-w-2xl mx-auto">
-        <!-- العنوان -->
-        <div class="text-center mb-10">
-            <h1 class="text-5xl font-black text-yellow-500 mb-2">Craftivo</h1>
-            <p class="text-slate-400 text-lg">تغطية كأس العالم 2026</p>
-        </div>
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-black text-yellow-500">Craftivo</h1>
+            <p class="text-slate-300">تغطية كأس العالم 2026</p>
+        </header>
 
-        <!-- المجموعات -->
-        <div class="space-y-6 mb-12">
-            <!-- هيكل المجموعة -->
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-700">
-                <h3 class="text-yellow-500 font-bold text-xl mb-4 border-b border-slate-800 pb-2">المجموعة A</h3>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center text-md"><span>المكسيك × جنوب أفريقيا</span> <span class="bg-green-700 px-3 py-1 rounded-lg font-bold">2-0</span></div>
-                    <div class="flex justify-between items-center text-md"><span>كوريا الجنوبية × التشيك</span> <span class="bg-green-700 px-3 py-1 rounded-lg font-bold">2-1</span></div>
-                </div>
-            </div>
-            
-            <!-- (كرري هذا الهيكل لكل المجموعات B حتى L مع تغيير النتائج) -->
-            <!-- سأضع لك مثالاً لمجموعة غير ملعوبة لترحي الطريقة -->
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-700 opacity-70">
-                <h3 class="text-blue-400 font-bold text-xl mb-4 border-b border-slate-800 pb-2">المجموعة I</h3>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center text-md"><span>فرنسا × السنغال</span> <span class="bg-slate-800 px-3 py-1 rounded-lg">-</span></div>
-                    <div class="flex justify-between items-center text-md"><span>العراق × النرويج</span> <span class="bg-slate-800 px-3 py-1 rounded-lg">-</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- أدوار البطولة -->
-        <h2 class="text-2xl font-bold text-yellow-500 mb-6 border-b border-slate-800 pb-2">خارطة الطريق نحو النهائي 🏆</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center font-bold text-slate-400">دور الـ 32</div>
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center font-bold text-slate-400">دور الـ 16</div>
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center font-bold text-slate-400">دور الـ 8</div>
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center font-bold text-slate-400">نصف النهائي</div>
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center font-bold text-yellow-500 col-span-1 md:col-span-2">النهائي الكبير</div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة A</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>المكسيك - جنوب أفريقيا</span> <span class="bg-green-700 px-1 rounded">2-0</span></div>
+                    <div class="flex justify-between"><span>كوريا الجنوبية - التشيك</span> <span class="bg-green-700 px-1 rounded">2-1</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة B</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>كندا - البوسنة والهرسك</span> <span class="bg-green-700 px-1 rounded">1-1</span></div>
+                    <div class="flex justify-between"><span>قطر - سويسرا</span> <span class="bg-green-700 px-1 rounded">1-1</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة C</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>البرازيل - المغرب</span> <span class="bg-green-700 px-1 rounded">1-1</span></div>
+                    <div class="flex justify-between"><span>هايتي - اسكتلندا</span> <span class="bg-green-700 px-1 rounded">0-1</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة D</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>أمريكا - باراغواي</span> <span class="bg-green-700 px-1 rounded">4-1</span></div>
+                    <div class="flex justify-between"><span>أستراليا - تركيا</span> <span class="bg-green-700 px-1 rounded">2-0</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة E</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>ألمانيا - كوراساو</span> <span class="bg-green-700 px-1 rounded">7-1</span></div>
+                    <div class="flex justify-between"><span>ساحل العاج - الإكوادور</span> <span class="bg-green-700 px-1 rounded">1-0</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة F</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>هولندا - اليابان</span> <span class="bg-green-700 px-1 rounded">2-2</span></div>
+                    <div class="flex justify-between"><span>السويد - تونس</span> <span class="bg-green-700 px-1 rounded">5-1</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة G</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>بلجيكا - مصر</span> <span class="bg-green-700 px-1 rounded">1-1</span></div>
+                    <div class="flex justify-between"><span>إيران - نيوزيلندا</span> <span class="bg-green-700 px-1 rounded">2-2</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                <h3 class="text-yellow-500 font-bold mb-2 border-b border-slate-800">المجموعة H</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>إسبانيا - الرأس الأخضر</span> <span class="bg-green-700 px-1 rounded">0-0</span></div>
+                    <div class="flex justify-between"><span>السعودية - الأوروغواي</span> <span class="bg-green-700 px-1 rounded">1-1</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700 opacity-60">
+                <h3 class="text-blue-400 font-bold mb-2 border-b border-slate-800">المجموعة I</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>فرنسا - السنغال</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                    <div class="flex justify-between"><span>العراق - النرويج</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700 opacity-60">
+                <h3 class="text-blue-400 font-bold mb-2 border-b border-slate-800">المجموعة J</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>الأرجنتين - الجزائر</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                    <div class="flex justify-between"><span>النمسا - الأردن</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700 opacity-60">
+                <h3 class="text-blue-400 font-bold mb-2 border-b border-slate-800">المجموعة K</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>البرتغال - الكونغو</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                    <div class="flex justify-between"><span>أوزبكستان - كولومبيا</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded border border-slate-700 opacity-60">
+                <h3 class="text-blue-400 font-bold mb-2 border-b border-slate-800">المجموعة L</h3>
+                <div class="text-xs space-y-1">
+                    <div class="flex justify-between"><span>إنجلترا - كرواتيا</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                    <div class="flex justify-between"><span>غانا - بنما</span> <span class="bg-slate-800 px-1 rounded">-</span></div>
+                </div>
+            </div>
         </div>
 
-        <!-- التذييل -->
-        <footer class="mt-16 text-center border-t border-slate-800 pt-8">
-            <p class="text-yellow-500 font-bold text-lg">© 2026 Craftivo Studio</p>
-        </footer>
+        <div class="mt-8 border-t border-slate-800 pt-4">
+            <h2 class="text-yellow-500 font-bold text-center mb-4">خارطة الطريق نحو النهائي</h2>
+            <div class="grid grid-cols-5 gap-1 text-center text-[10px]">
+                <div class="bg-slate-800 p-1 rounded">32</div>
+                <div class="bg-slate-800 p-1 rounded">16</div>
+                <div class="bg-slate-800 p-1 rounded">8</div>
+                <div class="bg-slate-800 p-1 rounded">4</div>
+                <div class="bg-slate-800 p-1 rounded text-yellow-500">النهائي</div>
+            </div>
+        </div>
+        <footer class="text-center mt-6 text-[10px] text-slate-500">© 2026 Craftivo Studio</footer>
     </div>
 </body>
 </html>
