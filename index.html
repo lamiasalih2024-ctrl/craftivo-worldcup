@@ -2,60 +2,68 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craftivo | تغطية كأس العالم 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background:#05070f; color:white; font-family: sans-serif; }
-    .group-wrapper { margin-top:20px; border-bottom:1px solid #222; padding-bottom:15px; }
-    .group-title { color:#fbbf24; font-size:1.2rem; font-weight:800; border-right:4px solid #fbbf24; padding-right:10px; margin-bottom:10px; }
-    .card { background:#111; border:1px solid #333; border-radius:8px; padding:10px; margin-bottom:5px; font-size: 0.9rem; }
+    body { background: #05070f; color: white; font-family: sans-serif; }
+    .group-container { margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+    .group-title { color: #fbbf24; font-size: 1.2rem; font-weight: 800; border-right: 4px solid #fbbf24; padding-right: 10px; margin-bottom: 10px; }
+    .match-card { background: #111; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-bottom: 8px; font-weight: bold; }
+    .footer-signature { text-align: center; padding: 40px; margin-top: 50px; border-top: 1px solid #222; }
   </style>
 </head>
 <body class="p-4">
 
 <div class="max-w-xl mx-auto">
-  <div class="text-center py-4">
+  <!-- الترويسة -->
+  <div class="text-center py-6">
     <h1 class="text-4xl font-black text-yellow-500">Craftivo</h1>
-    <p class="text-gray-400">تغطية كأس العالم 2026</p>
+    <p class="text-gray-400 font-bold">تغطية كأس العالم 2026</p>
+    <p class="text-blue-500 text-xs mt-1 font-bold">بتوقيت مكة المكرمة</p>
   </div>
 
-  <div id="container"></div>
+  <div id="app-container"></div>
 
-  <div class="text-center mt-10 p-4 border-t border-gray-800">
+  <!-- التوقيع النهائي -->
+  <div class="footer-signature">
     <div style="font-size: 2rem;">🤍</div>
-    <p class="font-bold">Craftivo | LMS</p>
+    <p class="text-gray-400 font-bold mt-2">Craftivo | LMS</p>
+    <p class="text-xs text-gray-600">تصميم وتطوير: لمياء صالح</p>
   </div>
 </div>
 
 <script>
+// الهيكل الثابت للمجموعات
 const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
-const matches = [
+// قاعدة البيانات: أضيفي أي مباراة هنا وستظهر فوراً في مجموعتها
+const matchesData = [
   { group:"A", home:"المكسيك 🇲🇽", away:"جنوب أفريقيا 🇿🇦", score:"2 - 0" },
   { group:"H", home:"فرنسا 🇫🇷", away:"السنغال 🇸🇳", score:"3 - 1" }
 ];
 
-const container = document.getElementById("container");
+const container = document.getElementById("app-container");
 
 groups.forEach(g => {
-  // إنشاء حاوية المجموعة أولاً
-  let groupDiv = document.createElement("div");
-  groupDiv.className = "group-wrapper";
-  groupDiv.innerHTML = `<h2 class="group-title">المجموعة ${g}</h2>`;
+  let div = document.createElement("div");
+  div.className = "group-container";
+  div.innerHTML = `<h2 class="group-title">المجموعة ${g}</h2>`;
   
-  // البحث عن مباريات هذه المجموعة
-  const match = matches.find(m => m.group === g);
-  if(match) {
-    groupDiv.innerHTML += `
-      <div class="card flex justify-between font-bold">
-        <span>${match.home}</span>
-        <span class="text-yellow-500">${match.score}</span>
-        <span>${match.away}</span>
-      </div>`;
+  const matches = matchesData.filter(m => m.group === g);
+  
+  if(matches.length > 0) {
+    matches.forEach(m => {
+      div.innerHTML += `
+        <div class="match-card flex justify-between items-center">
+          <span>${m.home}</span>
+          <span class="text-yellow-500 text-lg">${m.score}</span>
+          <span>${m.away}</span>
+        </div>`;
+    });
   } else {
-    // هذا الجزء هو الذي يمنع الفراغ
-    groupDiv.innerHTML += `<p class="text-gray-600 text-sm italic">لا توجد مباريات حالياً</p>`;
+    div.innerHTML += `<p class="text-gray-600 text-sm italic mr-4">لا توجد مباريات مسجلة حالياً</p>`;
   }
-  
-  container.appendChild(groupDiv);
+  container.appendChild(div);
 });
 </script>
 </body>
