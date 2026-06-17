@@ -8,89 +8,102 @@
         body { background-color: #05070f; color: #fff; font-family: sans-serif; }
         .group-card { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
         .gold-color { color: #eab308; }
-        .match-line { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1f2937; font-size: 0.95rem; }
-        .date-badge { color: #eab308; font-size: 0.75rem; font-weight: bold; }
+        .match-line { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1f2937; font-size: 0.9rem; }
+        .points-footer { color: #9ca3af; font-size: 0.75rem; margin-top: 8px; font-weight: bold; }
+        .status-tag { font-size: 0.7rem; color: #10b981; }
     </style>
 </head>
 <body class="p-4">
 
 <div class="max-w-3xl mx-auto">
-    <header class="text-center py-8">
-        <h1 class="text-4xl font-black gold-color">Craftivo</h1>
-        <p class="text-slate-400">جدول مباريات كأس العالم 2026 الكامل</p>
+    <header class="text-center py-6">
+        <h1 class="text-3xl font-black gold-color">Craftivo</h1>
+        <p class="text-slate-400 text-sm">تغطية كأس العالم 2026</p>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- مجموعة A -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة A</h2>
-            <div class="match-line"><span>🇲🇽 المكسيك 2 - 0 ج.أفريقيا 🇿🇦</span><span class="date-badge">11 يونيو</span></div>
-            <div class="match-line"><span>🇰🇷 كوريا ج 2 - 1 التشيك 🇨🇿</span><span class="date-badge">12 يونيو</span></div>
+        <!-- المجموعة A -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة A</h2>
+            <div class="match-line"><span>🇲🇽 المكسيك 2 - 0 ج.أفريقيا 🇿🇦 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇰🇷 كوريا ج 2 - 1 التشيك 🇨🇿 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: المكسيك(3)، كوريا(3)، التشيك(0)، ج.أفريقيا(0)</p>
         </div>
-        <!-- مجموعة B -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة B</h2>
-            <div class="match-line"><span>🇨🇦 كندا 1 - 1 البوسنة 🇧🇦</span><span class="date-badge">12 يونيو</span></div>
-            <div class="match-line"><span>🇶🇦 قطر 1 - 1 سويسرا 🇨🇭</span><span class="date-badge">13 يونيو</span></div>
+        <!-- المجموعة B -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة B</h2>
+            <div class="match-line"><span>🇨🇦 كندا 1 - 1 البوسنة 🇧🇦 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇶🇦 قطر 1 - 1 سويسرا 🇨🇭 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: كندا(1)، البوسنة(1)، قطر(1)، سويسرا(1)</p>
         </div>
-        <!-- مجموعة C -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة C</h2>
-            <div class="match-line"><span>🇧🇷 البرازيل 1 - 1 المغرب 🇲🇦</span><span class="date-badge">14 يونيو</span></div>
-            <div class="match-line"><span>🇭🇹 هايتي 0 - 1 إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="date-badge">14 يونيو</span></div>
+        <!-- المجموعة C -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة C</h2>
+            <div class="match-line"><span>🇧🇷 البرازيل 1 - 1 المغرب 🇲🇦 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇭🇹 هايتي 0 - 1 إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: إسكتلندا(3)، البرازيل(1)، المغرب(1)، هايتي(0)</p>
         </div>
-        <!-- مجموعة D -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة D</h2>
-            <div class="match-line"><span>🇺🇸 أمريكا 4 - 1 باراغواي 🇵🇾</span><span class="date-badge">13 يونيو</span></div>
-            <div class="match-line"><span>🇦🇺 أستراليا 2 - 0 تركيا 🇹🇷</span><span class="date-badge">14 يونيو</span></div>
+        <!-- المجموعة D -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة D</h2>
+            <div class="match-line"><span>🇺🇸 أمريكا 4 - 1 باراغواي 🇵🇾 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇦🇺 أستراليا 2 - 0 تركيا 🇹🇷 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: أمريكا(3)، أستراليا(3)، باراغواي(0)، تركيا(0)</p>
         </div>
-        <!-- مجموعة E -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة E</h2>
-            <div class="match-line"><span>🇩🇪 ألمانيا 7 - 1 كوراساو 🇨🇼</span><span class="date-badge">14 يونيو</span></div>
-            <div class="match-line"><span>🇨🇮 ساحل العاج 1 - 0 الإكوادور 🇪🇨</span><span class="date-badge">15 يونيو</span></div>
+        <!-- المجموعة E -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة E</h2>
+            <div class="match-line"><span>🇩🇪 ألمانيا 7 - 1 كوراساو 🇨🇼 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇨🇮 ساحل العاج 1 - 0 الإكوادور 🇪🇨 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: ألمانيا(3)، ساحل العاج(3)، الإكوادور(0)، كوراساو(0)</p>
         </div>
-        <!-- مجموعة F -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة F</h2>
-            <div class="match-line"><span>🇳🇱 هولندا 2 - 2 اليابان 🇯🇵</span><span class="date-badge">14 يونيو</span></div>
-            <div class="match-line"><span>🇸🇪 السويد 5 - 1 تونس 🇹🇳</span><span class="date-badge">15 يونيو</span></div>
+        <!-- المجموعة F -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة F</h2>
+            <div class="match-line"><span>🇳🇱 هولندا 2 - 2 اليابان 🇯🇵 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇸🇪 السويد 5 - 1 تونس 🇹🇳 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: السويد(3)، هولندا(1)، اليابان(1)، تونس(0)</p>
         </div>
-        <!-- مجموعة G -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة G</h2>
-            <div class="match-line"><span>🇧🇪 بلجيكا 1 - 1 مصر 🇪🇬</span><span class="date-badge">15 يونيو</span></div>
-            <div class="match-line"><span>🇮🇷 إيران 2 - 2 نيوزيلندا 🇳🇿</span><span class="date-badge">16 يونيو</span></div>
+        <!-- المجموعة G -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة G</h2>
+            <div class="match-line"><span>🇧🇪 بلجيكا 1 - 1 مصر 🇪🇬 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇮🇷 إيران 2 - 2 نيوزيلندا 🇳🇿 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: بلجيكا(1)، مصر(1)، إيران(1)، نيوزيلندا(1)</p>
         </div>
-        <!-- مجموعة H -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة H</h2>
-            <div class="match-line"><span>🇪🇸 إسبانيا 0 - 0 الرأس الأخضر 🇨🇻</span><span class="date-badge">15 يونيو</span></div>
-            <div class="match-line"><span>🇸🇦 السعودية 1 - 1 أوروغواي 🇺🇾</span><span class="date-badge">16 يونيو</span></div>
+        <!-- المجموعة H -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة H</h2>
+            <div class="match-line"><span>🇪🇸 إسبانيا 0 - 0 الرأس الأخضر 🇨🇻 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇸🇦 السعودية 1 - 1 أوروغواي 🇺🇾 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: إسبانيا(1)، الرأس الأخضر(1)، السعودية(1)، أوروغواي(1)</p>
         </div>
-        <!-- مجموعة I -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة I</h2>
-            <div class="match-line"><span>🇫🇷 فرنسا 3 - 1 السنغال 🇸🇳</span><span class="date-badge">16 يونيو</span></div>
-            <div class="match-line"><span>🇮🇶 العراق 1 - 4 النرويج 🇳🇴</span><span class="date-badge">16 يونيو</span></div>
+        <!-- المجموعة I -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة I</h2>
+            <div class="match-line"><span>🇫🇷 فرنسا 3 - 1 السنغال 🇸🇳 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇮🇶 العراق 1 - 4 النرويج 🇳🇴 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: النرويج(3)، فرنسا(3)، السنغال(0)، العراق(0)</p>
         </div>
-        <!-- مجموعة J -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة J</h2>
-            <div class="match-line"><span>🇦🇷 الأرجنتين 3 - 0 الجزائر 🇩🇿</span><span class="date-badge">16 يونيو</span></div>
-            <div class="match-line"><span>🇦🇹 النمسا 3 - 1 الأردن 🇯🇴</span><span class="date-badge">17 يونيو</span></div>
+        <!-- المجموعة J -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة J</h2>
+            <div class="match-line"><span>🇦🇷 الأرجنتين 3 - 0 الجزائر 🇩🇿 <span class="status-tag">✅</span></span></div>
+            <div class="match-line"><span>🇦🇹 النمسا 3 - 1 الأردن 🇯🇴 <span class="status-tag">✅</span></span></div>
+            <p class="points-footer">النقاط: الأرجنتين(3)، النمسا(3)، الجزائر(0)، الأردن(0)</p>
         </div>
-        <!-- مجموعة K -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة K</h2>
-            <div class="match-line"><span>🇵🇹 البرتغال VS الكونغو 🇨🇩</span><span class="date-badge">17 يونيو 8م</span></div>
-            <div class="match-line"><span>🇺🇿 أوزبكستان VS كولومبيا 🇨🇴</span><span class="date-badge">18 يونيو 5ص</span></div>
+        <!-- المجموعة K -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة K</h2>
+            <div class="match-line"><span>🇵🇹 البرتغال VS الكونغو 🇨🇩</span><span class="text-[10px] text-yellow-500">17 يونيو - 8:00 م</span></div>
+            <div class="match-line"><span>🇺🇿 أوزبكستان VS كولومبيا 🇨🇴</span><span class="text-[10px] text-yellow-500">18 يونيو - 5:00 ص</span></div>
+            <p class="points-footer">النقاط: بانتظار بدء المباريات</p>
         </div>
-        <!-- مجموعة L -->
-        <div class="group-card"><h2 class="gold-color font-bold">المجموعة L</h2>
-            <div class="match-line"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا VS كرواتيا 🇭🇷</span><span class="date-badge">17 يونيو 11م</span></div>
-            <div class="match-line"><span>🇬🇭 غانا VS بنما 🇵🇦</span><span class="date-badge">18 يونيو 2ص</span></div>
+        <!-- المجموعة L -->
+        <div class="group-card"><h2 class="gold-color font-bold mb-2">المجموعة L</h2>
+            <div class="match-line"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا VS كرواتيا 🇭🇷</span><span class="text-[10px] text-yellow-500">17 يونيو - 11:00 م</span></div>
+            <div class="match-line"><span>🇬🇭 غانا VS بنما 🇵🇦</span><span class="text-[10px] text-yellow-500">18 يونيو - 2:00 ص</span></div>
+            <p class="points-footer">النقاط: بانتظار بدء المباريات</p>
         </div>
     </div>
 
     <!-- خارطة الطريق -->
     <div class="group-card mt-6">
         <h2 class="text-center gold-color font-bold mb-4">خارطة الطريق نحو النهائي</h2>
-        <div class="flex justify-between text-center text-xs">
-            <div class="p-2 border-r border-slate-700">دور الـ32</div>
-            <div class="p-2 border-r border-slate-700">دور الـ16</div>
-            <div class="p-2 border-r border-slate-700">ربع النهائي</div>
-            <div class="p-2">النهائي</div>
+        <div class="flex justify-between text-center text-[10px] text-slate-400">
+            <div class="p-1">دور الـ32</div>
+            <div class="p-1">دور الـ16</div>
+            <div class="p-1">ربع النهائي</div>
+            <div class="p-1">النهائي</div>
         </div>
     </div>
 </div>
