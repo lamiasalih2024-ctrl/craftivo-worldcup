@@ -2,11 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Craftivo | تغطية كأس العالم 2026</title>
   <style>
     body { background: #05070f; color: white; font-family: sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
-    .card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; border-radius: 15px; padding: 20px; margin-bottom: 15px; }
+    .match-card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; border-radius: 15px; padding: 20px; margin-bottom: 15px; }
     footer { margin-top: auto; padding: 20px; text-align: center; color: #666; font-size: 0.8rem; border-top: 1px solid #222; }
   </style>
 </head>
@@ -30,28 +31,51 @@
       .then(res => res.json())
       .then(data => {
         const content = document.getElementById('content');
-        content.innerHTML = ''; 
-        if (data.response && data.response.length > 0) {
-          content.innerHTML = '<h2 class="text-2xl font-bold mb-6 text-center text-yellow-500">مباريات البطولة</h2>';
-          data.response.forEach(m => {
-            content.innerHTML += `
-              <div class="card text-center">
-                <p class="text-xs text-gray-400 mb-2">${m.fixture.date.split('T')[0]}</p>
-                <div class="flex justify-between items-center text-xl font-bold">
-                  <span>${m.teams.home.name}</span>
-                  <span class="text-yellow-500">${m.goals.home ?? '0'} : ${m.goals.away ?? '0'}</span>
-                  <span>${m.teams.away.name}</span>
-                </div>
-              </div>`;
-          });
-        } else {
+        const matches = data?.response || [];
+
+        if (matches.length === 0) {
           content.innerHTML = `
-            <div class="card text-center border-yellow-500/30">
-              <h2 class="text-2xl font-bold text-yellow-500 mb-4">كأس العالم 2026</h2>
-              <p class="text-gray-300">نظام البيانات يعمل بنجاح.</p>
-              <p class="text-gray-500 mt-4 text-sm">سيتم تحديث جدول المباريات فور توفرها في الـ API.</p>
-            </div>`;
+            <div class="match-card text-center text-gray-400">
+              لا توجد مباريات متاحة حالياً في النظام
+            </div>
+          `;
+          return;
         }
+
+        content.innerHTML = '<h2 class="text-xl font-bold mb-4 text-center text-yellow-500">جميع المباريات</h2>';
+
+        matches.forEach(m => {
+          const date = m?.fixture?.date?.split('T')[0] || "غير معروف";
+          const home = m?.teams?.home?.name || "—";
+          const away = m?.teams?.away?.name || "—";
+          const status = m?.fixture?.status?.short || "NS";
+          let score = "VS";
+
+          if (status === "FT") {
+            score = `${m?.goals?.home ?? 0} - ${m?.goals?.away ?? 0}`;
+          }
+
+          content.innerHTML += `
+            <div class="match-card text-center">
+              <p class="text-xs text-gray-400 mb-2">${date}</p>
+              <div class="flex justify-between items-center text-lg font-bold">
+                <span>${home}</span>
+                <span class="text-yellow-500">${score}</span>
+                <span>${away}</span>
+              </div>
+              <p class="text-xs mt-2 text-gray-400">
+                الحالة: ${status === "FT" ? "انتهت" : status === "NS" ? "لم تبدأ" : "مباشر"}
+              </p>
+            </div>
+          `;
+        });
+      })
+      .catch(() => {
+        document.getElementById('content').innerHTML = `
+          <div class="match-card text-red-500 text-center">
+            خطأ في الاتصال بالبيانات
+          </div>
+        `;
       });
   </script>
 </body>
