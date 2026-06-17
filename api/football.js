@@ -1,8 +1,7 @@
 export default async function handler(req, res) {
   const apiKey = process.env.API_KEY; 
-  
-  // سنقوم بجلب بيانات الدوري الإنجليزي كمثال للتأكد من عمل الربط
-  const endpoint = 'https://v3.football.api-sports.io/leagues?id=39';
+  // هذا الرابط المباشر لكأس العالم 2026
+  const endpoint = 'https://v3.football.api-sports.io/leagues?name=World%20Cup&season=2026';
 
   try {
     const response = await fetch(endpoint, {
