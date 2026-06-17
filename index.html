@@ -2,12 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Craftivo | تغطية كأس العالم 2026</title>
   <style>
-    body { background: #05070f; color: white; font-family: sans-serif; }
+    body { background: #05070f; color: white; font-family: sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
     .card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; border-radius: 15px; padding: 20px; margin-bottom: 15px; }
+    footer { margin-top: auto; padding: 20px; text-align: center; color: #666; font-size: 0.8rem; border-top: 1px solid #222; }
   </style>
 </head>
 <body class="p-4">
@@ -16,18 +16,21 @@
     <p class="text-gray-400 mt-2 text-lg font-bold">تغطية كأس العالم 2026</p>
   </header>
 
-  <div id="content" class="max-w-xl mx-auto">
-    <div class="text-center text-gray-500 animate-pulse">جاري تحميل البيانات...</div>
-  </div>
+  <main id="content" class="max-w-xl mx-auto flex-grow">
+    <div class="text-center text-gray-500 animate-pulse">جاري جلب البيانات...</div>
+  </main>
+
+  <footer>
+    <p>Craftivo &copy; 2026 | تطوير: LMS Systems</p>
+    <p class="mt-1">نظام تغطية المباريات الذكي</p>
+  </footer>
 
   <script>
     fetch('/api/football')
       .then(res => res.json())
       .then(data => {
         const content = document.getElementById('content');
-        content.innerHTML = ''; // تفريغ التحميل
-        
-        // إذا وجدت مباريات يعرضها، وإلا يعرض تفاصيل البطولة
+        content.innerHTML = ''; 
         if (data.response && data.response.length > 0) {
           content.innerHTML = '<h2 class="text-2xl font-bold mb-6 text-center text-yellow-500">مباريات البطولة</h2>';
           data.response.forEach(m => {
@@ -42,20 +45,13 @@
               </div>`;
           });
         } else {
-          // عرض حالة البطولة إذا كان الجدول فارغاً
           content.innerHTML = `
             <div class="card text-center border-yellow-500/30">
               <h2 class="text-2xl font-bold text-yellow-500 mb-4">كأس العالم 2026</h2>
-              <p class="text-gray-300">البطولة متاحة في النظام حالياً.</p>
-              <p class="text-gray-500 mt-4 text-sm">سيتم تحديث جدول المباريات فور توفرها من الـ API.</p>
+              <p class="text-gray-300">نظام البيانات يعمل بنجاح.</p>
+              <p class="text-gray-500 mt-4 text-sm">سيتم تحديث جدول المباريات فور توفرها في الـ API.</p>
             </div>`;
         }
-      })
-      .catch(err => {
-        document.getElementById('content').innerHTML = `
-          <div class="card border-red-500/30 text-red-500 text-center">
-            حدث خطأ في الاتصال. يرجى التأكد من إعدادات المفتاح (API KEY) في Vercel.
-          </div>`;
       });
   </script>
 </body>
