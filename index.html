@@ -4,84 +4,56 @@
   <meta charset="UTF-8">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background: #05070f; color: #fff; font-family: sans-serif; }
-    .card { background: #1a1a2e; border-radius: 20px; padding: 25px; margin-bottom: 20px; border: 1px solid #444; }
-    .title-main { font-size: 3rem; font-weight: 900; color: #fbbf24; text-align: center; margin-top: 10px; }
-    .subtitle { font-size: 1.5rem; text-align: center; color: #9ca3af; margin-bottom: 30px; }
-    .match-text { font-size: 1.8rem; font-weight: 900; margin-top: 15px; }
-    .live-badge { background: #dc2626; padding: 8px 20px; border-radius: 12px; font-weight: bold; font-size: 1.2rem; animation: pulse 1s infinite; }
-    .bracket-box { font-size: 1.2rem; font-weight: bold; border: 2px solid #fbbf24; padding: 20px; border-radius: 15px; text-align: center; margin-top: 20px; }
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+    body { background: #05070f; color: #fff; font-family: 'Cairo', sans-serif; }
+    .brand-title { font-size: 3.5rem; font-weight: 900; background: linear-gradient(to bottom, #fbbf24, #b45309); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
+    .card { background: #0f172a; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #334155; }
+    .live-card { border: 2px solid #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
+    .goal-flash { animation: flash 1s infinite; }
+    @keyframes flash { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
   </style>
 </head>
-<body class="p-6">
+<body class="p-4">
 
 <div class="max-w-2xl mx-auto">
-  <div class="title-main">Craftivo</div>
-  <p class="subtitle">التغطية الرسمية لكأس العالم 2026</p>
-  <p class="text-center text-blue-400 font-bold mb-6">توقيت مكة المكرمة</p>
+  <div class="brand-title">Craftivo</div>
+  <p class="text-center text-yellow-500 font-bold text-lg mb-8">التغطية الرسمية لكأس العالم 2026</p>
 
-  <!-- المباشر (مربوط بالـ API) -->
-  <div id="live-area"></div>
-
-  <h2 class="text-2xl font-bold text-yellow-500 mb-6">نتائج المباريات السابقة</h2>
-  <div id="archive-area"></div>
-
-  <!-- الخارطة -->
-  <div class="bracket-box text-yellow-500">
-    خارطة البطولة: دور الـ 32 ⟵ دور الـ 16 ⟵ ربع النهائي ⟵ نصف النهائي ⟵ النهائي
-  </div>
-
-  <div class="text-center mt-16 p-8 border-t border-gray-800">
-    <div style="font-size: 3rem;">🤍</div>
-    <p class="font-bold text-gray-500 text-xl">Craftivo | LMS</p>
-  </div>
+  <!-- منطقة المباشر -->
+  <div id="live-container"></div>
+  
+  <!-- الأرشيف والنتائج -->
+  <div id="archive-container"></div>
 </div>
 
 <script>
-// البيانات الكاملة لكل الفرق التي لعبت
-const allMatches = [
-  { group:"A", home: "🇲🇽 المكسيك", away: "🇿🇦 ج.أفريقيا", score: "2 - 0" },
-  { group:"B", home: "🇨🇦 كندا", away: "🇧🇦 البوسنة", score: "1 - 1" },
-  { group:"C", home: "🇩🇪 ألمانيا", away: "🇨🇼 كوراساو", score: "7 - 1" },
-  { group:"D", home: "🇫🇷 فرنسا", away: "🇸🇳 السنغال", score: "3 - 1" },
-  { group:"E", home: "🇸🇪 السويد", away: "🇹🇳 تونس", score: "5 - 1" },
-  { group:"F", home: "🇸🇦 السعودية", away: "🇺🇾 الأوروغواي", score: "1 - 1" },
-  { group:"G", home: "🇮🇷 إيران", away: "🇳🇿 نيوزيلندا", score: "2 - 2" },
-  { group:"H", home: "🇶🇦 قطر", away: "🇨🇭 سويسرا", score: "1 - 1" },
-  { group:"I", home: "🇯🇵 اليابان", away: "🇳🇴 النرويج", score: "0 - 0" },
-  { group:"J", home: "🇧🇷 البرازيل", away: "🇲🇦 المغرب", score: "3 - 0" },
-  { group:"K", home: "🇮🇹 إيطاليا", away: "🇳🇬 نيجيريا", score: "2 - 1" },
-  { group:"L", home: "🇪🇸 إسبانيا", away: "🇪🇬 مصر", score: "0 - 0" }
-];
+// تفعيل إذن الإشعارات فوراً
+if (Notification.permission !== "granted") Notification.requestPermission();
 
-// دالة الربط بالـ API للمباشر
-async function fetchLive() {
-  const liveArea = document.getElementById("live-area");
-  try {
-    // ضعي رابط الـ API الخاص بكِ هنا في مكان الـ URL
-    // const res = await fetch("URL_HERE");
-    // const live = await res.json(); 
+let lastScore = ""; // متغير لمراقبة تغير النتيجة
+
+async function fetchMatchData() {
+    // ضعي رابط الـ API الخاص بكِ هنا
+    // const response = await fetch("YOUR_API_URL");
+    // const data = await response.json();
     
-    // محاكاة للنتيجة الحالية
-    liveArea.innerHTML = `
-      <div class="card border-red-800">
-        <span class="live-badge">مباشر الآن 🔴</span>
-        <div class="match-text">🇨🇬 الكونغو 0 - 1 🇵🇹 البرتغال</div>
-      </div>`;
-  } catch(e) { liveArea.innerHTML = "جاري الاتصال بالمباشر..."; }
+    // محاكاة لبيانات هدف تم تسجيله
+    const currentScore = "1 - 1"; // مثال لنتيجة تغيرت
+    const matchName = "الكونغو ضد البرتغال";
+    
+    // منطق اكتشاف الهدف وإرسال الإشعار
+    if (lastScore !== "" && lastScore !== currentScore) {
+        if (Notification.permission === "granted") {
+            new Notification("⚽ هدف جديد في Craftivo!", { 
+                body: `${matchName} - النتيجة الآن ${currentScore}` 
+            });
+        }
+    }
+    lastScore = currentScore;
 }
 
-fetchLive();
-
-// عرض الأرشيف كاملاً
-const archive = document.getElementById("archive-area");
-allMatches.forEach(m => {
-  archive.innerHTML += `
-    <div class="card">
-      <div class="text-yellow-500 font-bold text-lg">المجموعة ${m.group}</div>
-      <div class="match-text">${m.home} ${m.score} ${m.away}</div>
-    </div>`;
-});
+// تحديث البيانات كل 10 ثوانٍ
+setInterval(fetchMatchData, 10000);
 </script>
 </body>
 </html>
