@@ -7,7 +7,7 @@
   <title>Craftivo | تغطية كأس العالم 2026</title>
   <style>
     body { background: #05070f; color: white; font-family: sans-serif; }
-    .league-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+    .card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; margin-bottom: 15px; }
   </style>
 </head>
 <body>
@@ -18,28 +18,44 @@
 </section>
 
 <div id="content" class="max-w-2xl mx-auto px-4 pb-20">
-    <div class="text-center text-gray-500">جاري الاتصال بقاعدة البيانات...</div>
+    <div class="text-center text-gray-500">جاري تحميل الدوريات...</div>
 </div>
 
 <script>
+  // جلب الدوريات عند فتح الصفحة
   fetch('/api/football')
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
       const content = document.getElementById('content');
       content.innerHTML = '<h2 class="text-xl font-bold mb-4 text-center">الدوريات المتاحة</h2>';
       
       data.response.forEach(item => {
         const div = document.createElement('div');
-        div.className = 'league-card flex items-center justify-between';
+        div.className = 'card flex items-center justify-between cursor-pointer hover:bg-yellow-500/10 transition';
         div.innerHTML = `
           <span class="font-bold text-yellow-500">${item.league.name}</span>
-          <img src="${item.league.logo}" class="w-8 h-8 object-contain">
+          <img src="${item.league.logo}" class="w-10 h-10 object-contain">
         `;
+        
+        // عند الضغط، سيقوم بجلب المباريات
+        div.onclick = () => {
+          content.innerHTML = '<div class="text-center">جاري تحميل المباريات...</div>';
+          fetch('/api/football?type=fixtures')
+            .then(res => res.json())
+            .then(fixData => {
+              content.innerHTML = '<h2 class="text-xl font-bold mb-4 text-center">المباريات القادمة</h2>';
+              fixData.response.forEach(match => {
+                content.innerHTML += `
+                  <div class="card text-center">
+                    <p class="text-sm text-gray-400">${match.teams.home.name} vs ${match.teams.away.name}</p>
+                    <p class="font-bold text-lg">${match.goals.home ?? 0} - ${match.goals.away ?? 0}</p>
+                  </div>
+                `;
+              });
+            });
+        };
         content.appendChild(div);
       });
-    })
-    .catch(err => {
-      document.getElementById('content').innerHTML = '<p class="text-red-500 text-center">خطأ في جلب البيانات.</p>';
     });
 </script>
 
