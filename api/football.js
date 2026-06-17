@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const apiKey = process.env.API_KEY;
-  // جلب كأس العالم مباشرة
-  const endpoint = 'https://v3.football.api-sports.io/fixtures?league=1&season=2026';
+  // نطلب البيانات العامة للبطولة (Standings) إذا لم تتوفر مباريات
+  const endpoint = 'https://v3.football.api-sports.io/standings?league=1&season=2026';
   
   try {
     const response = await fetch(endpoint, {
