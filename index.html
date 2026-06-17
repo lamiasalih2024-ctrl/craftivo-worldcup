@@ -31,12 +31,12 @@
         const data = await res.json();
         const liveScoresDiv = document.getElementById('live-scores');
         
-        // تعديل: عرض المباراة بغض النظر عن حالتها التقنية لضمان الاستمرارية
+        // هنا قمت بتعديل الشرط ليعرض المباريات المباشرة وغير المباشرة (التي لم تنتهِ بعد)
         if (data.response && data.response.length > 0) {
           liveScoresDiv.innerHTML = data.response.map(game => {
             const gameId = game.fixture.id;
             const currentScore = `${game.goals.home}-${game.goals.away}`;
-            // عرض الدقيقة مع التأكد من وجود قيمة
+            const status = game.fixture.status.short;
             const elapsed = game.fixture.status.elapsed || 0;
             let flashClass = '';
 
@@ -48,8 +48,8 @@
             return `
               <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800 transition-all ${flashClass}">
                 <div class="flex justify-between items-center mb-4">
-                  <span class="text-red-500 font-bold">🔴 مباشر</span>
-                  <span class="text-xs bg-slate-800 px-2 py-1 rounded text-yellow-500">${elapsed}'</span>
+                  <span class="text-red-500 font-bold">${status === 'FT' ? 'انتهت' : '🔴 مباشر'}</span>
+                  <span class="text-xs bg-slate-800 px-2 py-1 rounded text-yellow-500">${elapsed > 0 ? elapsed + "'" : ''}</span>
                 </div>
                 <div class="flex items-center justify-between text-2xl font-bold">
                   <div class="flex flex-col items-center w-1/3">
