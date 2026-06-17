@@ -23,7 +23,7 @@
   </div>
 
   <script>
-    let lastScores = {}; // لتخزين النتائج ومقارنتها
+    let lastScores = {}; 
 
     async function fetchScores() {
       try {
@@ -37,7 +37,6 @@
             const currentScore = `${game.goals.home}-${game.goals.away}`;
             let flashClass = '';
 
-            // كشف هدف جديد
             if (lastScores[gameId] && lastScores[gameId] !== currentScore) {
               flashClass = 'goal-flash';
             }
@@ -60,7 +59,9 @@
                     <span>${game.goals.away}</span>
                   </div>
                 </div>
-                <div class="text-sm mt-2 text-gray-300">${game.teams.home.name} ضد ${game.teams.away.name}</div>
+                <div class="text-lg font-semibold mt-4 text-white tracking-wide">
+                  ${game.teams.home.name} <span class="text-yellow-500 mx-2">ضد</span> ${game.teams.away.name}
+                </div>
               </div>
             `;
           }).join('');
@@ -71,7 +72,7 @@
     }
 
     fetchScores();
-    setInterval(fetchScores, 15000); // تحديث كل 15 ثانية
+    setInterval(fetchScores, 15000); 
   </script>
 </body>
 </html>
