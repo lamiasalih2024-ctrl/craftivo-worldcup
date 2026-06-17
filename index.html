@@ -4,53 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Craftivo | كأس العالم 2026</title>
+  <title>Craftivo | تغطية كأس العالم 2026</title>
   <style>
     body { background: #05070f; color: white; font-family: sans-serif; }
-    .card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
-    .gold-text { color: #fbbf24; }
+    .league-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; margin-bottom: 15px; }
   </style>
 </head>
 <body>
 
 <section class="text-center py-10 px-4">
-  <h1 class="text-5xl font-black gold-text">Craftivo</h1>
+  <h1 class="text-5xl font-black text-yellow-500">Craftivo</h1>
   <p class="text-gray-300 mt-2 font-bold text-lg">تغطية كأس العالم 2026</p>
-  <p class="text-yellow-600 text-sm mt-1">جميع المباريات بتوقيت مكة المكرمة</p>
 </section>
 
-<div id="app" class="max-w-4xl mx-auto px-4 pb-20">
-    <div class="card text-center">
-        <h2 class="text-xl font-bold mb-2">جاري تحميل البيانات...</h2>
-        <p class="text-gray-500">يرجى الانتظار ثوانٍ قليلة.</p>
-    </div>
+<div id="content" class="max-w-2xl mx-auto px-4 pb-20">
+    <div class="text-center text-gray-500">جاري الاتصال بقاعدة البيانات...</div>
 </div>
 
 <script>
-  async function loadData() {
-    try {
-      const response = await fetch('/api/football');
-      const data = await response.json();
-      const app = document.getElementById('app');
+  fetch('/api/football')
+    .then(response => response.json())
+    .then(data => {
+      const content = document.getElementById('content');
+      content.innerHTML = '<h2 class="text-xl font-bold mb-4 text-center">الدوريات المتاحة</h2>';
       
-      // إذا كانت البيانات موجودة، سنقوم بعرضها
-      if (data && data.response) {
-        app.innerHTML = ''; // مسح رسالة التحميل
-        data.response.forEach(item => {
-          const card = document.createElement('div');
-          card.className = 'card';
-          card.innerHTML = `
-            <h2 class="text-2xl font-bold gold-text mb-4">${item.league.name}</h2>
-            <p class="text-gray-300">نتابع معكم النتائج المحدثة أولاً بأول.</p>
-          `;
-          app.appendChild(card);
-        });
-      }
-    } catch (e) {
-      document.getElementById('app').innerHTML = '<div class="card text-center text-red-500">حدث خطأ في عرض البيانات.</div>';
-    }
-  }
-  loadData();
+      data.response.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'league-card flex items-center justify-between';
+        div.innerHTML = `
+          <span class="font-bold text-yellow-500">${item.league.name}</span>
+          <img src="${item.league.logo}" class="w-8 h-8 object-contain">
+        `;
+        content.appendChild(div);
+      });
+    })
+    .catch(err => {
+      document.getElementById('content').innerHTML = '<p class="text-red-500 text-center">خطأ في جلب البيانات.</p>';
+    });
 </script>
 
 </body>
