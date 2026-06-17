@@ -4,101 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Craftivo | World Cup 2026</title>
+  <title>Craftivo | تغطية كأس العالم 2026</title>
   <style>
     body { background: radial-gradient(circle at top, #0b1020, #05070f); color: white; font-family: sans-serif; }
-    .group-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; transition: 0.3s; }
+    .group-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; }
     .gold-text { color: #eab308; }
-    .status-done { color: #22c55e; font-size: 0.8rem; }
-    .match-line { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; }
-    .road-map { background: rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 15px; margin-top: 20px; }
+    .match-line { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 0; }
+    .time-slot { font-size: 0.75rem; color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 4px 8px; border-radius: 6px; }
   </style>
 </head>
-
 <body>
 
 <section class="text-center py-10">
   <h1 class="text-5xl font-black gold-text">Craftivo</h1>
-  <p class="text-gray-300 mt-2 font-bold italic">تغطية لكأس العالم 2026</p>
+  <p class="text-gray-300 mt-2 font-bold italic">تغطية كأس العالم 2026</p>
   <p class="text-yellow-500 text-sm mt-1">جميع المباريات بتوقيت مكة المكرمة</p>
 </section>
 
 <section class="px-4 pb-16">
   <h2 class="text-3xl font-bold mb-8 text-center">🏆 جدول المجموعات والنتائج</h2>
-  
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-    <!-- المجموعات (A-L) -->
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة A</h3>
-        <div class="match-line"><span>🇲🇽 المكسيك 2 - 0 ج.أفريقيا 🇿🇦</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇰🇷 كوريا ج 2 - 1 التشيك 🇨🇿</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: المكسيك(3)، كوريا(3)، التشيك(0)، ج.أفريقيا(0)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة B</h3>
-        <div class="match-line"><span>🇨🇦 كندا 1 - 1 البوسنة 🇧🇦</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇶🇦 قطر 1 - 1 سويسرا 🇨🇭</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: كندا(1)، البوسنة(1)، قطر(1)، سويسرا(1)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة C</h3>
-        <div class="match-line"><span>🇧🇷 البرازيل 1 - 1 المغرب 🇲🇦</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇭🇹 هايتي 0 - 1 إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: إسكتلندا(3)، البرازيل(1)، المغرب(1)، هايتي(0)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة D</h3>
-        <div class="match-line"><span>🇺🇸 أمريكا 4 - 1 باراغواي 🇵🇾</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇦🇺 أستراليا 2 - 0 تركيا 🇹🇷</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: أمريكا(3)، أستراليا(3)، باراغواي(0)، تركيا(0)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة E</h3>
-        <div class="match-line"><span>🇩🇪 ألمانيا 7 - 1 كوراساو 🇨🇼</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇨🇮 ساحل العاج 1 - 0 الإكوادور 🇪🇨</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: ألمانيا(3)، ساحل العاج(3)، الإكوادور(0)، كوراساو(0)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة F</h3>
-        <div class="match-line"><span>🇳🇱 هولندا 2 - 2 اليابان 🇯🇵</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇸🇪 السويد 5 - 1 تونس 🇹🇳</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: السويد(3)، هولندا(1)، اليابان(1)، تونس(0)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة G</h3>
-        <div class="match-line"><span>🇧🇪 بلجيكا 1 - 1 مصر 🇪🇬</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇮🇷 إيران 2 - 2 نيوزيلندا 🇳🇿</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: بلجيكا(1)، مصر(1)، إيران(1)، نيوزيلندا(1)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة H</h3>
-        <div class="match-line"><span>🇪🇸 إسبانيا 0 - 0 الرأس الأخضر 🇨🇻</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇸🇦 السعودية 1 - 1 أوروغواي 🇺🇾</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: إسبانيا(1)، الرأس الأخضر(1)، السعودية(1)، أوروغواي(1)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة I</h3>
-        <div class="match-line"><span>🇫🇷 فرنسا 3 - 1 السنغال 🇸🇳</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇮🇶 العراق 1 - 4 النرويج 🇳🇴</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: النرويج(3)، فرنسا(3)، السنغال(0)، العراق(0)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة J</h3>
-        <div class="match-line"><span>🇦🇷 الأرجنتين 3 - 0 الجزائر 🇩🇿</span> <span class="status-done">✅</span></div>
-        <div class="match-line"><span>🇦🇹 النمسا 3 - 1 الأردن 🇯🇴</span> <span class="status-done">✅</span></div>
-        <p class="text-xs text-gray-400 mt-3">النقاط: الأرجنتين(3)، النمسا(3)، الجزائر(0)، الأردن(0)</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة K</h3>
-        <div class="match-line"><span>🇵🇹 البرتغال VS الكونغو 🇨🇩</span><span class="text-[10px] text-yellow-400">17 يونيو 8م</span></div>
-        <div class="match-line"><span>🇺🇿 أوزبكستان VS كولومبيا 🇨🇴</span><span class="text-[10px] text-yellow-400">18 يونيو 5ص</span></div>
-        <p class="text-xs text-gray-400 mt-3">بانتظار بدء المباريات</p>
-    </div>
-    <div class="group-card"><h3 class="font-bold text-yellow-500 mb-2">المجموعة L</h3>
-        <div class="match-line"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا VS كرواتيا 🇭🇷</span><span class="text-[10px] text-yellow-400">17 يونيو 11م</span></div>
-        <div class="match-line"><span>🇬🇭 غانا VS بنما 🇵🇦</span><span class="text-[10px] text-yellow-400">18 يونيو 2ص</span></div>
-        <p class="text-xs text-gray-400 mt-3">بانتظار بدء المباريات</p>
-    </div>
-  </div>
-
-  <!-- خارطة الطريق -->
-  <div class="road-map max-w-6xl mx-auto mt-8">
-      <h3 class="text-center text-yellow-500 font-bold mb-4">خارطة الطريق نحو النهائي</h3>
-      <div class="flex justify-between text-center text-xs text-gray-300">
-          <div class="p-2 border-r border-white/10 flex-1">دور الـ32</div>
-          <div class="p-2 border-r border-white/10 flex-1">دور الـ16</div>
-          <div class="p-2 border-r border-white/10 flex-1">ربع النهائي</div>
-          <div class="p-2 flex-1">النهائي</div>
-      </div>
+  <div id="matches-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <!-- سيتم ملء البيانات هنا تلقائياً بواسطة JavaScript -->
+    <p class="text-center text-gray-400">جاري تحميل البيانات الحية...</p>
   </div>
 </section>
 
@@ -106,13 +33,33 @@
   <p>© 2026 Craftivo Creative Studio</p>
 </footer>
 
+<script>
+  async function loadMatches() {
+    try {
+      const response = await fetch('/api/football');
+      const data = await response.json();
+      
+      const container = document.getElementById('matches-container');
+      container.innerHTML = ''; // مسح رسالة التحميل
+
+      // هنا سنقوم بعرض البيانات المستلمة
+      // بناءً على هيكل الـ JSON الذي ظهر في 1000891340.jpg
+      if (data.response && data.response.length > 0) {
+        data.response.forEach(item => {
+          const league = item.league.name;
+          const card = document.createElement('div');
+          card.className = 'group-card';
+          card.innerHTML = `<h3 class="font-bold text-yellow-500 mb-2">${league}</h3>
+                            <div class="match-line"><span>يتم تحديث البيانات...</span></div>`;
+          container.appendChild(card);
+        });
+      }
+    } catch (error) {
+      document.getElementById('matches-container').innerHTML = '<p class="text-red-400">خطأ في تحميل البيانات المباشرة.</p>';
+    }
+  }
+  
+  loadMatches();
+</script>
 </body>
 </html>
-<script>
-  fetch('/api/football')
-    .then(response => response.json())
-    .then(data => {
-      console.log('بيانات الـ API:', data);
-    })
-    .catch(error => console.error('حدث خطأ:', error));
-</script>
