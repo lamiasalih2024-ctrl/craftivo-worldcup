@@ -8,57 +8,47 @@
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
     body { background: #05070f; color: #fff; font-family: 'Cairo', sans-serif; }
     
-    /* هوية احترافية */
-    .brand-title { font-size: 4rem; font-weight: 900; background: linear-gradient(to bottom, #fbbf24, #b45309); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-top: 20px; }
+    .brand-title { font-size: 3.5rem; font-weight: 900; background: linear-gradient(to bottom, #fbbf24, #b45309); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-top: 20px; }
+    .section-title { font-size: 1.6rem; font-weight: 900; color: #fbbf24; margin: 30px 0 15px; border-bottom: 2px solid #fbbf24; padding-bottom: 5px; }
+    .card { background: #0f172a; border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid #334155; }
+    .live-card { border: 3px solid #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
     
-    /* بطاقات واضحة وكبيرة */
-    .section-title { font-size: 1.8rem; font-weight: 900; color: #fbbf24; margin: 30px 0 15px; border-bottom: 2px solid #fbbf24; padding-bottom: 10px; }
-    .card { background: #0f172a; border-radius: 20px; padding: 25px; margin-bottom: 20px; border: 1px solid #334155; }
-    .live-card { border: 3px solid #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.4); }
-    
-    .score-text { font-size: 2.5rem; font-weight: 900; margin: 10px 0; color: #fff; }
-    .teams-text { font-size: 1.5rem; font-weight: bold; }
-    .live-badge { background: #ef4444; color: white; padding: 5px 15px; border-radius: 8px; font-weight: bold; font-size: 1.2rem; animation: pulse 1.5s infinite; }
-    
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    .bracket-box { background: #1e293b; border: 2px solid #fbbf24; padding: 20px; border-radius: 15px; text-align: center; margin: 30px 0; font-weight: bold; }
   </style>
 </head>
-<body class="p-6">
+<body class="p-4">
 
-<div class="max-w-3xl mx-auto">
-  <!-- العنوان الرئيسي -->
+<div class="max-w-2xl mx-auto">
   <div class="brand-title">Craftivo</div>
-  <p class="text-center text-gray-400 font-bold text-xl mb-10">التغطية الرسمية لكأس العالم 2026</p>
+  <p class="text-center text-gray-400 font-bold text-xl mb-8">تغطية كأس العالم 2026</p>
 
-  <!-- 1. قسم المباشر (يظهر في الأعلى) -->
+  <!-- المباشر -->
   <div id="live-container">
     <h2 class="section-title">مباراة مباشرة الآن 🔴</h2>
-    <div class="card live-card">
-      <div class="live-badge inline-block mb-3">شغال الآن</div>
-      <div class="teams-text">🇨🇬 الكونغو 🆚 🇵🇹 البرتغال</div>
-      <div class="score-text">0 - 1</div>
+    <div class="card live-card text-center">
+      <div class="text-xl font-bold">🇨🇬 الكونغو 🆚 🇵🇹 البرتغال</div>
+      <div class="text-4xl font-black text-red-500 mt-2">0 - 1</div>
     </div>
   </div>
 
-  <!-- 2. قسم الأرشيف (النتائج السابقة) -->
-  <div id="archive-container">
-    <h2 class="section-title">نتائج المباريات السابقة</h2>
-    <div id="matches-list"></div>
+  <!-- النتائج السابقة -->
+  <h2 class="section-title">نتائج المباريات السابقة</h2>
+  <div id="matches-list"></div>
+
+  <!-- الخارطة -->
+  <div class="bracket-box">
+    <div class="text-yellow-500 mb-2 underline">خارطة الأدوار الإقصائية 🏆</div>
+    دور الـ 32 ⟵ دور الـ 16 ⟵ ربع النهائي ⟵ نصف النهائي ⟵ النهائي
+  </div>
+
+  <!-- التوقيع -->
+  <div class="text-center mt-12 mb-6 border-t border-gray-800 pt-8">
+    <div style="font-size: 2.5rem;">🤍</div>
+    <p class="font-bold text-gray-400 text-lg">Craftivo | LMS</p>
   </div>
 </div>
 
 <script>
-// إذن الإشعارات تلقائياً
-if (Notification.permission !== "granted") Notification.requestPermission();
-
-// محاكاة تنبيه الأهداف (لو تغيرت النتيجة، سيأتي إشعار)
-function triggerGoalAlert(oldScore, newScore) {
-    if (oldScore !== newScore && Notification.permission === "granted") {
-        new Notification("⚽ هدف جديد في Craftivo!", { body: `النتيجة أصبحت ${newScore}` });
-    }
-}
-
-// قائمة المباريات الثابتة (لن تختفي أبداً)
 const archiveData = [
   { group: "A", match: "المكسيك 🇲🇽 - جنوب أفريقيا 🇿🇦", score: "2 - 0" },
   { group: "B", match: "كندا 🇨🇦 - البوسنة 🇧🇦", score: "1 - 1" },
@@ -78,9 +68,9 @@ const list = document.getElementById("matches-list");
 archiveData.forEach(m => {
   list.innerHTML += `
     <div class="card">
-      <div class="text-yellow-500 font-bold text-lg mb-2">المجموعة ${m.group}</div>
-      <div class="text-xl font-bold">${m.match}</div>
-      <div class="text-3xl text-yellow-400 font-black mt-2">${m.score}</div>
+      <div class="text-yellow-500 font-bold">المجموعة ${m.group}</div>
+      <div class="text-lg font-bold mt-1">${m.match}</div>
+      <div class="text-2xl font-black text-yellow-400 mt-2">${m.score}</div>
     </div>
   `;
 });
