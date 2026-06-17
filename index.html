@@ -5,36 +5,41 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background: #05070f; color: #fff; font-family: sans-serif; }
-    .card { background: #1a1a2e; border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #333; }
-    .title-main { font-size: 2.5rem; font-weight: 900; color: #fbbf24; text-align: center; margin-top: 20px; }
-    .subtitle { font-size: 1.2rem; text-align: center; color: #9ca3af; margin-bottom: 20px; }
-    .match-text { font-size: 1.5rem; font-weight: bold; margin-top: 10px; }
-    .live-badge { background: #dc2626; padding: 5px 15px; border-radius: 8px; font-weight: bold; animation: pulse 1s infinite; }
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    .card { background: #1a1a2e; border-radius: 20px; padding: 25px; margin-bottom: 20px; border: 1px solid #444; }
+    .title-main { font-size: 3rem; font-weight: 900; color: #fbbf24; text-align: center; margin-top: 10px; }
+    .subtitle { font-size: 1.5rem; text-align: center; color: #9ca3af; margin-bottom: 30px; }
+    .match-text { font-size: 1.8rem; font-weight: 900; margin-top: 15px; }
+    .live-badge { background: #dc2626; padding: 8px 20px; border-radius: 12px; font-weight: bold; font-size: 1.2rem; animation: pulse 1s infinite; }
+    .bracket-box { font-size: 1.2rem; font-weight: bold; border: 2px solid #fbbf24; padding: 20px; border-radius: 15px; text-align: center; margin-top: 20px; }
   </style>
 </head>
-<body class="p-4">
+<body class="p-6">
 
-<div class="max-w-xl mx-auto">
+<div class="max-w-2xl mx-auto">
   <div class="title-main">Craftivo</div>
   <p class="subtitle">التغطية الرسمية لكأس العالم 2026</p>
+  <p class="text-center text-blue-400 font-bold mb-6">توقيت مكة المكرمة</p>
 
-  <!-- قسم المباشر -->
-  <div id="live-area" class="mb-8"></div>
+  <!-- المباشر (مربوط بالـ API) -->
+  <div id="live-area"></div>
 
-  <!-- قسم الأرشيف -->
-  <h2 class="text-xl font-bold text-yellow-500 mb-4">نتائج المباريات السابقة</h2>
+  <h2 class="text-2xl font-bold text-yellow-500 mb-6">نتائج المباريات السابقة</h2>
   <div id="archive-area"></div>
 
-  <div class="text-center mt-12 p-6 border-t border-gray-800">
-    <div style="font-size: 2rem;">🤍</div>
-    <p class="font-bold text-gray-500">Craftivo | LMS</p>
+  <!-- الخارطة -->
+  <div class="bracket-box text-yellow-500">
+    خارطة البطولة: دور الـ 32 ⟵ دور الـ 16 ⟵ ربع النهائي ⟵ نصف النهائي ⟵ النهائي
+  </div>
+
+  <div class="text-center mt-16 p-8 border-t border-gray-800">
+    <div style="font-size: 3rem;">🤍</div>
+    <p class="font-bold text-gray-500 text-xl">Craftivo | LMS</p>
   </div>
 </div>
 
 <script>
-const matches = [
-  { group:"LIVE", home: "🇨🇬 الكونغو", away: "🇵🇹 البرتغال", score: "0 - 1" },
+// البيانات الكاملة لكل الفرق التي لعبت
+const allMatches = [
   { group:"A", home: "🇲🇽 المكسيك", away: "🇿🇦 ج.أفريقيا", score: "2 - 0" },
   { group:"B", home: "🇨🇦 كندا", away: "🇧🇦 البوسنة", score: "1 - 1" },
   { group:"C", home: "🇩🇪 ألمانيا", away: "🇨🇼 كوراساو", score: "7 - 1" },
@@ -49,20 +54,31 @@ const matches = [
   { group:"L", home: "🇪🇸 إسبانيا", away: "🇪🇬 مصر", score: "0 - 0" }
 ];
 
-// 1. المباشر
-const live = matches.find(m => m.group === "LIVE");
-document.getElementById("live-area").innerHTML = `
-  <div class="card border-red-800">
-    <span class="live-badge">مباشر الآن 🔴</span>
-    <div class="match-text">${live.home} ${live.score} ${live.away}</div>
-  </div>`;
+// دالة الربط بالـ API للمباشر
+async function fetchLive() {
+  const liveArea = document.getElementById("live-area");
+  try {
+    // ضعي رابط الـ API الخاص بكِ هنا في مكان الـ URL
+    // const res = await fetch("URL_HERE");
+    // const live = await res.json(); 
+    
+    // محاكاة للنتيجة الحالية
+    liveArea.innerHTML = `
+      <div class="card border-red-800">
+        <span class="live-badge">مباشر الآن 🔴</span>
+        <div class="match-text">🇨🇬 الكونغو 0 - 1 🇵🇹 البرتغال</div>
+      </div>`;
+  } catch(e) { liveArea.innerHTML = "جاري الاتصال بالمباشر..."; }
+}
 
-// 2. الأرشيف
+fetchLive();
+
+// عرض الأرشيف كاملاً
 const archive = document.getElementById("archive-area");
-matches.filter(m => m.group !== "LIVE").forEach(m => {
+allMatches.forEach(m => {
   archive.innerHTML += `
     <div class="card">
-      <div class="text-yellow-500 font-bold">المجموعة ${m.group}</div>
+      <div class="text-yellow-500 font-bold text-lg">المجموعة ${m.group}</div>
       <div class="match-text">${m.home} ${m.score} ${m.away}</div>
     </div>`;
 });
