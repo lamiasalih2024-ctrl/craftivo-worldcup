@@ -2,40 +2,45 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Craftivo | تغطية كأس العالم 2026</title>
+  <title>Craftivo | تغطية كأس العالم</title>
   <style>
     body { background: #05070f; color: white; font-family: sans-serif; }
-    .card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; border-radius: 12px; padding: 15px; margin: 10px 0; }
+    .match-card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; border-radius: 15px; padding: 20px; margin-bottom: 15px; text-align: center; }
   </style>
 </head>
 <body class="p-4">
   <h1 class="text-center text-4xl font-black text-yellow-500 py-6">Craftivo</h1>
   <div id="content" class="max-w-xl mx-auto">
-    <div id="league-btn" class="card cursor-pointer hover:bg-yellow-500/10 text-center text-xl font-bold">
-      كأس العالم 2026 (اضغط هنا للمباريات)
-    </div>
+    <p class="text-center text-gray-400">جاري جلب مباريات كأس العالم...</p>
   </div>
 
   <script>
-    document.getElementById('league-btn').onclick = () => {
-      const content = document.getElementById('content');
-      content.innerHTML = '<div class="text-center">جاري تحميل المباريات...</div>';
-      
-      fetch('/api/football?type=fixtures')
-        .then(res => res.json())
-        .then(data => {
-          content.innerHTML = '<h2 class="text-center text-xl font-bold mb-4">جدول المباريات</h2>';
+    fetch('/api/football')
+      .then(res => res.json())
+      .then(data => {
+        const content = document.getElementById('content');
+        if (data.response && data.response.length > 0) {
+          content.innerHTML = '<h2 class="text-xl font-bold mb-4 text-center text-yellow-500">المباريات</h2>';
           data.response.forEach(m => {
             content.innerHTML += `
-              <div class="card flex justify-between items-center">
-                <span>${m.teams.home.name}</span>
-                <span class="text-yellow-500 font-bold">${m.goals.home ?? '-'} : ${m.goals.away ?? '-'}</span>
-                <span>${m.teams.away.name}</span>
+              <div class="match-card">
+                <p class="text-xs text-gray-400 mb-2">${m.fixture.date.split('T')[0]}</p>
+                <div class="flex justify-between items-center text-lg font-bold">
+                  <span>${m.teams.home.name}</span>
+                  <span class="text-yellow-500">${m.goals.home ?? '-'} : ${m.goals.away ?? '-'}</span>
+                  <span>${m.teams.away.name}</span>
+                </div>
               </div>`;
           });
-        });
-    };
+        } else {
+          content.innerHTML = '<div class="match-card">لا توجد مباريات مسجلة حالياً في النظام.</div>';
+        }
+      })
+      .catch(() => {
+        document.getElementById('content').innerHTML = '<div class="match-card text-red-500">خطأ في الاتصال، تأكدي من إعدادات الـ API Key في Vercel.</div>';
+      });
   </script>
 </body>
 </html>
