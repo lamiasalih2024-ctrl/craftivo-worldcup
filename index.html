@@ -2,70 +2,69 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Craftivo | التغطية الشاملة</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background: #05070f; color: #fff; font-family: sans-serif; }
-    .group-card { background: #1a1a2e; border: 1px solid #333; border-radius: 15px; padding: 15px; margin-bottom: 20px; }
-    .group-title { color: #fbbf24; font-size: 1.4rem; font-weight: 900; border-right: 4px solid #fbbf24; padding-right: 10px; margin-bottom: 12px; }
-    .live-pulse { color: #ff0000; font-weight: bold; animation: blink 1s infinite; }
-    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    .card { background: #1a1a2e; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid #333; }
+    .title-main { font-size: 1.8rem; font-weight: 900; color: #fbbf24; text-align: center; margin: 20px 0; }
+    .match-text { font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+    .live-badge { background: #dc2626; color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.8rem; animation: pulse 1s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
   </style>
 </head>
 <body class="p-4">
 
-<div class="max-w-2xl mx-auto">
-  <h1 class="text-4xl font-black text-center text-yellow-500 py-6">Craftivo</h1>
-  
-  <button id="notifyBtn" class="w-full bg-yellow-600 text-black font-bold py-2 rounded-lg mb-6">تفعيل إشعارات الأهداف 🔔</button>
+<div class="max-w-xl mx-auto">
+  <div class="title-main">Craftivo</div>
+  <p class="text-center text-gray-400 font-bold mb-6">التغطية الرسمية لكأس العالم 2026</p>
 
   <div id="app"></div>
 
-  <div class="bg-gray-900 p-6 rounded-2xl border border-gray-700 mt-10">
-    <h2 class="text-xl font-bold text-yellow-500 mb-4">خارطة الأدوار الإقصائية 🏆</h2>
-    <div class="grid grid-cols-2 gap-4 text-xs text-center">
-      <div class="p-2 border border-gray-600 rounded">دور الـ 32</div>
-      <div class="p-2 border border-gray-600 rounded">دور الـ 16</div>
-      <div class="p-2 border border-gray-600 rounded">ربع النهائي</div>
-      <div class="p-2 border border-gray-600 rounded">النصف النهائي</div>
-    </div>
+  <div class="text-center mt-10 p-6 border-t border-gray-800">
+    <div style="font-size: 2rem;">🤍</div>
+    <p class="font-bold text-gray-400">Craftivo | LMS</p>
   </div>
 </div>
 
 <script>
-document.getElementById('notifyBtn').onclick = () => Notification.requestPermission();
+// تفعيل الإشعارات تلقائياً عند فتح الموقع
+if (Notification.permission !== "granted") Notification.requestPermission();
 
-const groups = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
-const matchesData = [
-  { group: "A", home: "المكسيك 🇲🇽", away: "جنوب أفريقيا 🇿🇦", score: "2 - 0", status: "FT" },
-  { group: "B", home: "كندا 🇨🇦", away: "البوسنة 🇧🇦", score: "1 - 1", status: "FT" },
-  { group: "C", home: "ألمانيا 🇩🇪", away: "كوراساو 🇨🇼", score: "7 - 1", status: "FT" },
-  { group: "D", home: "فرنسا 🇫🇷", away: "السنغال 🇸🇳", score: "3 - 1", status: "FT" },
-  { group: "E", home: "السويد 🇸🇪", away: "تونس 🇹🇳", score: "5 - 1", status: "FT" },
-  { group: "F", home: "السعودية 🇸🇦", away: "الأوروغواي 🇺🇾", score: "1 - 1", status: "FT" },
-  { group: "G", home: "إيران 🇮🇷", away: "نيوزيلندا 🇳🇿", score: "2 - 2", status: "FT" },
-  { group: "H", home: "قطر 🇶🇦", away: "سويسرا 🇨🇭", score: "1 - 1", status: "FT" },
-  { group: "I", home: "اليابان 🇯🇵", away: "النرويج 🇳🇴", score: "0 - 0", status: "FT" },
-  { group: "J", home: "البرازيل 🇧🇷", away: "المغرب 🇲🇦", score: "3 - 0", status: "FT" },
-  { group: "K", home: "إيطاليا 🇮🇹", away: "نيجيريا 🇳🇬", score: "2 - 1", status: "FT" },
-  { group: "L", home: "إسبانيا 🇪🇸", away: "مصر 🇪🇬", score: "0 - 0", status: "FT" }
+const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+const matches = [
+  { group:"LIVE", home: "🇦🇷 الأرجنتين", away: "🇨🇴 كولومبيا", score: "1 - 0" },
+  { group:"A", home: "🇲🇽 المكسيك", away: "🇿🇦 ج.أفريقيا", score: "2 - 0" },
+  { group:"B", home: "🇨🇦 كندا", away: "🇧🇦 البوسنة", score: "1 - 1" },
+  { group:"C", home: "🇩🇪 ألمانيا", away: "🇨🇼 كوراساو", score: "7 - 1" },
+  { group:"D", home: "🇫🇷 فرنسا", away: "🇸🇳 السنغال", score: "3 - 1" },
+  { group:"E", home: "🇸🇪 السويد", away: "🇹🇳 تونس", score: "5 - 1" },
+  { group:"F", home: "🇸🇦 السعودية", away: "🇺🇾 الأوروغواي", score: "1 - 1" },
+  { group:"G", home: "🇮🇷 إيران", away: "🇳🇿 نيوزيلندا", score: "2 - 2" },
+  { group:"H", home: "🇶🇦 قطر", away: "🇨🇭 سويسرا", score: "1 - 1" },
+  { group:"I", home: "🇯🇵 اليابان", away: "🇳🇴 النرويج", score: "0 - 0" },
+  { group:"J", home: "🇧🇷 البرازيل", away: "🇲🇦 المغرب", score: "3 - 0" },
+  { group:"K", home: "🇮🇹 إيطاليا", away: "🇳🇬 نيجيريا", score: "2 - 1" },
+  { group:"L", home: "🇪🇸 إسبانيا", away: "🇪🇬 مصر", score: "0 - 0" }
 ];
 
 const container = document.getElementById("app");
+
+// 1. عرض المباشر
+const live = matches.find(m => m.group === "LIVE");
+if(live) {
+    container.innerHTML += `<div class="card border-red-500"><div class="live-badge mb-2 inline-block">مباشر الآن 🔴</div><div class="match-text">${live.home} ${live.score} ${live.away}</div></div>`;
+    // إشعار تلقائي
+    if (Notification.permission === "granted") new Notification("مباراة مباشرة الآن!", { body: `${live.home} ضد ${live.away}` });
+}
+
+// 2. عرض المجموعات
 groups.forEach(g => {
-  let div = document.createElement("div");
-  div.className = "group-card";
-  div.innerHTML = `<h2 class="group-title">المجموعة ${g}</h2>`;
-  
-  const matches = matchesData.filter(m => m.group === g);
-  matches.forEach(m => {
-    div.innerHTML += `
-      <div class="flex justify-between items-center py-2 border-b border-gray-700">
-        <span>${m.home}  ${m.score}  ${m.away}</span>
-        ${m.status === 'LIVE' ? '<span class="live-pulse">مباشر 🔴</span>' : ''}
-      </div>`;
-  });
-  container.appendChild(div);
+  let m = matches.find(m => m.group === g);
+  container.innerHTML += `
+    <div class="card">
+      <div class="text-yellow-500 font-bold mb-2">المجموعة ${g}</div>
+      <div class="match-text">${m ? m.home + " " + m.score + " " + m.away : "بانتظار المباراة..."}</div>
+    </div>`;
 });
 </script>
 </body>
