@@ -5,34 +5,31 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background: #05070f; color: #fff; font-family: sans-serif; }
-    .card { background: #1a1a2e; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid #333; }
-    .title-main { font-size: 1.8rem; font-weight: 900; color: #fbbf24; text-align: center; margin: 20px 0; }
-    .match-text { font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-    .live-badge { background: #dc2626; color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.8rem; animation: pulse 1s infinite; }
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    .card { background: #1a1a2e; border-radius: 15px; padding: 15px; margin-bottom: 10px; border: 1px solid #333; }
+    .live-card { border: 2px solid #dc2626; background: #1f0b0b; }
+    .title-yellow { color: #fbbf24; font-weight: bold; }
+    .match-row { font-size: 1.1rem; font-weight: bold; }
   </style>
 </head>
 <body class="p-4">
 
 <div class="max-w-xl mx-auto">
-  <div class="title-main">Craftivo</div>
-  <p class="text-center text-gray-400 font-bold mb-6">التغطية الرسمية لكأس العالم 2026</p>
+  <h1 class="text-3xl font-black text-center text-yellow-500 py-4">Craftivo</h1>
+  
+  <div id="live-container"></div>
+  <div id="groups-container"></div>
 
-  <div id="app"></div>
-
-  <div class="text-center mt-10 p-6 border-t border-gray-800">
+  <div class="text-center mt-10 border-t border-gray-800 pt-6">
     <div style="font-size: 2rem;">🤍</div>
-    <p class="font-bold text-gray-400">Craftivo | LMS</p>
+    <p class="text-gray-400 font-bold">Craftivo | LMS</p>
   </div>
 </div>
 
 <script>
-// تفعيل الإشعارات تلقائياً عند فتح الموقع
 if (Notification.permission !== "granted") Notification.requestPermission();
 
-const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
-const matches = [
-  { group:"LIVE", home: "🇦🇷 الأرجنتين", away: "🇨🇴 كولومبيا", score: "1 - 0" },
+const matchesData = [
+  { group:"LIVE", home: "🇨🇬 الكونغو", away: "🇵🇹 البرتغال", score: "0 - 1" },
   { group:"A", home: "🇲🇽 المكسيك", away: "🇿🇦 ج.أفريقيا", score: "2 - 0" },
   { group:"B", home: "🇨🇦 كندا", away: "🇧🇦 البوسنة", score: "1 - 1" },
   { group:"C", home: "🇩🇪 ألمانيا", away: "🇨🇼 كوراساو", score: "7 - 1" },
@@ -47,23 +44,22 @@ const matches = [
   { group:"L", home: "🇪🇸 إسبانيا", away: "🇪🇬 مصر", score: "0 - 0" }
 ];
 
-const container = document.getElementById("app");
+// عرض المباشر
+const live = matchesData.find(m => m.group === "LIVE");
+document.getElementById("live-container").innerHTML = `
+  <div class="card live-card">
+    <div class="text-red-500 font-bold mb-1 animate-pulse">مباشر الآن 🔴</div>
+    <div class="match-row">${live.home} ${live.score} ${live.away}</div>
+  </div>`;
+if (Notification.permission === "granted") new Notification("⚽ هدف مباشر!", { body: `${live.home} ${live.score} ${live.away}` });
 
-// 1. عرض المباشر
-const live = matches.find(m => m.group === "LIVE");
-if(live) {
-    container.innerHTML += `<div class="card border-red-500"><div class="live-badge mb-2 inline-block">مباشر الآن 🔴</div><div class="match-text">${live.home} ${live.score} ${live.away}</div></div>`;
-    // إشعار تلقائي
-    if (Notification.permission === "granted") new Notification("مباراة مباشرة الآن!", { body: `${live.home} ضد ${live.away}` });
-}
-
-// 2. عرض المجموعات
-groups.forEach(g => {
-  let m = matches.find(m => m.group === g);
-  container.innerHTML += `
+// عرض المجموعات كاملة
+const groups = document.getElementById("groups-container");
+matchesData.filter(m => m.group !== "LIVE").forEach(m => {
+  groups.innerHTML += `
     <div class="card">
-      <div class="text-yellow-500 font-bold mb-2">المجموعة ${g}</div>
-      <div class="match-text">${m ? m.home + " " + m.score + " " + m.away : "بانتظار المباراة..."}</div>
+      <div class="title-yellow">المجموعة ${m.group}</div>
+      <div class="match-row">${m.home} ${m.score} ${m.away}</div>
     </div>`;
 });
 </script>
