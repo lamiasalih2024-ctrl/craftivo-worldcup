@@ -108,3 +108,11 @@
 
 </body>
 </html>
+<script>
+  fetch('/api/football')
+    .then(response => response.json())
+    .then(data => {
+      console.log('بيانات الـ API:', data);
+    })
+    .catch(error => console.error('حدث خطأ:', error));
+</script>
