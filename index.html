@@ -2,91 +2,61 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Craftivo | تغطية كأس العالم 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background: #05070f; color: white; font-family: sans-serif; }
-    .card { background: #111; border: 1px solid #333; border-radius: 12px; padding: 12px; margin-bottom: 8px; }
-    .group-label { color: #fbbf24; font-size: 1.3rem; font-weight: 900; margin-top: 25px; margin-bottom: 10px; border-right: 4px solid #fbbf24; padding-right: 10px; display: block; }
-    .footer { text-align: center; padding: 40px; margin-top: 50px; border-top: 1px solid #222; }
-    .flag { font-size: 1.2rem; margin: 0 5px; }
+    body { background:#05070f; color:white; font-family: sans-serif; }
+    .group-wrapper { margin-top:20px; border-bottom:1px solid #222; padding-bottom:15px; }
+    .group-title { color:#fbbf24; font-size:1.2rem; font-weight:800; border-right:4px solid #fbbf24; padding-right:10px; margin-bottom:10px; }
+    .card { background:#111; border:1px solid #333; border-radius:8px; padding:10px; margin-bottom:5px; font-size: 0.9rem; }
   </style>
 </head>
 <body class="p-4">
 
 <div class="max-w-xl mx-auto">
-  <div class="text-center py-6">
-    <h1 class="text-5xl font-black text-yellow-500">Craftivo</h1>
-    <p class="text-gray-300 font-bold mt-2">تغطية كأس العالم 2026</p>
-    <p class="text-blue-500 text-sm font-bold">بتوقيت مكة المكرمة</p>
+  <div class="text-center py-4">
+    <h1 class="text-4xl font-black text-yellow-500">Craftivo</h1>
+    <p class="text-gray-400">تغطية كأس العالم 2026</p>
   </div>
 
-  <div id="app-container"></div>
+  <div id="container"></div>
 
-  <div class="footer">
+  <div class="text-center mt-10 p-4 border-t border-gray-800">
     <div style="font-size: 2rem;">🤍</div>
-    <p class="text-gray-400 font-bold mt-2">Craftivo | LMS</p>
-    <p class="text-xs text-gray-600">تصميم وتطوير: لمياء صالح</p>
+    <p class="font-bold">Craftivo | LMS</p>
   </div>
 </div>
 
 <script>
-// 1. قاموس الأعلام (ربط اسم الدولة بالـ Emoji)
-const flagMap = {
-  "المكسيك": "🇲🇽", "جنوب أفريقيا": "🇿🇦", "الأرجنتين": "🇦🇷", "الجزائر": "🇩🇿",
-  "ألمانيا": "🇩🇪", "كوراساو": "🇨🇼", "قطر": "🇶🇦", "سويسرا": "🇨🇭",
-  "فرنسا": "🇫🇷", "السنغال": "🇸🇳", "العراق": "🇮🇶", "النرويج": "🇳🇴",
-  "السعودية": "🇸🇦", "الأوروغواي": "🇺🇾", "هولندا": "🇳🇱", "اليابان": "🇯🇵"
-  // يمكنك إضافة بقية الدول هنا بنفس الطريقة
-};
-
 const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
-const appContainer = document.getElementById("app-container");
-
-// بناء الهيكل
-groups.forEach(g => {
-  appContainer.innerHTML += `
-    <div class="group-container">
-      <span class="group-label">المجموعة ${g}</span>
-      <div id="group-${g}"></div>
-    </div>
-  `;
-});
-
-// 2. دالة العرض مع الأعلام
-function renderMatches(matches) {
-  matches.forEach(m => {
-    const group = m.group || "A";
-    const target = document.getElementById(`group-${group}`);
-    if (!target) return;
-
-    // جلب الأعلام
-    const homeFlag = flagMap[m.homeName] || "🏳️";
-    const awayFlag = flagMap[m.awayName] || "🏳️";
-    
-    target.innerHTML += `
-      <div class="card">
-        <div class="flex justify-between items-center font-bold text-lg">
-          <span>${homeFlag} ${m.homeName}</span>
-          <span class="text-yellow-500">${m.score}</span>
-          <span>${m.awayName} ${awayFlag}</span>
-        </div>
-        <div class="text-xs text-gray-500 mt-2">
-            النقاط: ${m.points} | الفارق: ${m.diff}
-        </div>
-      </div>
-    `;
-  });
-}
-
-// 3. البيانات (الربط مع الـ API سيوضع هنا مكان القائمة الثابتة)
-const demoMatches = [
-  { group: "A", homeName: "المكسيك", awayName: "جنوب أفريقيا", score: "2 - 0", points: 3, diff: 2 },
-  { group: "H", homeName: "فرنسا", awayName: "السنغال", score: "3 - 1", points: 3, diff: 2 }
+const matches = [
+  { group:"A", home:"المكسيك 🇲🇽", away:"جنوب أفريقيا 🇿🇦", score:"2 - 0" },
+  { group:"H", home:"فرنسا 🇫🇷", away:"السنغال 🇸🇳", score:"3 - 1" }
 ];
 
-renderMatches(demoMatches);
-</script>
+const container = document.getElementById("container");
 
+groups.forEach(g => {
+  // إنشاء حاوية المجموعة أولاً
+  let groupDiv = document.createElement("div");
+  groupDiv.className = "group-wrapper";
+  groupDiv.innerHTML = `<h2 class="group-title">المجموعة ${g}</h2>`;
+  
+  // البحث عن مباريات هذه المجموعة
+  const match = matches.find(m => m.group === g);
+  if(match) {
+    groupDiv.innerHTML += `
+      <div class="card flex justify-between font-bold">
+        <span>${match.home}</span>
+        <span class="text-yellow-500">${match.score}</span>
+        <span>${match.away}</span>
+      </div>`;
+  } else {
+    // هذا الجزء هو الذي يمنع الفراغ
+    groupDiv.innerHTML += `<p class="text-gray-600 text-sm italic">لا توجد مباريات حالياً</p>`;
+  }
+  
+  container.appendChild(groupDiv);
+});
+</script>
 </body>
 </html>
