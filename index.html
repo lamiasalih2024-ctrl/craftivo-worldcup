@@ -11,12 +11,17 @@
     <h1 class="text-4xl font-black text-yellow-500 mb-2">Craftivo</h1>
     <p class="text-gray-400 mb-8">تغطية كأس العالم 2026</p>
     
-    <!-- منطقة النتائج المباشرة -->
+    <!-- منطقة النتائج -->
     <div id="live-scores" class="space-y-4">
       <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800">
-        جاري تحديث النتائج الحية...
+        جاري تحديث البيانات...
       </div>
     </div>
+
+    <!-- توقيع الموقع -->
+    <footer class="mt-12 text-sm text-gray-500">
+      <p>❤️ Craftivo | LMS</p>
+    </footer>
   </div>
 
   <script>
@@ -27,21 +32,23 @@
         const liveScoresDiv = document.getElementById('live-scores');
         
         if (data.response && data.response.length > 0) {
-          liveScoresDiv.innerHTML = data.response.map(game => `
-            <div class="p-6 bg-slate-900 rounded-2xl border border-red-500/30">
-              <div class="text-red-500 font-bold animate-pulse">🔴 مباشر</div>
-              <div class="text-xl font-bold my-2">${game.teams.home.name} ${game.goals.home ?? 0} - ${game.goals.away ?? 0} ${game.teams.away.name}</div>
-            </div>
-          `).join('');
+          liveScoresDiv.innerHTML = data.response.map(game => {
+            const isLive = game.fixture.status.short === '1H' || game.fixture.status.short === '2H' || game.fixture.status.short === 'ET';
+            return `
+              <div class="p-6 bg-slate-900 rounded-2xl border ${isLive ? 'border-red-500/30' : 'border-slate-800'}">
+                ${isLive ? '<div class="text-red-500 font-bold animate-pulse">🔴 مباشر</div>' : '<div class="text-gray-400 text-sm">مباراة</div>'}
+                <div class="text-xl font-bold my-2">${game.teams.home.name} ${game.goals.home ?? 0} - ${game.goals.away ?? 0} ${game.teams.away.name}</div>
+              </div>
+            `;
+          }).join('');
         } else {
-          liveScoresDiv.innerHTML = '<div class="p-6 text-gray-500">لا توجد مباريات مباشرة حالياً.</div>';
+          liveScoresDiv.innerHTML = '<div class="p-6 text-gray-500">لا توجد مباريات حالياً.</div>';
         }
       } catch (err) {
         console.error("خطأ في جلب البيانات:", err);
       }
     }
 
-    // التحديث كل 60 ثانية
     fetchScores();
     setInterval(fetchScores, 60000);
   </script>
