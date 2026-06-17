@@ -2,54 +2,48 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-    body { background: #05070f; color: #fff; font-family: 'Cairo', sans-serif; }
-    .brand-title { font-size: 3rem; font-weight: 900; background: linear-gradient(to bottom, #fbbf24, #b45309); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
-    .card { background: #0f172a; border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid #334155; }
-    .live-card { border: 3px solid #ef4444; }
-  </style>
+  <title>Craftivo | تغطية كأس العالم 2026</title>
 </head>
-<body class="p-4">
-<div class="max-w-2xl mx-auto">
-  <div class="brand-title">Craftivo</div>
-  <p class="text-center text-gray-400 font-bold mb-8">تغطية كأس العالم 2026</p>
-  
-  <div id="live-container"></div>
-  <div id="archive-list"></div>
-  
-  <div class="text-center mt-12 p-8 border-t border-gray-800">
-    <p class="font-bold text-gray-400">Craftivo | LMS 🤍</p>
-  </div>
-</div>
-
-<script>
-// ضعي مفتاحك هنا بين القوسين
-const API_KEY = "ضعي_مفتاحك_هنا";
-
-async function updateData() {
-    // عرض المباشر (سيتم تحديثه بالـ API لاحقاً)
-    document.getElementById('live-container').innerHTML = `
-        <div class="card live-card">
-            <span class="text-red-500 font-bold">🔴 مباشر الآن</span>
-            <div class="text-xl font-bold">الكونغو 0 - 1 البرتغال</div>
-        </div>`;
+<body class="bg-slate-950 text-white min-h-screen p-6">
+  <div class="max-w-2xl mx-auto text-center">
+    <h1 class="text-4xl font-black text-yellow-500 mb-2">Craftivo</h1>
+    <p class="text-gray-400 mb-8">تغطية كأس العالم 2026</p>
     
-    // عرض الأرشيف الثابت لضمان عدم اختفائه
-    const matches = [
-        { group: "A", match: "المكسيك - ج.أفريقيا", score: "2 - 0" },
-        { group: "B", match: "كندا - البوسنة", score: "1 - 1" }
-    ];
-    document.getElementById('archive-list').innerHTML = matches.map(m => `
-        <div class="card">
-            <div class="text-yellow-500 font-bold">المجموعة ${m.group}</div>
-            <div class="text-lg font-bold">${m.match}</div>
-            <div class="text-2xl font-black text-yellow-400">${m.score}</div>
-        </div>
-    `).join('');
-}
-updateData();
-</script>
+    <!-- منطقة النتائج المباشرة -->
+    <div id="live-scores" class="space-y-4">
+      <div class="p-6 bg-slate-900 rounded-2xl border border-slate-800">
+        جاري تحديث النتائج الحية...
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchScores() {
+      try {
+        const res = await fetch("/api/football");
+        const data = await res.json();
+        const liveScoresDiv = document.getElementById('live-scores');
+        
+        if (data.response && data.response.length > 0) {
+          liveScoresDiv.innerHTML = data.response.map(game => `
+            <div class="p-6 bg-slate-900 rounded-2xl border border-red-500/30">
+              <div class="text-red-500 font-bold animate-pulse">🔴 مباشر</div>
+              <div class="text-xl font-bold my-2">${game.teams.home.name} ${game.goals.home ?? 0} - ${game.goals.away ?? 0} ${game.teams.away.name}</div>
+            </div>
+          `).join('');
+        } else {
+          liveScoresDiv.innerHTML = '<div class="p-6 text-gray-500">لا توجد مباريات مباشرة حالياً.</div>';
+        }
+      } catch (err) {
+        console.error("خطأ في جلب البيانات:", err);
+      }
+    }
+
+    // التحديث كل 60 ثانية
+    fetchScores();
+    setInterval(fetchScores, 60000);
+  </script>
 </body>
 </html>
