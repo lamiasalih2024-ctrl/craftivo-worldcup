@@ -2,47 +2,64 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Craftivo | تغطية كأس العالم 2026</title>
   <style>
     body { background: #05070f; color: white; font-family: sans-serif; }
-    .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+    .match-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; margin-bottom: 10px; }
+    .status-live { color: #ef4444; font-weight: bold; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
   </style>
 </head>
 <body>
 
-<section class="text-center py-10">
-  <h1 class="text-5xl font-black text-yellow-500">Craftivo</h1>
-  <p class="text-gray-300 mt-2 italic">تغطية كأس العالم 2026</p>
-</section>
+<header class="text-center py-8">
+  <h1 class="text-4xl font-black text-yellow-500">Craftivo</h1>
+  <p class="text-gray-400">تغطية كأس العالم 2026 - تحديث تلقائي</p>
+</header>
 
-<div id="app" class="max-w-4xl mx-auto px-4">
-  <p class="text-center">جاري جلب النتائج الحية...</p>
+<div id="matches-app" class="max-w-2xl mx-auto px-4 pb-10">
+  <p class="text-center text-gray-500">جاري تحميل الأحداث المباشرة...</p>
 </div>
 
 <script>
-  async function fetchMatches() {
+  async function updateMatches() {
     try {
       const response = await fetch('/api/football');
       const data = await response.json();
-      const app = document.getElementById('app');
-      app.innerHTML = ''; 
+      const container = document.getElementById('matches-app');
+      container.innerHTML = ''; 
 
-      // عرض بيانات الدوريات والمباريات من الـ API
-      data.response.forEach(item => {
+      // عرض المباريات (يتم تعديل المسار بناءً على هيكل استجابة الـ API الخاص بك)
+      // هذا الكود مصمم ليقرأ البيانات التي ترجع من الـ API
+      data.response.forEach(match => {
         const div = document.createElement('div');
-        div.className = 'card';
+        div.className = 'match-card';
+        
+        // منطق عرض الحالة (مباشر / انتهت)
+        let statusText = match.fixture.status.short === 'FT' ? 'انتهت' : (match.fixture.status.short === '1H' ? 'مباشر الآن' : 'قادمة');
+        let statusClass = match.fixture.status.short === '1H' ? 'status-live' : 'text-gray-400';
+
         div.innerHTML = `
-          <h2 class="text-xl font-bold text-yellow-500 mb-4">${item.league.name}</h2>
-          <p class="text-gray-400">تغطية المباريات والنتائج ستظهر هنا فور تحديثها من المصدر.</p>
+          <div class="flex justify-between items-center">
+            <span class="${statusClass}">${statusText}</span>
+            <span class="text-sm">${match.fixture.date}</span>
+          </div>
+          <div class="text-center py-4 font-bold text-lg">
+            ${match.teams.home.name} ${match.goals.home} - ${match.goals.away} ${match.teams.away.name}
+          </div>
         `;
-        app.appendChild(div);
+        container.appendChild(div);
       });
     } catch (e) {
-      document.getElementById('app').innerHTML = '<p class="text-red-500">حدث خطأ في الاتصال، يرجى المحاولة لاحقاً.</p>';
+      console.error('Error:', e);
     }
   }
-  fetchMatches();
+
+  // التحديث التلقائي كل 30 ثانية
+  updateMatches();
+  setInterval(updateMatches, 30000);
 </script>
 
 </body>
