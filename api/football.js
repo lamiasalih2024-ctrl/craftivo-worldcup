@@ -1,8 +1,7 @@
 export default async function handler(req, res) {
   const { type } = req.query;
-  const apiKey = 'e3af6b67b2839b4a1526bd2a3ab00e30'; // ضعي مفتاح الـ API الخاص بك هنا
+  const apiKey = process.env.API_KEY; 
   
-  // رابط الـ API الأساسي (تأكدي من صحة الروابط حسب اشتراكك)
   const endpoint = type === 'standings' 
     ? 'https://v3.football.api-sports.io/standings?league=1&season=2026'
     : 'https://v3.football.api-sports.io/fixtures?league=1&season=2026';
@@ -17,5 +16,3 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Failed to fetch data' });
   }
 }
-e3af
-
