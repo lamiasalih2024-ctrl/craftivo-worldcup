@@ -2,35 +2,99 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background: #05070f; color: white; font-family: sans-serif; }
-    .match-card { background: rgba(255, 255, 255, 0.08); border: 1px solid #444; border-radius: 16px; padding: 20px; margin-bottom: 15px; }
-    .group-label { color: #fbbf24; font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; display: block; border-bottom: 1px solid #333; padding-bottom: 5px; }
-    .footer-text { color: #ffffff; font-size: 0.9rem; }
+    .card { background: #111; border: 1px solid #333; border-radius: 12px; padding: 15px; margin-bottom: 10px; }
+    .group-label { color: #fbbf24; font-size: 1.3rem; font-weight: 900; margin-top: 25px; border-bottom: 2px solid #fbbf24; display: inline-block; }
+    .section-head { color: #3b82f6; font-size: 1.2rem; font-weight: 800; margin-top: 30px; margin-bottom: 10px; border-right: 4px solid #3b82f6; padding-right: 10px; }
   </style>
 </head>
 <body class="p-4">
-  <header class="text-center py-8">
-    <h1 class="text-6xl font-black text-yellow-500">Craftivo</h1>
-    <p class="text-gray-300 mt-2 font-bold text-lg">التغطية الرسمية لكأس العالم 2026 | توقيت مكة</p>
-  </header>
-
-  <main class="max-w-xl mx-auto">
-    <h2 class="text-2xl font-bold text-yellow-500 mb-6 border-b border-yellow-500 pb-2">سجل النتائج والمباريات</h2>
-    <div id="manual-results"></div>
-    
-    <h2 class="text-2xl font-bold text-yellow-500 mt-10 mb-6 border-b border-yellow-500 pb-2">مباريات اليوم (مباشر)</h2>
-    <div id="api-fixtures" class="text-center text-gray-400 italic">جاري البحث عن مباريات حية...</div>
-  </main>
-
-  <footer class="text-center mt-12 py-8 border-t border-gray-800">
-    <p class="footer-text font-bold">Craftivo &copy; 2026 | تطوير: LMS Systems</p>
-  </footer>
+  <div class="max-w-xl mx-auto">
+    <h1 class="text-4xl font-black text-yellow-500 text-center py-6">Craftivo</h1>
+    <div id="manual-results">
+        <h2 class="text-yellow-500 font-bold border-b border-yellow-500 mb-4">سجل النتائج (A - L)</h2>
+    </div>
+    <div id="dynamic-matches">
+        <h2 class="text-yellow-500 font-bold border-b border-yellow-500 mt-8 mb-4">مباريات اليوم</h2>
+        <div id="live-section"></div>
+        <div id="upcoming-section"></div>
+        <div id="finished-section"></div>
+    </div>
+  </div>
 
   <script>
-    const data = [
+    const manualGroups = [
       { g: "المجموعة A", m: [{h: "المكسيك 🇲🇽", a: "جنوب أفريقيا 🇿🇦", s: "2 - 0"}, {h: "قطر 🇶🇦", a: "سويسرا 🇨🇭", s: "1 - 1"}]},
       { g: "المجموعة B", m: [{h: "الأرجنتين 🇦🇷", a: "الجزائر 🇩🇿", s: "3 - 0"}, {h: "النمسا 🇦🇹", a: "الأردن 🇯🇴", s: "3 - 1"}]},
       { g: "المجموعة C", m: [{h: "ألمانيا 🇩🇪", a: "كوراساو 🇨🇼", s: "7 - 1"}, {h: "كوريا الجنوبية 🇰🇷", a: "التشيك 🇨🇿", s: "2 - 1"}]},
-      { g: "المجموعة D", m: [{h: "كندا 🇨🇦", a: "البوسنة 🇧🇦",
+      { g: "المجموعة D", m: [{h: "كندا 🇨🇦", a: "البوسنة 🇧🇦", s: "1 - 1"}, {h: "أمريكا 🇺🇸", a: "باراغواي 🇵🇾", s: "4 - 1"}]},
+      { g: "المجموعة E", m: [{h: "أستراليا 🇦🇺", a: "تركيا 🇹🇷", s: "2 - 0"}, {h: "ساحل العاج 🇨🇮", a: "الإكوادور 🇪🇨", s: "1 - 0"}]},
+      { g: "المجموعة F", m: [{h: "هولندا 🇳🇱", a: "اليابان 🇯🇵", s: "2 - 2"}, {h: "السويد 🇸🇪", a: "تونس 🇹🇳", s: "5 - 1"}]},
+      { g: "المجموعة G", m: [{h: "إيران 🇮🇷", a: "نيوزيلندا 🇳🇿", s: "2 - 2"}, {h: "إسبانيا 🇪🇸", a: "الرأس الأخضر 🇨🇻", s: "0 - 0"}]},
+      { g: "المجموعة H", m: [{h: "فرنسا 🇫🇷", a: "السنغال 🇸🇳", s: "3 - 1"}, {h: "العراق 🇮🇶", a: "النرويج 🇳🇴", s: "1 - 4"}]},
+      { g: "المجموعة I", m: [{h: "السعودية 🇸🇦", a: "الأوروغواي 🇺🇾", s: "1 - 1"}]},
+      { g: "المجموعة J", m: []}, { g: "المجموعة K", m: []}, { g: "المجموعة L", m: []}
+    ];
+
+    manualGroups.forEach(group => {
+      document.getElementById('manual-results').innerHTML += `<span class="group-label">${group.g}</span>`;
+      group.m.forEach(match => {
+        document.getElementById('manual-results').innerHTML += `<div class="card flex justify-between font-bold"><span>${match.h}</span> <span class="text-yellow-500">${match.s}</span> <span>${match.a}</span></div>`;
+      });
+    });
+
+    let lastMatches = [];
+    const sentEvents = new Set();
+    if ("Notification" in window) Notification.requestPermission();
+
+    async function updateMatches() {
+      try {
+        const res = await fetch('/api/football');
+        const data = await res.json();
+        const matches = data.response;
+        if (!Array.isArray(matches)) return;
+        
+        matches.sort((a, b) => new Date(a.fixture.date) - new Date(b.fixture.date));
+        
+        let liveHTML = '<div class="section-head">🔴 مباريات مباشرة</div>';
+        let upHTML = '<div class="section-head">🕒 مباريات قادمة</div>';
+        let finHTML = '<div class="section-head">🏁 مباريات انتهت</div>';
+
+        matches.forEach(m => {
+          const home = m?.teams?.home?.name || "—";
+          const away = m?.teams?.away?.name || "—";
+          const homeGoals = m?.goals?.home ?? 0;
+          const awayGoals = m?.goals?.away ?? 0;
+          
+          const card = `<div class="card flex justify-between font-bold"><span>${home}</span> <span class="text-yellow-500">${homeGoals} - ${awayGoals}</span> <span>${away}</span></div>`;
+          
+          if(m?.fixture?.status?.short === "LIVE") {
+            liveHTML += card;
+            const eventKey = `${m.fixture.id}_${m.fixture.status.elapsed}_${JSON.stringify(m.goals)}`;
+            const old = lastMatches.find(x => x.fixture?.id === m.fixture.id);
+            if(old && (old.goals?.home !== homeGoals || old.goals?.away !== awayGoals) && !sentEvents.has(eventKey)) {
+                new Notification("⚽ هدف!", { body: `${home} ${homeGoals} - ${awayGoals} ${away}` });
+                sentEvents.add(eventKey);
+            }
+          } else if(m?.fixture?.status?.short === "NS") upHTML += card;
+          else if(m?.fixture?.status?.short === "FT") finHTML += card;
+        });
+        
+        if (!liveHTML.includes("card")) liveHTML += "<p class='text-gray-500 text-sm'>لا توجد مباريات مباشرة حالياً</p>";
+        
+        document.getElementById('live-section').innerHTML = liveHTML;
+        document.getElementById('upcoming-section').innerHTML = upHTML;
+        document.getElementById('finished-section').innerHTML = finHTML;
+        
+        lastMatches = JSON.parse(JSON.stringify(matches));
+      } catch (e) { console.log("خطأ في الاتصال"); }
+    }
+
+    setInterval(updateMatches, 30000);
+    updateMatches();
+  </script>
+</body>
+</html>
