@@ -17,4 +17,5 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Failed to fetch data' });
   }
 }
-e3af6b67b2839b4a1526bd2a3ab00e30
+e3af
+
