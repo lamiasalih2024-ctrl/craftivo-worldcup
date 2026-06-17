@@ -2,86 +2,78 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Craftivo | تغطية كأس العالم 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craftivo | التغطية الرسمية لكأس العالم 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background: #05070f; color: white; font-family: sans-serif; }
-    .group-wrapper { margin-top: 25px; border-bottom: 1px solid #222; padding-bottom: 20px; }
-    .group-title { color: #fbbf24; font-size: 1.3rem; font-weight: 900; border-right: 4px solid #fbbf24; padding-right: 10px; margin-bottom: 15px; }
-    .match-card { background: #111; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
-    .live-indicator { color: #ef4444; font-weight: bold; font-size: 0.8rem; animation: blink 1s infinite; }
-    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    body { background: #05070f; color: #fff; font-family: sans-serif; }
+    .group-card { background: #1a1a2e; border: 1px solid #333; border-radius: 15px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+    .group-title { color: #fbbf24; font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; border-right: 4px solid #fbbf24; padding-right: 10px; }
+    .match-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333; }
+    .points-text { font-size: 0.85rem; color: #a1a1aa; margin-top: 5px; }
+    .live-tag { background: #dc2626; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
   </style>
 </head>
 <body class="p-4">
 
-<div class="max-w-xl mx-auto">
+<div class="max-w-2xl mx-auto">
   <div class="text-center py-6">
     <h1 class="text-4xl font-black text-yellow-500">Craftivo</h1>
-    <p class="text-gray-400 font-bold">تغطية كأس العالم 2026</p>
-    <p class="text-blue-500 text-xs font-bold">بتوقيت مكة المكرمة</p>
+    <p class="text-gray-400 font-bold">التغطية الرسمية لكأس العالم 2026</p>
+    <p class="text-blue-500 text-sm font-bold">جميع المباريات بتوقيت مكة المكرمة</p>
   </div>
 
   <div id="app"></div>
 
-  <div class="text-center mt-12 pb-10">
+  <div class="text-center mt-12 p-6 border-t border-gray-800">
     <div style="font-size: 2rem;">🤍</div>
-    <p class="text-gray-400 font-bold">Craftivo | LMS</p>
+    <p class="font-bold mt-2">Craftivo | LMS</p>
+    <p class="text-xs text-gray-600">تصميم وتطوير: لمياء صالح</p>
   </div>
 </div>
 
 <script>
-// 1. هيكل المجموعات الثابت (يظهر دائماً حتى لو لم تكن هناك مباريات)
-const allGroups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+const groups = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
 
-// 2. الداتا القديمة (تظهر كمرجع إذا تعطل الـ API)
-const backupData = [
-  { group: "A", home: "المكسيك 🇲🇽", away: "جنوب أفريقيا 🇿🇦", score: "2 - 0", status: "FT" },
-  { group: "H", home: "فرنسا 🇫🇷", away: "السنغال 🇸🇳", score: "3 - 1", status: "FT" }
+// قاعدة البيانات الكاملة والشاملة
+const matchesData = [
+  { group: "A", home: "المكسيك 🇲🇽", away: "جنوب أفريقيا 🇿🇦", score: "2 - 0", pts: "المكسيك(3)، ج.أفريقيا(0)" },
+  { group: "B", home: "كندا 🇨🇦", away: "البوسنة 🇧🇦", score: "1 - 1", pts: "كندا(1)، البوسنة(1)" },
+  { group: "C", home: "ألمانيا 🇩🇪", away: "كوراساو 🇨🇼", score: "7 - 1", pts: "ألمانيا(3)، كوراساو(0)" },
+  { group: "D", home: "فرنسا 🇫🇷", away: "السنغال 🇸🇳", score: "3 - 1", pts: "فرنسا(3)، السنغال(0)" },
+  { group: "E", home: "السويد 🇸🇪", away: "تونس 🇹🇳", score: "5 - 1", pts: "السويد(3)، تونس(0)" },
+  { group: "F", home: "السعودية 🇸🇦", away: "الأوروغواي 🇺🇾", score: "1 - 1", pts: "السعودية(1)، الأوروغواي(1)" },
+  { group: "G", home: "إيران 🇮🇷", away: "نيوزيلندا 🇳🇿", score: "2 - 2", pts: "إيران(1)، نيوزيلندا(1)" },
+  { group: "H", home: "قطر 🇶🇦", away: "سويسرا 🇨🇭", score: "1 - 1", pts: "قطر(1)، سويسرا(1)" },
+  { group: "I", home: "اليابان 🇯🇵", away: "النرويج 🇳🇴", score: "0 - 0", pts: "اليابان(1)، النرويج(1)" },
+  { group: "J", home: "البرازيل 🇧🇷", away: "المغرب 🇲🇦", score: "3 - 0", pts: "البرازيل(3)، المغرب(0)" },
+  { group: "K", home: "إيطاليا 🇮🇹", away: "نيجيريا 🇳🇬", score: "2 - 1", pts: "إيطاليا(3)، نيجيريا(0)" },
+  { group: "L", home: "إسبانيا 🇪🇸", away: "مصر 🇪🇬", score: "0 - 0", pts: "إسبانيا(1)، مصر(1)" }
 ];
 
-async function updateData() {
-  const app = document.getElementById("app");
-  app.innerHTML = ""; // تنظيف
+const container = document.getElementById("app");
 
-  try {
-    // محاولة جلب الداتا من الـ API
-    const response = await fetch("/api/football");
-    const data = await response.json();
-    render(data.response); // عرض الداتا الحية
-  } catch (e) {
-    console.warn("استخدام البيانات المخزنة");
-    render(backupData); // عرض الداتا القديمة إذا توقف الـ API
+groups.forEach(g => {
+  let div = document.createElement("div");
+  div.className = "group-card";
+  div.innerHTML = `<h2 class="group-title">المجموعة ${g}</h2>`;
+  
+  const matches = matchesData.filter(m => m.group === g);
+  
+  if (matches.length > 0) {
+    matches.forEach(m => {
+      div.innerHTML += `
+        <div class="match-row">
+          <span>✅ ${m.home}  ${m.score}  ${m.away}</span>
+        </div>
+        <div class="points-text">النقاط: ${m.pts}</div>`;
+    });
+  } else {
+    div.innerHTML += `<p class="text-gray-600 text-sm italic">بانتظار المباريات...</p>`;
   }
-}
-
-function render(matches) {
-  const app = document.getElementById("app");
-  allGroups.forEach(g => {
-    let html = `<div class="group-wrapper"><h2 class="group-title">المجموعة ${g}</h2>`;
-    const groupMatches = matches.filter(m => m.group === g);
-    
-    if(groupMatches.length > 0) {
-      groupMatches.forEach(m => {
-        html += `
-          <div class="match-card flex justify-between items-center">
-            <span>${m.home}</span>
-            <div class="text-center">
-              <span class="text-yellow-500 font-bold">${m.score}</span>
-              ${m.status === "LIVE" ? '<br><span class="live-indicator">مباشر 🔴</span>' : ''}
-            </div>
-            <span>${m.away}</span>
-          </div>`;
-      });
-    } else {
-      html += `<p class="text-gray-600 text-sm italic mr-4">بانتظار المباريات...</p>`;
-    }
-    app.innerHTML += html + "</div>";
-  });
-}
-
-updateData();
-setInterval(updateData, 30000); // تحديث كل 30 ثانية
+  container.appendChild(div);
+});
 </script>
 </body>
 </html>
