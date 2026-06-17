@@ -18,7 +18,7 @@
   </header>
 
   <main id="content" class="max-w-xl mx-auto flex-grow">
-    <div class="text-center text-gray-500 animate-pulse">جاري جلب البيانات...</div>
+    <div class="text-center text-gray-500 animate-pulse">جاري تحميل السجل...</div>
   </main>
 
   <footer>
@@ -27,55 +27,46 @@
   </footer>
 
   <script>
+    // سجل المباريات التاريخي المحدث بناءً على 1000891419.jpg والمشاركات السابقة
+    const manualMatches = [
+      { date: "2026-06-01", home: "المكسيك", away: "جنوب أفريقيا", scoreHome: 2, scoreAway: 0 },
+      { date: "2026-06-02", home: "كوريا الجنوبية", away: "التشيك", scoreHome: 2, scoreAway: 1 },
+      { date: "2026-06-03", home: "كندا", away: "البوسنة", scoreHome: 1, scoreAway: 1 },
+      { date: "2026-06-04", home: "قطر", away: "سويسرا", scoreHome: 1, scoreAway: 1 },
+      { date: "2026-06-05", home: "أمريكا", away: "باراغواي", scoreHome: 4, scoreAway: 1 },
+      { date: "2026-06-06", home: "أستراليا", away: "تركيا", scoreHome: 2, scoreAway: 0 },
+      { date: "2026-06-07", home: "ألمانيا", away: "كوراساو", scoreHome: 7, scoreAway: 1 },
+      { date: "2026-06-08", home: "ساحل العاج", away: "الإكوادور", scoreHome: 1, scoreAway: 0 },
+      { date: "2026-06-09", home: "هولندا", away: "اليابان", scoreHome: 2, scoreAway: 2 },
+      { date: "2026-06-10", home: "السويد", away: "تونس", scoreHome: 5, scoreAway: 1 },
+      { date: "2026-06-11", home: "بلجيكا", away: "مصر", scoreHome: 1, scoreAway: 1 },
+      { date: "2026-06-12", home: "إيران", away: "نيوزيلندا", scoreHome: 2, scoreAway: 2 },
+      { date: "2026-06-13", home: "إسبانيا", away: "الرأس الأخضر", scoreHome: 0, scoreAway: 0 },
+      { date: "2026-06-14", home: "السعودية", away: "الأوروغواي", scoreHome: 1, scoreAway: 1 },
+      { date: "2026-06-15", home: "فرنسا", away: "السنغال", scoreHome: 3, scoreAway: 1 },
+      { date: "2026-06-17", home: "العراق", away: "النرويج", scoreHome: 1, scoreAway: 4 },
+      { date: "2026-06-17", home: "الأرجنتين", away: "الجزائر", scoreHome: 3, scoreAway: 0 },
+      { date: "2026-06-17", home: "النمسا", away: "الأردن", scoreHome: 3, scoreAway: 1 }
+    ];
+
     fetch('/api/football')
       .then(res => res.json())
       .then(data => {
         const content = document.getElementById('content');
-        const matches = data?.response || [];
-
-        if (matches.length === 0) {
-          content.innerHTML = `
-            <div class="match-card text-center text-gray-400">
-              لا توجد مباريات متاحة حالياً في النظام
-            </div>
-          `;
-          return;
-        }
-
-        content.innerHTML = '<h2 class="text-xl font-bold mb-4 text-center text-yellow-500">جميع المباريات</h2>';
-
-        matches.forEach(m => {
-          const date = m?.fixture?.date?.split('T')[0] || "غير معروف";
-          const home = m?.teams?.home?.name || "—";
-          const away = m?.teams?.away?.name || "—";
-          const status = m?.fixture?.status?.short || "NS";
-          let score = "VS";
-
-          if (status === "FT") {
-            score = `${m?.goals?.home ?? 0} - ${m?.goals?.away ?? 0}`;
-          }
-
+        content.innerHTML = '<h2 class="text-xl font-bold mb-4 text-center text-yellow-500">سجل المباريات</h2>';
+        
+        manualMatches.forEach(m => {
           content.innerHTML += `
-            <div class="match-card text-center">
-              <p class="text-xs text-gray-400 mb-2">${date}</p>
+            <div class="match-card text-center border border-yellow-500/30">
+              <p class="text-xs text-gray-400 mb-2">${m.date}</p>
               <div class="flex justify-between items-center text-lg font-bold">
-                <span>${home}</span>
-                <span class="text-yellow-500">${score}</span>
-                <span>${away}</span>
+                <span>${m.home}</span>
+                <span class="text-yellow-500">${m.scoreHome} - ${m.scoreAway}</span>
+                <span>${m.away}</span>
               </div>
-              <p class="text-xs mt-2 text-gray-400">
-                الحالة: ${status === "FT" ? "انتهت" : status === "NS" ? "لم تبدأ" : "مباشر"}
-              </p>
-            </div>
-          `;
+              <p class="text-xs mt-2 text-green-500">انتهت</p>
+            </div>`;
         });
-      })
-      .catch(() => {
-        document.getElementById('content').innerHTML = `
-          <div class="match-card text-red-500 text-center">
-            خطأ في الاتصال بالبيانات
-          </div>
-        `;
       });
   </script>
 </body>
