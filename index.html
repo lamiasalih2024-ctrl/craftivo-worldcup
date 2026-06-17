@@ -4,75 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Craftivo | World Cup 2026</title>
     <style>
-        body { background: radial-gradient(circle at top, #0b1020, #05070f); }
-        .flag { width: 22px; height: 16px; display: inline-block; vertical-align: middle; margin: 0 6px; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+        body { background-color: #05070f; color: #fff; font-family: sans-serif; }
+        .group-card { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .gold-color { color: #eab308; }
+        .match-line { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1f2937; font-size: 0.95rem; }
+        .date-badge { color: #eab308; font-size: 0.75rem; font-weight: bold; }
     </style>
 </head>
-<body class="text-white">
+<body class="p-4">
 
-<div class="max-w-6xl mx-auto px-4 py-10 space-y-14">
-
-    <!-- HEADER -->
-    <header class="text-center space-y-4">
-        <h1 class="text-5xl md:text-7xl font-black text-yellow-400 tracking-wide">Craftivo</h1>
-        <p class="text-slate-400 text-lg md:text-2xl">⚽ تغطية كأس العالم 2026 - النتائج والجدول</p>
-        <div class="inline-block px-4 py-1 bg-red-600 text-white rounded-full text-sm font-bold animate-pulse">🔴 LIVE</div>
-        <p class="text-sm text-slate-400 mt-2">جميع المواعيد بتوقيت مكة المكرمة | آخر تحديث: 17 يونيو 2026</p>
+<div class="max-w-3xl mx-auto">
+    <header class="text-center py-8">
+        <h1 class="text-4xl font-black gold-color">Craftivo</h1>
+        <p class="text-slate-400">جدول مباريات كأس العالم 2026 الكامل</p>
     </header>
 
-    <!-- GROUPS GRID -->
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- GROUP I -->
-        <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl">
-            <h2 class="text-yellow-400 text-2xl font-bold mb-4 border-b border-slate-700 pb-2">المجموعة I</h2>
-            <p>✔ فرنسا <span class="text-yellow-400 font-bold">3 - 1</span> السنغال</p>
-            <p class="mt-2">✔ النرويج <span class="text-yellow-400 font-bold">4 - 1</span> العراق</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- مجموعة A -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة A</h2>
+            <div class="match-line"><span>🇲🇽 المكسيك 2 - 0 ج.أفريقيا 🇿🇦</span><span class="date-badge">11 يونيو</span></div>
+            <div class="match-line"><span>🇰🇷 كوريا ج 2 - 1 التشيك 🇨🇿</span><span class="date-badge">12 يونيو</span></div>
         </div>
-
-        <!-- GROUP J -->
-        <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl">
-            <h2 class="text-yellow-400 text-2xl font-bold mb-4 border-b border-slate-700 pb-2">المجموعة J</h2>
-            <p>✔ الأرجنتين <span class="text-yellow-400 font-bold">3 - 0</span> الجزائر</p>
-            <p class="mt-2">✔ النمسا <span class="text-yellow-400 font-bold">3 - 1</span> الأردن</p>
+        <!-- مجموعة B -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة B</h2>
+            <div class="match-line"><span>🇨🇦 كندا 1 - 1 البوسنة 🇧🇦</span><span class="date-badge">12 يونيو</span></div>
+            <div class="match-line"><span>🇶🇦 قطر 1 - 1 سويسرا 🇨🇭</span><span class="date-badge">13 يونيو</span></div>
         </div>
-
-        <!-- GROUP K -->
-        <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl">
-            <h2 class="text-yellow-400 text-2xl font-bold mb-4 border-b border-slate-700 pb-2">المجموعة K</h2>
-            <p class="text-slate-300 text-sm">⏳ 18 يونيو 17:00 | البرتغال VS الكونغو</p>
-            <p class="mt-2 text-slate-300 text-sm">⏳ 18 يونيو 21:00 | أوزبكستان VS كولومبيا</p>
+        <!-- مجموعة C -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة C</h2>
+            <div class="match-line"><span>🇧🇷 البرازيل 1 - 1 المغرب 🇲🇦</span><span class="date-badge">14 يونيو</span></div>
+            <div class="match-line"><span>🇭🇹 هايتي 0 - 1 إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="date-badge">14 يونيو</span></div>
         </div>
-
-        <!-- GROUP L -->
-        <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl">
-            <h2 class="text-yellow-400 text-2xl font-bold mb-4 border-b border-slate-700 pb-2">المجموعة L</h2>
-            <p class="text-slate-300 text-sm">⏳ 19 يونيو 19:00 | إنجلترا VS كرواتيا</p>
-            <p class="mt-2 text-slate-300 text-sm">⏳ 19 يونيو 22:00 | غانا VS بنما</p>
+        <!-- مجموعة D -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة D</h2>
+            <div class="match-line"><span>🇺🇸 أمريكا 4 - 1 باراغواي 🇵🇾</span><span class="date-badge">13 يونيو</span></div>
+            <div class="match-line"><span>🇦🇺 أستراليا 2 - 0 تركيا 🇹🇷</span><span class="date-badge">14 يونيو</span></div>
         </div>
-
-    </section>
-
-    <!-- ROADMAP -->
-    <section class="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 text-center space-y-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-yellow-400">🏆 الطريق نحو النهائي</h2>
-        <div class="flex flex-wrap justify-center gap-2 text-sm font-bold">
-            <div class="bg-slate-800 px-4 py-2 rounded-lg">المجموعات</div> <div>➡️</div>
-            <div class="bg-slate-800 px-4 py-2 rounded-lg">دور الـ 32</div> <div>➡️</div>
-            <div class="bg-slate-800 px-4 py-2 rounded-lg">دور الـ 16</div> <div>➡️</div>
-            <div class="bg-slate-800 px-4 py-2 rounded-lg">ربع النهائي</div> <div>➡️</div>
-            <div class="bg-slate-800 px-4 py-2 rounded-lg">نصف النهائي</div> <div>➡️</div>
-            <div class="bg-yellow-500 text-black px-4 py-2 rounded-lg">النهائي 🏆</div>
+        <!-- مجموعة E -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة E</h2>
+            <div class="match-line"><span>🇩🇪 ألمانيا 7 - 1 كوراساو 🇨🇼</span><span class="date-badge">14 يونيو</span></div>
+            <div class="match-line"><span>🇨🇮 ساحل العاج 1 - 0 الإكوادور 🇪🇨</span><span class="date-badge">15 يونيو</span></div>
         </div>
-    </section>
+        <!-- مجموعة F -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة F</h2>
+            <div class="match-line"><span>🇳🇱 هولندا 2 - 2 اليابان 🇯🇵</span><span class="date-badge">14 يونيو</span></div>
+            <div class="match-line"><span>🇸🇪 السويد 5 - 1 تونس 🇹🇳</span><span class="date-badge">15 يونيو</span></div>
+        </div>
+        <!-- مجموعة G -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة G</h2>
+            <div class="match-line"><span>🇧🇪 بلجيكا 1 - 1 مصر 🇪🇬</span><span class="date-badge">15 يونيو</span></div>
+            <div class="match-line"><span>🇮🇷 إيران 2 - 2 نيوزيلندا 🇳🇿</span><span class="date-badge">16 يونيو</span></div>
+        </div>
+        <!-- مجموعة H -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة H</h2>
+            <div class="match-line"><span>🇪🇸 إسبانيا 0 - 0 الرأس الأخضر 🇨🇻</span><span class="date-badge">15 يونيو</span></div>
+            <div class="match-line"><span>🇸🇦 السعودية 1 - 1 أوروغواي 🇺🇾</span><span class="date-badge">16 يونيو</span></div>
+        </div>
+        <!-- مجموعة I -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة I</h2>
+            <div class="match-line"><span>🇫🇷 فرنسا 3 - 1 السنغال 🇸🇳</span><span class="date-badge">16 يونيو</span></div>
+            <div class="match-line"><span>🇮🇶 العراق 1 - 4 النرويج 🇳🇴</span><span class="date-badge">16 يونيو</span></div>
+        </div>
+        <!-- مجموعة J -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة J</h2>
+            <div class="match-line"><span>🇦🇷 الأرجنتين 3 - 0 الجزائر 🇩🇿</span><span class="date-badge">16 يونيو</span></div>
+            <div class="match-line"><span>🇦🇹 النمسا 3 - 1 الأردن 🇯🇴</span><span class="date-badge">17 يونيو</span></div>
+        </div>
+        <!-- مجموعة K -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة K</h2>
+            <div class="match-line"><span>🇵🇹 البرتغال VS الكونغو 🇨🇩</span><span class="date-badge">17 يونيو 8م</span></div>
+            <div class="match-line"><span>🇺🇿 أوزبكستان VS كولومبيا 🇨🇴</span><span class="date-badge">18 يونيو 5ص</span></div>
+        </div>
+        <!-- مجموعة L -->
+        <div class="group-card"><h2 class="gold-color font-bold">المجموعة L</h2>
+            <div class="match-line"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا VS كرواتيا 🇭🇷</span><span class="date-badge">17 يونيو 11م</span></div>
+            <div class="match-line"><span>🇬🇭 غانا VS بنما 🇵🇦</span><span class="date-badge">18 يونيو 2ص</span></div>
+        </div>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="text-center text-slate-500 py-10 border-t border-slate-800">
-        <p class="text-xl font-bold">Craftivo Studio © 2026</p>
-        <p class="text-3xl mt-3">LMS 🤍</p>
-    </footer>
+    <!-- خارطة الطريق -->
+    <div class="group-card mt-6">
+        <h2 class="text-center gold-color font-bold mb-4">خارطة الطريق نحو النهائي</h2>
+        <div class="flex justify-between text-center text-xs">
+            <div class="p-2 border-r border-slate-700">دور الـ32</div>
+            <div class="p-2 border-r border-slate-700">دور الـ16</div>
+            <div class="p-2 border-r border-slate-700">ربع النهائي</div>
+            <div class="p-2">النهائي</div>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>
