@@ -2,42 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craftivo | تغطية كأس العالم 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background:#05070f; color:white; font-family: sans-serif; }
-    .card { background:#111; border:1px solid #333; border-radius:12px; padding:12px; margin-bottom:8px; transition:0.3s; }
-    .group-container { margin-top:30px; border-bottom:1px solid #222; padding-bottom:20px; }
-    .group-label { color:#fbbf24; font-size:1.4rem; font-weight:900; margin-bottom:15px; display:block; border-right:4px solid #fbbf24; padding-right:10px; }
-    .footer { text-align:center; padding:40px; color:#555; font-size:0.8rem; }
-    .badge { font-size:0.7rem; padding:2px 6px; border-radius:4px; margin-right:5px; font-weight:bold; }
+    body { background: #05070f; color: white; font-family: sans-serif; }
+    .card { background: #111; border: 1px solid #333; border-radius: 12px; padding: 12px; margin-bottom: 8px; }
+    .group-label { color: #fbbf24; font-size: 1.3rem; font-weight: 900; margin-top: 25px; margin-bottom: 10px; border-right: 4px solid #fbbf24; padding-right: 10px; display: block; }
+    .footer { text-align: center; padding: 40px; margin-top: 50px; border-top: 1px solid #222; }
+    .flag { font-size: 1.2rem; margin: 0 5px; }
   </style>
 </head>
 <body class="p-4">
 
 <div class="max-w-xl mx-auto">
-  <div class="text-center py-8">
+  <div class="text-center py-6">
     <h1 class="text-5xl font-black text-yellow-500">Craftivo</h1>
-    <p class="text-gray-300 mt-2 text-lg">تغطية كأس العالم 2026</p>
-    <p class="text-blue-500 font-bold mt-1 text-sm">بتوقيت مكة المكرمة</p>
+    <p class="text-gray-300 font-bold mt-2">تغطية كأس العالم 2026</p>
+    <p class="text-blue-500 text-sm font-bold">بتوقيت مكة المكرمة</p>
   </div>
 
-  <div id="main-container"></div>
+  <div id="app-container"></div>
 
   <div class="footer">
-    <p>© 2026 Craftivo - جميع الحقوق محفوظة</p>
+    <div style="font-size: 2rem;">🤍</div>
+    <p class="text-gray-400 font-bold mt-2">Craftivo | LMS</p>
+    <p class="text-xs text-gray-600">تصميم وتطوير: لمياء صالح</p>
   </div>
 </div>
 
 <script>
-const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
-const container = document.getElementById("main-container");
-let lastMatches = [];
-const goalEvents = new Set();
+// 1. قاموس الأعلام (ربط اسم الدولة بالـ Emoji)
+const flagMap = {
+  "المكسيك": "🇲🇽", "جنوب أفريقيا": "🇿🇦", "الأرجنتين": "🇦🇷", "الجزائر": "🇩🇿",
+  "ألمانيا": "🇩🇪", "كوراساو": "🇨🇼", "قطر": "🇶🇦", "سويسرا": "🇨🇭",
+  "فرنسا": "🇫🇷", "السنغال": "🇸🇳", "العراق": "🇮🇶", "النرويج": "🇳🇴",
+  "السعودية": "🇸🇦", "الأوروغواي": "🇺🇾", "هولندا": "🇳🇱", "اليابان": "🇯🇵"
+  // يمكنك إضافة بقية الدول هنا بنفس الطريقة
+};
 
-// 1. بناء هيكل المجموعات
+const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+const appContainer = document.getElementById("app-container");
+
+// بناء الهيكل
 groups.forEach(g => {
-  container.innerHTML += `
+  appContainer.innerHTML += `
     <div class="group-container">
       <span class="group-label">المجموعة ${g}</span>
       <div id="group-${g}"></div>
@@ -45,70 +53,40 @@ groups.forEach(g => {
   `;
 });
 
-// 2. دالة العرض الذكية
-function render(matches) {
-  const frag = {};
-  groups.forEach(g => frag[g] = "");
-
+// 2. دالة العرض مع الأعلام
+function renderMatches(matches) {
   matches.forEach(m => {
-    const home = m?.teams?.home?.name || "—";
-    const away = m?.teams?.away?.name || "—";
-    const hg = m?.goals?.home ?? 0;
-    const ag = m?.goals?.away ?? 0;
-    const status = m?.fixture?.status?.short;
-    const group = m?.league?.group || "A";
+    const group = m.group || "A";
+    const target = document.getElementById(`group-${group}`);
+    if (!target) return;
 
-    const badge = status === "LIVE" ? '<span class="badge bg-red-600">الآن</span>' : 
-                  status === "NS" ? '<span class="badge bg-blue-600">قادمة</span>' : 
-                  '<span class="badge bg-gray-600">انتهت</span>';
-
-    const card = `
-      <div class="card flex justify-between items-center">
-        <span class="font-bold">${home}</span>
-        <div class="text-center">
-          <div class="text-yellow-500 font-black text-lg">${hg} - ${ag}</div>
-          ${badge}
+    // جلب الأعلام
+    const homeFlag = flagMap[m.homeName] || "🏳️";
+    const awayFlag = flagMap[m.awayName] || "🏳️";
+    
+    target.innerHTML += `
+      <div class="card">
+        <div class="flex justify-between items-center font-bold text-lg">
+          <span>${homeFlag} ${m.homeName}</span>
+          <span class="text-yellow-500">${m.score}</span>
+          <span>${m.awayName} ${awayFlag}</span>
         </div>
-        <span class="font-bold">${away}</span>
+        <div class="text-xs text-gray-500 mt-2">
+            النقاط: ${m.points} | الفارق: ${m.diff}
+        </div>
       </div>
     `;
-
-    if(frag[group] !== undefined) frag[group] += card;
-
-    // إشعارات الأهداف الذكية
-    if(status === "LIVE"){
-      const key = `${m.fixture.id}_${hg}_${ag}`;
-      const old = lastMatches.find(x => x.fixture?.id === m.fixture.id);
-      if(old && (old.goals?.home !== hg || old.goals?.away !== ag) && !goalEvents.has(key)){
-        if(Notification.permission === "granted") new Notification("⚽ هدف!", { body: `${home} ${hg} - ${ag} ${away}` });
-        goalEvents.add(key);
-      }
-    }
   });
-
-  groups.forEach(g => {
-    document.getElementById(`group-${g}`).innerHTML = frag[g] || `<p class="text-gray-600 text-sm italic">لا توجد مباريات مسجلة حالياً</p>`;
-  });
-  lastMatches = JSON.parse(JSON.stringify(matches));
 }
 
-// 3. الربط مع الـ API بنظام الحماية
-async function update(){
-  try{
-    const res = await fetch("/api/football");
-    if(!res.ok) throw new Error();
-    const data = await res.json();
-    render(data.response);
-  } catch(e) {
-    console.warn("استخدام الوضع الاحتياطي");
-    // هنا تضعين النتائج الثابتة في حال تعطل الـ API
-    render([]); 
-  }
-}
+// 3. البيانات (الربط مع الـ API سيوضع هنا مكان القائمة الثابتة)
+const demoMatches = [
+  { group: "A", homeName: "المكسيك", awayName: "جنوب أفريقيا", score: "2 - 0", points: 3, diff: 2 },
+  { group: "H", homeName: "فرنسا", awayName: "السنغال", score: "3 - 1", points: 3, diff: 2 }
+];
 
-if("Notification" in window) Notification.requestPermission();
-update();
-setInterval(update, 30000);
+renderMatches(demoMatches);
 </script>
+
 </body>
 </html>
