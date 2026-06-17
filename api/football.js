@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   const { type } = req.query;
-  const apiKey = 'YOUR_API_KEY'; // ضعي مفتاح الـ API الخاص بك هنا
+  const apiKey = 'e3af6b67b2839b4a1526bd2a3ab00e30'; // ضعي مفتاح الـ API الخاص بك هنا
   
   // رابط الـ API الأساسي (تأكدي من صحة الروابط حسب اشتراكك)
   const endpoint = type === 'standings' 
