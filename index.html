@@ -1,59 +1,26 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Craftivo - تغطية كأس العالم 2026 🤍</title>
+    <title>Craftivo - تغطية كأس العالم 2026</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
-        .nav-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .nav-btn { padding: 12px 25px; border: none; background: #2c3e50; color: white; border-radius: 8px; cursor: pointer; }
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; font-size: 20px; }
+        
+        .nav-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .nav-btn { padding: 15px 30px; border: none; background: #2c3e50; color: white; border-radius: 10px; cursor: pointer; font-size: 1.3em; font-weight: bold; }
+        
         .page-content { display: none; }
         .active { display: block; }
         
-        /* تصميم المباشر */
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .pulse-circle { width: 14px; height: 14px; background: #e74c3c; border-radius: 50%; animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
-        .match-display { display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 2px solid #e74c3c; border-radius: 12px; background-color: #fff9f9; }
+        /* تصميم كرت المباراة - مهيأ للبيانات القادمة من الـ API */
+        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+        .match-container { display: flex; justify-content: space-between; align-items: center; border: 2px solid #e74c3c; padding: 30px; border-radius: 15px; }
+        .team-box { flex: 1; }
+        .team-name { font-size: 1.5em; font-weight: bold; margin-top: 10px; }
+        .score-box { font-size: 4em; font-weight: bold; flex: 1; }
     </style>
 </head>
 <body>
 
 <div class="nav-bar">
-    <button class="nav-btn" onclick="openPage('live')">مباشر</button>
-    <button class="nav-btn" onclick="openPage('archive')">المباريات السابقة</button>
-    <button class="nav-btn" onclick="openPage('upcoming')">المباريات القادمة</button>
-</div>
-
-<div id="live" class="page-content active">
-    <div class="card">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 25px;">
-            <div class="pulse-circle"></div>
-            <h2 style="margin: 0; color: #e74c3c;">مباشر</h2>
-        </div>
-        <div class="match-display">
-            <div style="text-align: center; flex: 1;">
-                <div style="font-size: 3em;">🇲🇦</div>
-                <strong>المغرب</strong>
-            </div>
-            <div style="font-size: 3em; font-weight: bold; color: #2c3e50;">0 - 0</div>
-            <div style="text-align: center; flex: 1;">
-                <div style="font-size: 3em;">🇭🇹</div>
-                <strong>هايتي</strong>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="archive" class="page-content"></div>
-<div id="upcoming" class="page-content"></div>
-
-<script>
-    function openPage(pageName) {
-        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageName).classList.add('active');
-    }
-</script>
-
-</body>
-</html>
+    <button class="nav-btn" onclick="openPage('live
