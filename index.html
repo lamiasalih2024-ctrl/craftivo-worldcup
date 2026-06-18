@@ -6,241 +6,151 @@
 <title>Craftivo | تغطية كأس العالم 2026</title>
 
 <style>
-body { 
-  margin: 0; 
-  font-family: 'Segoe UI', sans-serif; 
-  background: #070b16; 
-  color: #fff; 
-  padding: 20px; 
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:#070b16;
+  color:#fff;
+  padding:20px;
 }
 
-/* ===== HEADER ===== */
-.header-container { 
-  text-align: center; 
-  margin-top: 30px; 
-  margin-bottom: 35px; 
+.header{
+  text-align:center;
+  margin:30px 0;
 }
 
-.title { 
-  font-size: 55px; 
-  font-weight: 900; 
-  background: linear-gradient(to bottom, #ffd700, #b8860b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
+.title{
+  font-size:55px;
+  font-weight:900;
+  background:linear-gradient(to bottom,#ffd700,#b8860b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-.subtitle { 
-  font-size: 22px; 
-  color: #00ff88; 
-  margin-top: 5px; 
-  font-weight: 600; 
+.subtitle{
+  font-size:22px;
+  color:#00ff88;
+  font-weight:600;
 }
 
-/* ===== NAV ===== */
-.nav-bar { 
-  display: flex; 
-  justify-content: center; 
-  gap: 12px; 
-  margin-bottom: 35px; 
-  flex-wrap: wrap;
+/* tabs */
+.nav-bar{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin:30px 0;
+  flex-wrap:wrap;
 }
 
-.nav-btn { 
-  padding: 15px 25px; 
-  font-size: 16px; 
-  font-weight: 700; 
-  border-radius: 50px; 
-  cursor: pointer; 
-  background: #1a2238; 
-  border: 1px solid #2d3e66; 
-  color: #fff; 
-  transition: 0.25s;
+.nav-btn{
+  padding:15px 25px;
+  border-radius:50px;
+  border:1px solid #2d3e66;
+  background:#1a2238;
+  color:#fff;
+  cursor:pointer;
 }
 
-.nav-btn:hover { 
-  background: #2d3e66; 
+/* cards */
+.match{
+  background:linear-gradient(145deg,#111827,#070b16);
+  margin:12px auto;
+  max-width:520px;
+  padding:18px;
+  border-radius:16px;
+  border:1px solid #1f2a44;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-/* ===== LIVE DOT ===== */
-.live-dot { 
-  width: 10px; 
-  height: 10px; 
-  background: #ff3333; 
-  border-radius: 50%; 
-  display: inline-block;
-  margin-left: 5px;
-  animation: blink 1.2s infinite;
+.team{
+  width:40%;
+  text-align:center;
 }
 
-@keyframes blink {
-  50% { opacity: 0.2; }
+.score{
+  color:#00ff88;
+  font-size:26px;
+  font-weight:900;
 }
 
-/* ===== PAGES ===== */
-.page { display: none; }
-.page.active { display: block; }
-
-/* ===== MATCH CARD (WORLD CLASS) ===== */
-.match { 
-  background: linear-gradient(145deg, #111827, #070b16);
-  padding: 18px; 
-  margin: 12px auto; 
-  border-radius: 18px; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  max-width: 550px; 
-  border: 1px solid #1f2a44;
-  transition: 0.3s;
-  position: relative;
-  overflow: hidden;
+/* LIVE animation */
+.live{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:red;
+  border-radius:50%;
+  animation:blink 1s infinite;
+  margin-left:6px;
 }
 
-.match:hover {
-  transform: scale(1.02);
-  border-color: #2d3e66;
+@keyframes blink{
+  50%{opacity:0.2;}
 }
 
-/* تحسين بصري خفيف */
-.match::before {
-  content: "";
-  position: absolute;
-  width: 3px;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: #00ff88;
-  opacity: 0.6;
-}
-
-/* الفرق */
-.team {
-  flex: 1;
-  text-align: center;
-  font-weight: 600;
-}
-
-/* النتيجة */
-.score {
-  font-size: 26px;
-  font-weight: 900;
-  color: #00ff88;
-  min-width: 80px;
-  text-align: center;
-}
-
-/* حالة المباراة */
-.status {
-  font-size: 12px;
-  opacity: 0.7;
-  margin-top: 5px;
-}
-
-/* ===== LOADING ===== */
-.loading {
-  text-align: center;
-  opacity: 0.7;
-}
-
-/* ===== FOOTER ===== */
-.footer { 
-  text-align: center; 
-  margin-top: 50px; 
-  font-size: 15px; 
-  opacity: 0.5; 
+.footer{
+  text-align:center;
+  margin-top:40px;
+  opacity:0.6;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header-container">
+<div class="header">
   <div class="title">Craftivo</div>
   <div class="subtitle">تغطية كأس العالم 2026</div>
 </div>
 
 <div class="nav-bar">
-  <button class="nav-btn" onclick="openPage('live')"><span class="live-dot"></span> مباشر</button>
-  <button class="nav-btn" onclick="openPage('archive')">📺 السابقة</button>
-  <button class="nav-btn" onclick="openPage('upcoming')">⏳ القادمة</button>
+  <button class="nav-btn" onclick="show('live')">🔴 مباشر</button>
+  <button class="nav-btn" onclick="show('past')">📺 السابقة</button>
+  <button class="nav-btn" onclick="show('next')">⏳ القادمة</button>
 </div>
 
-<div id="live" class="page active">
-  <div id="live-matches" class="loading">جاري البحث عن مباريات...</div>
+<div id="live">
+  <div class="match">
+    <div class="team">السعودية</div>
+    <div class="score">2 - 1</div>
+    <div class="team">الأرجنتين</div>
+  </div>
+
+  <div class="match">
+    <div class="team">فرنسا</div>
+    <div class="score">1 - 0</div>
+    <div class="team">البرازيل</div>
+  </div>
 </div>
 
-<div id="archive" class="page">
-  <div id="archive-matches" class="loading">جاري التحميل...</div>
+<div id="past" style="display:none;">
+  <div class="match">
+    <div class="team">ألمانيا</div>
+    <div class="score">0 - 2</div>
+    <div class="team">إسبانيا</div>
+  </div>
 </div>
 
-<div id="upcoming" class="page">
-  <div id="upcoming-matches" class="loading">جاري التحميل...</div>
+<div id="next" style="display:none;">
+  <div class="match">
+    <div class="team">إيطاليا</div>
+    <div class="score">--</div>
+    <div class="team">هولندا</div>
+  </div>
 </div>
 
 <div class="footer">LMS 🤍</div>
 
 <script>
+function show(id){
+  document.getElementById('live').style.display='none';
+  document.getElementById('past').style.display='none';
+  document.getElementById('next').style.display='none';
 
-function openPage(id){
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  document.getElementById(id).style.display='block';
 }
-
-const KEY = "PUT_YOUR_API_KEY_HERE";
-
-async function loadMatches(endpoint, boxId) {
-  const box = document.getElementById(boxId);
-
-  try {
-    const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
-      headers: {"x-apisports-key": KEY}
-    });
-
-    if(!res.ok){
-      box.innerHTML = "⚠️ مشكلة في الاتصال";
-      return;
-    }
-
-    const data = await res.json();
-
-    if(!data.response || data.response.length === 0){
-      box.innerHTML = "<p>لا توجد مباريات حالياً</p>";
-      return;
-    }
-
-    box.innerHTML = data.response.map(m => {
-
-      const home = m.teams.home.name;
-      const away = m.teams.away.name;
-      const hg = m.goals.home ?? 0;
-      const ag = m.goals.away ?? 0;
-      const status = m.fixture.status.short;
-
-      return `
-        <div class="match">
-          <div class="team">${home}</div>
-
-          <div>
-            <div class="score">${hg} - ${ag}</div>
-            <div class="status">${status}</div>
-          </div>
-
-          <div class="team">${away}</div>
-        </div>
-      `;
-    }).join('');
-
-  } catch(e) {
-    box.innerHTML = "حدث خطأ في الاتصال.";
-  }
-}
-
-/* تحميل البيانات */
-loadMatches("fixtures?live=all", "live-matches");
-loadMatches("fixtures?league=1&season=2026&status=FT", "archive-matches");
-loadMatches("fixtures?league=1&season=2026&status=NS", "upcoming-matches");
-
 </script>
 
 </body>
