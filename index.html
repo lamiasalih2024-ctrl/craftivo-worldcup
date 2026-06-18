@@ -2,61 +2,67 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Craftivo - تغطية كأس العالم 2026 🤍</title>
     <style>
-        body { background-color: #0b0e17; color: #fff; font-family: sans-serif; }
-        .page { display: none; } .page.active { display: block; }
-        .nav-btn { flex: 1; padding: 12px; font-weight: 800; border-radius: 12px; background: #1f2937; color: #9ca3af; }
-        .nav-btn.active { background: #eab308; color: #000; }
-        .group-card { background: #111827; border: 1px solid #374151; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
-        .match-divider { border-top: 1px solid #374151; margin: 15px 0; padding-top: 15px; }
-        .team-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .header { text-align: center; background: #2c3e50; color: white; padding: 20px; border-radius: 10px; }
+        .card { background: white; padding: 15px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .match-row { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; }
+        .makkah-time { background: #3498db; color: white; padding: 10px; text-align: center; border-radius: 5px; font-weight: bold; }
     </style>
 </head>
-<body class="p-4">
+<body>
 
-    <nav class="flex gap-2 mb-8">
-        <button id="btn-live" class="nav-btn active" onclick="show('live', 'btn-live')">بث مباشر</button>
-        <button id="btn-archive" class="nav-btn" onclick="show('archive', 'btn-archive')">السابقة</button>
-        <button id="btn-upcoming" class="nav-btn" onclick="show('upcoming', 'btn-upcoming')">القادمة</button>
-    </nav>
+<div class="header">
+    <h1>Craftivo لتغطية كأس العالم 2026 🤍</h1>
+</div>
 
-    <!-- المباشر -->
-    <div id="live" class="page active text-center">
-        <div class="group-card py-16"><p class="text-slate-400">لا توجد مباريات مباشرة حالياً</p></div>
-    </div>
+<div class="card">
+    <h2 style="color:red">🔴 مباشر</h2>
+    <div class="match-row"><span>🇲🇦 المغرب vs 🇭🇹 هايتي</span> <span>جاري التحديث...</span></div>
+</div>
 
-    <!-- السابقة (المجموعات من A لـ L) -->
-    <div id="archive" class="page">
-        <!-- تكرار هذا الكارد للمجموعات -->
-        <div class="group-card">
-            <h3 class="text-yellow-500 font-bold mb-4">المجموعة A</h3>
-            <div class="team-row"><span>🇲🇽 المكسيك</span> <span>2</span></div>
-            <div class="team-row"><span>🇿🇦 جنوب أفريقيا</span> <span>0</span></div>
-            <div class="match-divider"></div>
-            <div class="team-row"><span>🇰🇷 كوريا الجنوبية</span> <span>2</span></div>
-            <div class="team-row"><span>🇨🇿 التشيك</span> <span>1</span></div>
-        </div>
-        
-        <!-- يمكنكِ نسخ الكارد أعلاه وتغيير البيانات للمجموعات B, C...L -->
-        <div class="group-card">
-            <h3 class="text-yellow-500 font-bold mb-4">المجموعة B</h3>
-            <div class="team-row"><span>🇨🇦 كندا</span> <span>1</span></div>
-            <div class="team-row"><span>🇧🇦 البوسنة</span> <span>1</span></div>
-            <div class="match-divider"></div>
-            <div class="team-row"><span>🇶🇦 قطر</span> <span>1</span></div>
-            <div class="team-row"><span>🇨🇭 سويسرا</span> <span>1</span></div>
-        </div>
-        <!-- وهكذا لكل المجموعات -->
-    </div>
+<div class="card">
+    <h3>نتائج المجموعات</h3>
+    <div><strong>المجموعة A:</strong> 🇲🇽 المكسيك 2-0 🇿🇦 جنوب أفريقيا | 🇰🇷 كوريا 2-1 🇨🇿 التشيك</div>
+    <div><strong>المجموعة B:</strong> 🇨🇦 كندا 1-1 🇧🇦 البوسنة | 🇶🇦 قطر 1-1 🇨🇭 سويسرا</div>
+    <div><strong>المجموعة C:</strong> 🇧🇷 البرازيل 1-1 🇲🇦 المغرب | 🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا 1-0 🇭🇹 هايتي</div>
+    <div><strong>المجموعة D:</strong> 🇺🇸 أمريكا 4-1 🇵🇾 باراغواي | 🇦🇺 أستراليا 2-0 🇹🇷 تركيا</div>
+    <div><strong>المجموعة E:</strong> 🇩🇪 ألمانيا 7-1 🇨🇼 كوراساو | 🇨🇮 كوت ديفوار 1-0 🇪🇨 الإكوادور</div>
+    <div><strong>المجموعة F:</strong> 🇳🇱 هولندا 2-2 🇯🇵 اليابان | 🇸🇪 السويد 5-1 🇹🇳 تونس</div>
+    <div><strong>المجموعة G:</strong> 🇧🇪 بلجيكا 1-1 🇪🇬 مصر | 🇮🇷 إيران 2-2 🇳🇿 نيوزيلندا</div>
+    <div><strong>المجموعة H:</strong> 🇸🇦 السعودية 1-1 🇺🇾 أوروغواي | 🇪🇸 إسبانيا 0-0 🇨🇻 الرأس الأخضر</div>
+    <div><strong>المجموعة I:</strong> 🇫🇷 فرنسا 3-1 🇸🇳 السنغال | 🇳🇴 النرويج 4-1 🇮🇶 العراق</div>
+    <div><strong>المجموعة J:</strong> 🇦🇷 الأرجنتين 3-0 🇩🇿 الجزائر | 🇦🇹 النمسا 3-1 🇯🇴 الأردن</div>
+    <div><strong>المجموعة K:</strong> 🇵🇹 البرتغال 1-1 🇨🇩 الكونغو | 🇨🇴 كولومبيا 3-1 🇺🇿 أوزبكستان</div>
+    <div><strong>المجموعة L:</strong> 🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا 4-2 🇭🇷 كرواتيا | 🇬🇭 غانا 1-0 🇵🇦 بنما</div>
+</div>
 
-    <script>
-        function show(pageId, btnId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            document.getElementById(btnId).classList.add('active');
-        }
-    </script>
+<div class="card">
+    <div class="makkah-time">جميع التوقيتات بتوقيت مكة المكرمة 🕋</div>
+    <h3>المباريات القادمة</h3>
+    <div class="match-row"><span>🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇲🇦 المغرب</span> <span>6/20 - 00:00</span></div>
+    <div class="match-row"><span>🇧🇷 البرازيل vs 🇭🇹 هايتي</span> <span>6/20 - 02:30</span></div>
+    <div class="match-row"><span>🇹🇷 تركيا vs 🇵🇾 باراغواي</span> <span>6/20 - 05:00</span></div>
+    <div class="match-row"><span>🇳🇱 هولندا vs 🇸🇪 السويد</span> <span>6/20 - 19:00</span></div>
+    <div class="match-row"><span>🇩🇪 ألمانيا vs 🇨🇮 ساحل العاج</span> <span>6/20 - 22:00</span></div>
+    <div class="match-row"><span>🇪🇨 الإكوادور vs 🇨🇼 كوراساو</span> <span>6/21 - 02:00</span></div>
+    <div class="match-row"><span>🇹🇳 تونس vs 🇯🇵 اليابان</span> <span>6/21 - 06:00</span></div>
+    <div class="match-row"><span>🇪🇸 إسبانيا vs 🇸🇦 السعودية</span> <span>6/21 - 18:00</span></div>
+    <div class="match-row"><span>🇧🇪 بلجيكا vs 🇮🇷 إيران</span> <span>6/21 - 21:00</span></div>
+    <div class="match-row"><span>🇺🇾 أوروغواي vs 🇨🇻 الرأس الأخضر</span> <span>6/22 - 00:00</span></div>
+    <div class="match-row"><span>🇳🇿 نيوزيلندا vs 🇪🇬 مصر</span> <span>6/22 - 03:00</span></div>
+    <div class="match-row"><span>🇦🇷 الأرجنتين vs 🇦🇹 النمسا</span> <span>6/22 - 19:00</span></div>
+    <div class="match-row"><span>🇫🇷 فرنسا vs 🇮🇶 العراق</span> <span>6/22 - 23:00</span></div>
+    <div class="match-row"><span>🇳🇴 النرويج vs 🇸🇳 السنغال</span> <span>6/23 - 02:00</span></div>
+    <div class="match-row"><span>🇯🇴 الأردن vs 🇩🇿 الجزائر</span> <span>6/23 - 05:00</span></div>
+    <div class="match-row"><span>🇵🇹 البرتغال vs 🇺🇿 أوزبكستان</span> <span>6/23 - 19:00</span></div>
+    <div class="match-row"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا vs 🇬🇭 غانا</span> <span>6/23 - 22:00</span></div>
+    <div class="match-row"><span>🇵🇦 بنما vs 🇭🇷 كرواتيا</span> <span>6/24 - 01:00</span></div>
+    <div class="match-row"><span>🇨🇴 كولومبيا vs 🇨🇩 الكونغو</span> <span>6/24 - 04:00</span></div>
+    <div class="match-row"><span>🇨🇭 سويسرا vs 🇨🇦 كندا</span> <span>6/24 - 21:00</span></div>
+    <div class="match-row"><span>🇧🇦 البوسنة vs 🇶🇦 قطر</span> <span>6/24 - 21:00</span></div>
+</div>
+
 </body>
 </html>
