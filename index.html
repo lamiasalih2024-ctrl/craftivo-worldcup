@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Craftivo | World Cup 2026</title>
+<title>Craftivo | تغطية كأس العالم 2026</title>
 
 <style>
 body{
@@ -73,11 +73,11 @@ body{
   50%{opacity:0.2;}
 }
 
-/* PAGES */
+/* PAGE */
 .page{display:none;}
 .page.active{display:block;}
 
-/* MATCH CARD */
+/* MATCH */
 .match{
   background:linear-gradient(145deg,#111827,#070b16);
   padding:16px;
@@ -89,34 +89,18 @@ body{
   justify-content:space-between;
   align-items:center;
   transition:0.2s;
-  position:relative;
-  overflow:hidden;
 }
 
 .match:hover{
   transform:scale(1.02);
-  border-color:#2d3e66;
 }
 
-/* LIVE BAR */
-.match.live::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  width:4px;
-  height:100%;
-  background:#ff3333;
-}
-
-/* TEAMS */
 .team{
   flex:1;
   text-align:center;
   font-weight:600;
 }
 
-/* SCORE */
 .score{
   font-size:26px;
   font-weight:900;
@@ -125,21 +109,18 @@ body{
   text-align:center;
 }
 
-/* STATUS */
 .status{
   font-size:12px;
   opacity:0.7;
   margin-top:4px;
 }
 
-/* FOOTER */
 .footer{
   text-align:center;
   margin-top:40px;
   opacity:0.5;
 }
 
-/* MOBILE */
 @media(max-width:600px){
   .match{
     flex-direction:column;
@@ -162,9 +143,8 @@ body{
   <button class="nav-btn" onclick="show('upcoming')">⏳ القادمة</button>
 </div>
 
-<!-- PAGES -->
 <div id="live" class="page active">
-  <div id="live-matches" style="text-align:center;">⏳ جاري تحميل المباريات...</div>
+  <div id="live-matches" style="text-align:center;">⏳ جاري التحميل...</div>
 </div>
 
 <div id="archive" class="page">
@@ -179,15 +159,14 @@ body{
 
 <script>
 
-const KEY = "PUT_YOUR_API_KEY_HERE";
+const KEY = "PUT_YOUR_API_KEY_HERE"; // 👈 ضعي المفتاح هنا
 
-/* NAV */
 function show(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-/* SAFE API LOADER */
+/* 🔥 API FUNCTION (FIXED) */
 async function loadMatches(endpoint, boxId, filter){
 
   const box = document.getElementById(boxId);
@@ -196,8 +175,17 @@ async function loadMatches(endpoint, boxId, filter){
   try{
 
     const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
-      headers:{ "x-apisports-key": KEY }
+      method: "GET",
+      headers: {
+        "x-apisports-key": KEY,
+        "Accept": "application/json"
+      }
     });
+
+    if(!res.ok){
+      box.innerHTML = "⚠️ خطأ في الاتصال API (" + res.status + ")";
+      return;
+    }
 
     const data = await res.json();
 
@@ -208,7 +196,7 @@ async function loadMatches(endpoint, boxId, filter){
 
     let matches = data.response;
 
-    // فلترة ذكية
+    // فلترة حسب الحالة
     if(filter){
       matches = matches.filter(m => m.fixture.status.short === filter);
     }
@@ -226,10 +214,8 @@ async function loadMatches(endpoint, boxId, filter){
       const ag = m.goals.away ?? "-";
       const status = m.fixture.status.short;
 
-      const isLive = status === "1H" || status === "2H" || status === "LIVE";
-
       return `
-        <div class="match ${isLive ? 'live' : ''}">
+        <div class="match">
           <div class="team">${home}</div>
 
           <div>
@@ -243,21 +229,13 @@ async function loadMatches(endpoint, boxId, filter){
     }).join('');
 
   }catch(e){
-    box.innerHTML = "⚠️ خطأ في الاتصال بالـ API";
+    console.log(e);
+    box.innerHTML = "⚠️ مشكلة في الاتصال بالإنترنت أو API";
   }
 }
 
-/* AUTO LIVE UPDATE */
-function startLive(){
-  loadMatches("fixtures?live=all", "live-matches", "LIVE");
-
-  setInterval(()=>{
-    loadMatches("fixtures?live=all", "live-matches", "LIVE");
-  }, 20000);
-}
-
-/* START */
-startLive();
+/* تشغيل */
+loadMatches("fixtures?live=all", "live-matches", "LIVE");
 loadMatches("fixtures?status=FT&season=2024", "archive-matches", "FT");
 loadMatches("fixtures?status=NS&season=2024", "upcoming-matches", "NS");
 
