@@ -1,4 +1,41 @@
-// استبدلي سطر fetch في الكود الخاص بك بهذا السطر تحديداً:
-const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://v3.football.api-sports.io/fixtures?date=2026-06-19')}`, {
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Craftivo | مباريات اليوم</title>
+<style>
+  body { background: #070b16; color: #fff; text-align: center; font-family: sans-serif; }
+  .match { background: #111827; padding: 20px; margin: 10px; border-radius: 15px; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+  <h1>مباريات اليوم</h1>
+  <div id="live-matches">جاري جلب البيانات...</div>
+
+<script>
+async function fetchLiveMatches() {
+  const box = document.getElementById("live-matches");
+  try {
+    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://v3.football.api-sports.io/fixtures?date=2026-06-19')}`, {
       headers: {"x-apisports-key": "e3af6b67b2839b4a1526bd2a3ab00e30"}
     });
+    const result = await res.json();
+    const data = JSON.parse(result.contents);
+    
+    if(!data.response || data.response.length === 0) { 
+      box.innerHTML = "<p>لا توجد مباريات لهذا التاريخ.</p>"; 
+    } else {
+      box.innerHTML = data.response.map(m => `
+        <div class="match">
+          <span>${m.teams.home.name}</span>
+          <b>${m.goals.home ?? '0'} - ${m.goals.away ?? '0'}</b>
+          <span>${m.teams.away.name}</span>
+        </div>
+      `).join('');
+    }
+  } catch(e) { box.innerHTML = "خطأ في الاتصال."; }
+}
+fetchLiveMatches();
+</script>
+</body>
+</html>
