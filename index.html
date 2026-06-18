@@ -4,242 +4,99 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Craftivo | تغطية كأس العالم 2026</title>
-
 <style>
-body{
-  margin:0;
-  font-family:'Segoe UI', sans-serif;
-  background:#070b16;
-  color:#fff;
-  padding:20px;
-}
-
-/* HEADER */
-.header{
-  text-align:center;
-  margin:30px 0 20px;
-}
-
-.title{
-  font-size:55px;
-  font-weight:900;
-  background:linear-gradient(to bottom,#ffd700,#b8860b);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.subtitle{
-  font-size:22px;
-  color:#00ff88;
-  font-weight:600;
-}
-
-/* NAV */
-.nav-bar{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin:25px 0;
-  flex-wrap:wrap;
-}
-
-.nav-btn{
-  padding:14px 22px;
-  border-radius:50px;
-  border:1px solid #2d3e66;
-  background:#1a2238;
-  color:#fff;
-  cursor:pointer;
-  font-weight:700;
-  transition:0.2s;
-}
-
-.nav-btn:hover{
-  background:#2d3e66;
-}
-
-/* LIVE DOT */
-.live{
-  width:10px;
-  height:10px;
-  background:red;
-  border-radius:50%;
-  display:inline-block;
-  margin-left:6px;
-  animation:blink 1.2s infinite;
-}
-
-@keyframes blink{
-  50%{opacity:0.2;}
-}
-
-/* PAGE */
-.page{display:none;}
-.page.active{display:block;}
-
-/* MATCH */
-.match{
-  background:linear-gradient(145deg,#111827,#070b16);
-  padding:16px;
-  margin:12px auto;
-  max-width:560px;
-  border-radius:18px;
-  border:1px solid #1f2a44;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  transition:0.2s;
-}
-
-.match:hover{
-  transform:scale(1.02);
-}
-
-.team{
-  flex:1;
-  text-align:center;
-  font-weight:600;
-}
-
-.score{
-  font-size:26px;
-  font-weight:900;
-  color:#00ff88;
-  min-width:90px;
-  text-align:center;
-}
-
-.status{
-  font-size:12px;
-  opacity:0.7;
-  margin-top:4px;
-}
-
-.footer{
-  text-align:center;
-  margin-top:40px;
-  opacity:0.5;
-}
-
-@media(max-width:600px){
-  .match{
-    flex-direction:column;
-    gap:10px;
+  body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #070b16; color: #fff; padding: 20px; }
+  .header-container { text-align: center; margin-top: 30px; margin-bottom: 40px; }
+  .title { 
+    font-size: 60px; font-weight: 900; 
+    background: linear-gradient(to bottom, #ffd700, #b8860b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0;
   }
-}
+  .subtitle { font-size: 24px; color: #00ff88; margin-top: 10px; font-weight: 600; }
+  
+  .nav-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
+  .nav-btn { 
+    padding: 15px 30px; font-size: 18px; font-weight: 700; border-radius: 50px; 
+    cursor: pointer; background: #1a2238; border: 1px solid #2d3e66; color: #fff; 
+    transition: 0.3s; display: flex; align-items: center; gap: 8px;
+  }
+  .nav-btn:hover { background: #2d3e66; border-color: #00ff88; }
+  
+  .live-dot { width: 12px; height: 12px; background: #ff3333; border-radius: 50%; box-shadow: 0 0 10px #ff3333; animation: blink 1.5s infinite; }
+  @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+  
+  .page { display: none; }
+  .page.active { display: block; }
+  
+  .match { 
+    background: linear-gradient(145deg, #111827, #070b16); 
+    padding: 25px; margin: 15px auto; border-radius: 20px; 
+    display: flex; justify-content: space-between; align-items: center; 
+    max-width: 600px; border: 1px solid #1f2a44; font-size: 22px;
+  }
+  .footer { text-align: center; margin-top: 50px; font-size: 18px; opacity: 0.6; }
 </style>
 </head>
-
 <body>
 
-<div class="header">
+<div class="header-container">
   <div class="title">Craftivo</div>
   <div class="subtitle">تغطية كأس العالم 2026</div>
 </div>
 
 <div class="nav-bar">
-  <button class="nav-btn" onclick="show('live')"><span class="live"></span> مباشر</button>
-  <button class="nav-btn" onclick="show('archive')">📺 السابقة</button>
-  <button class="nav-btn" onclick="show('upcoming')">⏳ القادمة</button>
+  <button class="nav-btn" onclick="openPage('live')"><span class="live-dot"></span> مباشر</button>
+  <button class="nav-btn" onclick="openPage('archive')">📺 السابقة</button>
+  <button class="nav-btn" onclick="openPage('upcoming')">⏳ القادمة</button>
 </div>
 
-<div id="live" class="page active">
-  <div id="live-matches" style="text-align:center;">⏳ جاري التحميل...</div>
-</div>
+<div id="live" class="page active"><div id="live-matches" style="text-align:center;">جاري البحث عن مباريات مباشرة...</div></div>
+<div id="archive" class="page"><div id="archive-matches" style="text-align:center;">جاري تحميل النتائج السابقة...</div></div>
+<div id="upcoming" class="page"><div id="upcoming-matches" style="text-align:center;">جاري تحميل المباريات القادمة...</div></div>
 
-<div id="archive" class="page">
-  <div id="archive-matches" style="text-align:center;">⏳ جاري التحميل...</div>
-</div>
-
-<div id="upcoming" class="page">
-  <div id="upcoming-matches" style="text-align:center;">⏳ جاري التحميل...</div>
-</div>
-
-<div class="footer">Craftivo | LMS 🤍</div>
+<div class="footer">LMS 🤍</div>
 
 <script>
-
-const KEY = "PUT_YOUR_API_KEY_HERE"; // 👈 ضعي المفتاح هنا
-
-function show(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+function openPage(id){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-/* 🔥 API FUNCTION (FIXED) */
-async function loadMatches(endpoint, boxId, filter){
+const KEY = "e3af6b67b2839b4a1526bd2a3ab00e30"; // مفتاحك الفعال
 
+async function loadMatches(endpoint, boxId) {
   const box = document.getElementById(boxId);
-  box.innerHTML = "⏳ جاري التحميل...";
-
-  try{
-
+  try {
     const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
-      method: "GET",
-      headers: {
-        "x-apisports-key": KEY,
-        "Accept": "application/json"
-      }
+      headers: {"x-apisports-key": KEY}
     });
-
-    if(!res.ok){
-      box.innerHTML = "⚠️ خطأ في الاتصال API (" + res.status + ")";
-      return;
-    }
-
     const data = await res.json();
-
-    if(!data.response || !Array.isArray(data.response)){
-      box.innerHTML = "⚠️ لا توجد بيانات";
-      return;
+    
+    // التحقق من وجود بيانات
+    if(!data.response || data.response.length === 0) { 
+      box.innerHTML = "<p>لا توجد مباريات حالياً في هذا القسم.</p>"; 
+      return; 
     }
-
-    let matches = data.response;
-
-    // فلترة حسب الحالة
-    if(filter){
-      matches = matches.filter(m => m.fixture.status.short === filter);
-    }
-
-    if(matches.length === 0){
-      box.innerHTML = "⚽ لا توجد مباريات حالياً";
-      return;
-    }
-
-    box.innerHTML = matches.map(m => {
-
-      const home = m.teams.home.name;
-      const away = m.teams.away.name;
-      const hg = m.goals.home ?? "-";
-      const ag = m.goals.away ?? "-";
-      const status = m.fixture.status.short;
-
-      return `
-        <div class="match">
-          <div class="team">${home}</div>
-
-          <div>
-            <div class="score">${hg} - ${ag}</div>
-            <div class="status">${status}</div>
-          </div>
-
-          <div class="team">${away}</div>
-        </div>
-      `;
-    }).join('');
-
-  }catch(e){
-    console.log(e);
-    box.innerHTML = "⚠️ مشكلة في الاتصال بالإنترنت أو API";
+    
+    box.innerHTML = data.response.map(m => `
+      <div class="match">
+        <span>${m.teams.home.name}</span>
+        <b style="color:#00ff88; font-size: 28px;">${m.goals.home ?? '-'} - ${m.goals.away ?? '-'}</b>
+        <span>${m.teams.away.name}</span>
+      </div>
+    `).join('');
+  } catch(e) { 
+    box.innerHTML = "حدث خطأ في الاتصال، يرجى المحاولة لاحقاً."; 
   }
 }
 
-/* تشغيل */
-loadMatches("fixtures?live=all", "live-matches", "LIVE");
-loadMatches("fixtures?status=FT&season=2024", "archive-matches", "FT");
-loadMatches("fixtures?status=NS&season=2024", "upcoming-matches", "NS");
-
+// تحميل المباريات (تم إزالة شرط السنة لتفادي قيود الحساب المجاني)
+loadMatches("fixtures?live=all&league=1", "live-matches");
+loadMatches("fixtures?league=1&status=FT&last=10", "archive-matches");
+loadMatches("fixtures?league=1&status=NS&next=10", "upcoming-matches");
 </script>
-
 </body>
 </html>
