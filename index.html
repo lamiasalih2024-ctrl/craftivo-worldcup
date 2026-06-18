@@ -3,100 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Craftivo | تغطية كأس العالم 2026</title>
+<title>Craftivo | البث المباشر</title>
 <style>
-  body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #070b16; color: #fff; padding: 20px; }
-  .header-container { text-align: center; margin-top: 30px; margin-bottom: 40px; }
+  body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #070b16; color: #fff; padding: 20px; text-align: center; }
+  .header-container { margin-top: 30px; margin-bottom: 40px; }
   .title { 
-    font-size: 60px; font-weight: 900; 
+    font-size: 50px; font-weight: 900; 
     background: linear-gradient(to bottom, #ffd700, #b8860b);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    margin: 0;
   }
-  .subtitle { font-size: 24px; color: #00ff88; margin-top: 10px; font-weight: 600; }
-  
-  .nav-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
-  .nav-btn { 
-    padding: 15px 30px; font-size: 18px; font-weight: 700; border-radius: 50px; 
-    cursor: pointer; background: #1a2238; border: 1px solid #2d3e66; color: #fff; 
-    transition: 0.3s; display: flex; align-items: center; gap: 8px;
+  .live-indicator { 
+    display: inline-flex; align-items: center; gap: 10px; 
+    background: #1a2238; padding: 10px 25px; border-radius: 50px;
+    border: 1px solid #ff3333; margin-bottom: 20px;
   }
-  .nav-btn:hover { background: #2d3e66; border-color: #00ff88; }
-  
-  .live-dot { width: 12px; height: 12px; background: #ff3333; border-radius: 50%; box-shadow: 0 0 10px #ff3333; animation: blink 1.5s infinite; }
+  .live-dot { width: 12px; height: 12px; background: #ff3333; border-radius: 50%; animation: blink 1s infinite; }
   @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-  
-  .page { display: none; }
-  .page.active { display: block; }
   
   .match { 
     background: linear-gradient(145deg, #111827, #070b16); 
-    padding: 25px; margin: 15px auto; border-radius: 20px; 
+    padding: 20px; margin: 15px auto; border-radius: 20px; 
     display: flex; justify-content: space-between; align-items: center; 
-    max-width: 600px; border: 1px solid #1f2a44; font-size: 22px;
+    max-width: 500px; border: 1px solid #1f2a44; font-size: 20px;
   }
-  .footer { text-align: center; margin-top: 50px; font-size: 18px; opacity: 0.6; }
 </style>
 </head>
 <body>
 
 <div class="header-container">
   <div class="title">Craftivo</div>
-  <div class="subtitle">تغطية كأس العالم 2026</div>
+  <div class="live-indicator"><div class="live-dot"></div> جاري البحث عن مباريات مباشرة...</div>
 </div>
 
-<div class="nav-bar">
-  <button class="nav-btn" onclick="openPage('live')"><span class="live-dot"></span> مباشر</button>
-  <button class="nav-btn" onclick="openPage('archive')">📺 السابقة</button>
-  <button class="nav-btn" onclick="openPage('upcoming')">⏳ القادمة</button>
-</div>
-
-<div id="live" class="page active"><div id="live-matches" style="text-align:center;">جاري البحث عن مباريات مباشرة...</div></div>
-<div id="archive" class="page"><div id="archive-matches" style="text-align:center;">جاري تحميل النتائج السابقة...</div></div>
-<div id="upcoming" class="page"><div id="upcoming-matches" style="text-align:center;">جاري تحميل المباريات القادمة...</div></div>
-
-<div class="footer">LMS 🤍</div>
+<div id="live-matches">جاري الاتصال بالسيرفر...</div>
 
 <script>
-function openPage(id){
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+const KEY = "e3af6b67b2839b4a1526bd2a3ab00e30";
 
-const KEY = "e3af6b67b2839b4a1526bd2a3ab00e30"; // مفتاحك الفعال
-
-async function loadMatches(endpoint, boxId) {
-  const box = document.getElementById(boxId);
+async function fetchLiveMatches() {
+  const box = document.getElementById("live-matches");
   try {
-    const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
+    // جلب المباريات المباشرة عالمياً بدون تحديد دوري لتجنب القيود
+    const res = await fetch(`https://v3.football.api-sports.io/fixtures?live=all`, {
       headers: {"x-apisports-key": KEY}
     });
     const data = await res.json();
     
-    // التحقق من وجود بيانات
     if(!data.response || data.response.length === 0) { 
-      box.innerHTML = "<p>لا توجد مباريات حالياً في هذا القسم.</p>"; 
-      return; 
+      box.innerHTML = "<p>لا توجد مباريات مباشرة حالياً. سيتم التحديث تلقائياً...</p>"; 
+    } else {
+      box.innerHTML = data.response.map(m => `
+        <div class="match">
+          <span>${m.teams.home.name}</span>
+          <b style="color:#00ff88; font-size: 24px;">${m.goals.home} - ${m.goals.away}</b>
+          <span>${m.teams.away.name}</span>
+        </div>
+      `).join('');
     }
-    
-    box.innerHTML = data.response.map(m => `
-      <div class="match">
-        <span>${m.teams.home.name}</span>
-        <b style="color:#00ff88; font-size: 28px;">${m.goals.home ?? '-'} - ${m.goals.away ?? '-'}</b>
-        <span>${m.teams.away.name}</span>
-      </div>
-    `).join('');
   } catch(e) { 
-    box.innerHTML = "حدث خطأ في الاتصال، يرجى المحاولة لاحقاً."; 
+    box.innerHTML = "يرجى التحقق من الاتصال."; 
   }
 }
 
-// تحميل المباريات (تم إزالة شرط السنة لتفادي قيود الحساب المجاني)
-loadMatches("fixtures?live=all&league=1", "live-matches");
-loadMatches("fixtures?league=1&status=FT&last=10", "archive-matches");
-loadMatches("fixtures?league=1&status=NS&next=10", "upcoming-matches");
+// تحديث الصفحة تلقائياً كل دقيقة لجلب الجديد
+fetchLiveMatches();
+setInterval(fetchLiveMatches, 60000);
 </script>
 </body>
 </html>
