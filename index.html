@@ -2,216 +2,174 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Craftivo LMS | كأس العالم 2026</title>
+<title>Craftivo | كأس العالم 2026</title>
 
 <style>
 body{
-    margin:0;
-    font-family: sans-serif;
-    background:#0b0f1a;
-    color:white;
+  margin:0;
+  font-family:sans-serif;
+  background:#0b0f1a;
+  color:#fff;
+  font-size:20px;
 }
 
 /* الهيدر */
 .header{
-    text-align:center;
-    padding:25px;
-    font-size:38px;
-    font-weight:bold;
+  text-align:center;
+  font-size:42px;
+  font-weight:bold;
+  padding:20px;
 }
 
-/* تبويبات */
+/* شريط التبويبات */
 .nav-bar{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:20px;
 }
 
 .nav-btn{
-    padding:14px 26px;
-    background:#1f2a44;
-    color:white;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:20px;
+  padding:14px 26px;
+  background:#1f2a44;
+  border:none;
+  color:#fff;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:20px;
 }
 
-.nav-btn:hover{
-    background:#2d3b5f;
-}
-
-/* الصفحات */
-.page{
-    display:none;
-    padding:20px;
-}
-
-.active{
-    display:block;
-}
-
-/* كروت */
-.card{
-    background:#111a2e;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:15px;
-}
-
-/* مباشر */
-.live-box{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    font-size:24px;
-}
-
-.dot{
-    width:12px;
-    height:12px;
-    background:red;
-    border-radius:50%;
-    animation:blink 1s infinite;
+/* المباشر */
+.live-dot{
+  width:12px;
+  height:12px;
+  background:red;
+  border-radius:50%;
+  display:inline-block;
+  margin-left:8px;
+  animation: blink 1s infinite;
 }
 
 @keyframes blink{
-    50%{opacity:0.2;}
+  50%{opacity:0.3;}
+}
+
+.card{
+  background:#111a2e;
+  margin:15px;
+  padding:20px;
+  border-radius:15px;
 }
 
 /* مباراة */
 .match{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 0;
-    border-bottom:1px solid #222;
-    font-size:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 0;
+  border-bottom:1px solid #222;
+  font-size:22px;
 }
 
 .team{
-    width:40%;
+  width:40%;
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
 
 .center{
-    width:20%;
-    text-align:center;
-    color:#ffd54f;
+  width:20%;
+  text-align:center;
+  color:#00ff88;
+  font-weight:bold;
 }
 
-/* تحسين وضوح */
-.big{
-    font-size:22px;
-}
+.page{display:none;}
+.active{display:block;}
+
 </style>
 </head>
 
 <body>
 
-<div class="header">
-⚽ Craftivo LMS - كأس العالم 2026
-</div>
+<div class="header">⚽ Craftivo TV - كأس العالم 2026</div>
 
 <div class="nav-bar">
 <button class="nav-btn" onclick="show('live')">🔴 مباشر</button>
-<button class="nav-btn" onclick="show('archive')">📊 السابقة</button>
-<button class="nav-btn" onclick="show('upcoming')">📅 القادمة</button>
+<button class="nav-btn" onclick="show('archive')">السابقة</button>
+<button class="nav-btn" onclick="show('upcoming')">القادمة</button>
 </div>
 
----
-
-## 🔴 LIVE PAGE
-
+<!-- LIVE -->
 <div id="live" class="page active">
-<div class="card live-box">
-<span class="dot"></span>
-<strong>مباشر الآن</strong>
-</div>
-
 <div class="card">
-<div class="match big">
-<div class="team">🇧🇷 البرازيل</div>
-<div class="center">1 - 0</div>
-<div class="team" style="text-align:left;">🇦🇷 الأرجنتين</div>
-</div>
+<h2>مباشر <span class="live-dot"></span></h2>
+<div id="live-matches">جاري التحميل...</div>
 </div>
 </div>
 
----
-
-## 📊 ARCHIVE PAGE
-
+<!-- ARCHIVE -->
 <div id="archive" class="page">
-
 <div class="card">
-<h3>المجموعة A</h3>
-
-<div class="match">
-<div class="team">🇲🇽 المكسيك</div>
-<div class="center">2 - 0</div>
-<div class="team">🇿🇦 جنوب أفريقيا</div>
+<h2>المباريات السابقة</h2>
+<div id="past-matches">سيتم إضافة فلتر لاحق</div>
+</div>
 </div>
 
-<div class="match">
-<div class="team">🇰🇷 كوريا</div>
-<div class="center">2 - 1</div>
-<div class="team">🇨🇿 التشيك</div>
-</div>
-
-</div>
-
-<div class="card">
-<h3>المجموعة B</h3>
-
-<div class="match">
-<div class="team">🇨🇦 كندا</div>
-<div class="center">1 - 1</div>
-<div class="team">🇧🇦 البوسنة</div>
-</div>
-
-<div class="match">
-<div class="team">🇶🇦 قطر</div>
-<div class="center">1 - 1</div>
-<div class="team">🇨🇭 سويسرا</div>
-</div>
-
-</div>
-
-</div>
-
----
-
-## 📅 UPCOMING PAGE
-
+<!-- UPCOMING -->
 <div id="upcoming" class="page">
-
 <div class="card">
-
-<div class="match">
-<div class="team">🇧🇷 البرازيل</div>
-<div class="center">VS</div>
-<div class="team">🇦🇷 الأرجنتين | 25/06 | 18:00</div>
+<h2>المباريات القادمة</h2>
+<div id="upcoming-matches">سيتم إضافة فلتر لاحق</div>
 </div>
-
-<div class="match">
-<div class="team">🇿🇦 جنوب أفريقيا</div>
-<div class="center">VS</div>
-<div class="team">🇰🇷 كوريا الجنوبية | 25/06 | 03:00</div>
-</div>
-
-</div>
-
 </div>
 
 <script>
-function show(page){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.getElementById(page).classList.add('active');
+
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
+
+/* 🔴 جلب المباريات المباشرة فقط */
+async function loadLive(){
+
+  const url = "https://v3.football.api-sports.io/fixtures?live=all";
+
+  const res = await fetch(url,{
+    headers:{
+      "x-apisports-key":"PUT_YOUR_KEY_HERE"
+    }
+  });
+
+  const data = await res.json();
+
+  const container = document.getElementById("live-matches");
+  container.innerHTML = "";
+
+  if(!data.response.length){
+    container.innerHTML = "لا توجد مباريات مباشرة حالياً";
+    return;
+  }
+
+  data.response.forEach(m=>{
+
+    container.innerHTML += `
+      <div class="match">
+        <div class="team">🇸🇦 ${m.teams.home.name}</div>
+        <div class="center">${m.goals.home} - ${m.goals.away}</div>
+        <div class="team" style="justify-content:flex-end;">
+          ${m.teams.away.name} 🇦🇷
+        </div>
+      </div>
+    `;
+  });
+}
+
+loadLive();
+setInterval(loadLive, 30000); // تحديث كل 30 ثانية (آمن للـ API المجاني)
+
 </script>
 
 </body>
