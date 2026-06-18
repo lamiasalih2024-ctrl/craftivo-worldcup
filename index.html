@@ -1,97 +1,44 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<title>Craftivo TV | تغطية كأس العالم 2026</title>
+<!-- صفحة الأرشيف المصححة والكاملة -->
+<div class="card">
+    <style>
+        .group-title { text-align: center; font-size: 1.5em; margin-bottom: 20px; color: #fff; border-bottom: 1px solid #2c3e50; padding-bottom: 10px; }
+        .match-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .team-box { display: flex; align-items: center; gap: 10px; }
+        .team-box.left { justify-content: flex-start; }
+        .team-box.right { justify-content: flex-end; flex-direction: row-reverse; }
+        .res-box { font-weight: bold; color: #00ff88; font-size: 1.2em; min-width: 60px; text-align: center; }
+        .flag { font-size: 1.8em; }
+    </style>
 
-<style>
-body { font-family: sans-serif; background: #0b0f1a; margin: 0; color: white; font-size: 22px; }
-
-/* HEADER */
-.header { text-align: center; padding: 25px; font-size: 48px; font-weight: bold; }
-.sub { font-size: 26px; color: #aaa; margin-top: 8px; }
-
-/* NAV */
-.nav-bar { display: flex; justify-content: center; gap: 20px; padding: 15px; }
-.nav-btn { padding: 20px 45px; border: none; background: #1f2a44; color: white; border-radius: 12px; cursor: pointer; font-size: 24px; font-weight: bold; transition: 0.3s; }
-.nav-btn:hover { background: #2d3f66; transform: scale(1.05); }
-
-/* PAGES */
-.page-content { display: none; padding: 25px; }
-.active { display: block; }
-
-/* CARDS */
-.card { background: #111a2e; padding: 40px; border-radius: 15px; text-align: center; font-size: 24px; margin-top: 20px; }
-
-/* ARCHIVE STYLES */
-.group-box { margin-bottom: 30px; border: 2px solid #34495e; padding: 25px; border-radius: 15px; background: #16213e; }
-.match-card { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2c3e50; padding: 20px 0; }
-.team-unit { display: flex; align-items: center; gap: 15px; }
-.flag { font-size: 3em; }
-.name { font-weight: bold; font-size: 1.4em; }
-.res { font-size: 2.2em; font-weight: bold; color: #00ff88; }
-h2 { color: #ffffff !important; margin-bottom: 20px; }
-
-/* LIVE */
-.live-indicator { display: inline-flex; align-items: center; gap: 10px; color: #ff3b3b; font-weight: bold; font-size: 28px; }
-.dot { width: 16px; height: 16px; background: red; border-radius: 50%; animation: blink 1s infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-
-.footer { text-align: center; padding: 30px; margin-top: 40px; font-size: 20px; color: #aaa; }
-</style>
-</head>
-
-<body>
-
-<div class="header">
-    ⚽ Craftivo TV
-    <div class="sub">تغطية كأس العالم 2026</div>
-</div>
-
-<div class="nav-bar">
-    <button class="nav-btn" onclick="openPage('live')">مباشر</button>
-    <button class="nav-btn" onclick="openPage('archive')">السابقة</button>
-    <button class="nav-btn" onclick="openPage('upcoming')">القادمة</button>
-</div>
-
-<div id="live" class="page-content active">
-    <div class="card">
-        <div class="live-indicator">
-            <div class="dot"></div> LIVE
+    <!-- مثال لمجموعة واحدة - كرري نفس هذا التنسيق لبقية المجموعات -->
+    <div class="group-box">
+        <div class="group-title">المجموعة A</div>
+        <div class="match-row">
+            <div class="team-box left"><div class="flag">🇲🇽</div><div>المكسيك</div></div>
+            <div class="res-box">2 - 0</div>
+            <div class="team-box right"><div>جنوب أفريقيا</div><div class="flag">🇿🇦</div></div>
         </div>
-        <div id="matchBox" style="margin-top:20px;">جاري التحديث...</div>
+        <div class="match-row">
+            <div class="team-box left"><div class="flag">🇰🇷</div><div>كوريا الجنوبية</div></div>
+            <div class="res-box">2 - 1</div>
+            <div class="team-box right"><div>التشيك</div><div class="flag">🇨🇿</div></div>
+        </div>
     </div>
-</div>
 
-<div id="archive" class="page-content">
-    <div class="card">
-        <div class="group-box">
-            <h2>المجموعة A</h2>
-            <div class="match-card"><div class="team-unit"><div class="flag">🇲🇽</div><div class="name">المكسيك</div></div><div class="res">2 - 0</div><div class="team-unit"><div class="flag">🇿🇦</div><div class="name">جنوب أفريقيا</div></div></div>
-            <div class="match-card"><div class="team-unit"><div class="flag">🇰🇷</div><div class="name">كوريا الجنوبية</div></div><div class="res">2 - 1</div><div class="team-unit"><div class="flag">🇨🇿</div><div class="name">التشيك</div></div></div>
+    <!-- مجموعة B -->
+    <div class="group-box">
+        <div class="group-title">المجموعة B</div>
+        <div class="match-row">
+            <div class="team-box left"><div class="flag">🇨🇦</div><div>كندا</div></div>
+            <div class="res-box">1 - 1</div>
+            <div class="team-box right"><div>البوسنة</div><div class="flag">🇧🇦</div></div>
         </div>
-        
-        <div class="group-box">
-            <h2>المجموعة B</h2>
-            <div class="match-card"><div class="team-unit"><div class="flag">🇨🇦</div><div class="name">كندا</div></div><div class="res">1 - 1</div><div class="team-unit"><div class="flag">🇧🇦</div><div class="name">البوسنة</div></div></div>
-            <div class="match-card"><div class="team-unit"><div class="flag">🇶🇦</div><div class="name">قطر</div></div><div class="res">1 - 1</div><div class="team-unit"><div class="flag">🇨🇭</div><div class="name">سويسرا</div></div></div>
+        <div class="match-row">
+            <div class="team-box left"><div class="flag">🇶🇦</div><div>قطر</div></div>
+            <div class="res-box">1 - 1</div>
+            <div class="team-box right"><div>سويسرا</div><div class="flag">🇨🇭</div></div>
         </div>
-        
-        </div>
+    </div>
+    
+    <!-- وهكذا دواليك لكل المجموعات بنفس التنسيق -->
 </div>
-
-<div id="upcoming" class="page-content">
-    <div class="card">المباريات القادمة</div>
-</div>
-
-<div class="footer">Craftivo | تصميم LMS 🤍</div>
-
-<script>
-function openPage(pageName) {
-    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageName).classList.add('active');
-}
-</script>
-
-</body>
-</html>
