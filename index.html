@@ -3,56 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Craftivo | تغطية كأس العالم 2026</title>
+    <style>
+        .goal-flash { animation: goalFlash 2s ease-in-out; }
+        @keyframes goalFlash {
+            0% { box-shadow: 0 0 0px #22c55e; border-color: #22c55e; }
+            50% { box-shadow: 0 0 80px #22c55e; border-color: #22c55e; transform: scale(1.02); }
+            100% { box-shadow: 0 0 0px #22c55e; transform: scale(1); }
+        }
+        .tab-btn { transition: all .3s ease; }
+        .tab-btn:hover { transform: translateY(-3px); }
+        .stat-card { background: rgba(255,255,255,.05); backdrop-filter: blur(12px); }
+        body { background: radial-gradient(circle at top, #15203a, #0b0e17 60%); min-height: 100vh; }
+    </style>
 </head>
-<body class="bg-[#0b0e17] text-white p-4">
-    <div class="max-w-4xl mx-auto space-y-12">
-        <header class="text-center py-8">
-            <h1 class="text-7xl font-black text-yellow-500 mb-6">Craftivo</h1>
-            <p class="text-slate-400 text-4xl">تغطية كأس العالم 2026</p>
+<body class="text-white p-6">
+    <div class="max-w-4xl mx-auto space-y-8">
+        <header class="text-center py-6">
+            <h1 class="text-7xl font-black text-yellow-500">Craftivo</h1>
+            <p class="text-slate-400 text-3xl">تغطية كأس العالم 2026</p>
         </header>
 
-        <div class="flex justify-center gap-6 mb-12 bg-[#1a1f2e] p-6 rounded-full border border-slate-700">
-            <button onclick="showTab('live')" class="bg-yellow-600 text-black px-12 py-5 rounded-full font-black text-3xl">بث مباشر</button>
-            <button onclick="showTab('history')" class="text-slate-300 hover:text-white px-12 py-5 rounded-full font-black text-3xl">المباريات السابقة</button>
-            <button onclick="showTab('upcoming')" class="text-slate-300 hover:text-white px-12 py-5 rounded-full font-black text-3xl">القادمة</button>
+        <div class="flex justify-center gap-4 bg-[#1a1f2e]/50 p-3 rounded-full border border-slate-700">
+            <button onclick="showTab('live')" class="tab-btn bg-yellow-600 text-black px-8 py-3 rounded-full font-bold text-xl">بث مباشر</button>
+            <button onclick="showTab('history')" class="tab-btn text-slate-300 px-8 py-3 rounded-full font-bold text-xl">الأرشيف</button>
+            <button onclick="showTab('upcoming')" class="tab-btn text-slate-300 px-8 py-3 rounded-full font-bold text-xl">القادمة</button>
         </div>
 
-        <div id="live" class="tab-content">
-            <div class="bg-[#1a1f2e] p-12 rounded-[3rem] border-4 border-yellow-500 text-center shadow-2xl">
-                <h2 class="text-5xl font-bold text-yellow-500 mb-8 animate-pulse">🔴 Live Match Now</h2>
-                <div class="text-6xl font-black flex justify-center items-center gap-8">
-                    <span>🇲🇽 Mexico</span> 
-                    <span class="text-yellow-500">2 - 0</span> 
-                    <span>🇿🇦 S.Africa</span>
-                </div>
-            </div>
+        <div id="live" class="tab-content text-center py-12 border-4 border-slate-700 rounded-[3rem] bg-[#1a1f2e]/80">
+            <div id="match-data">جاري الاتصال بالسيرفر...</div>
         </div>
 
-        <div id="history" class="tab-content hidden space-y-8">
-            <div class="grid grid-cols-1 gap-8">
-                <div class="bg-[#1a1f2e] p-10 rounded-[3rem] border border-slate-700">
-                    <h3 class="text-yellow-500 font-bold text-5xl mb-6">Group A</h3>
-                    <div class="text-4xl font-bold space-y-4">
-                        <p>🇲🇽 Mexico 2 - 0 South Africa</p>
-                        <p>🇰🇷 S.Korea 2 - 1 Czech Rep</p>
-                    </div>
-                    <p class="text-yellow-500 text-3xl mt-6 font-bold">Points: Mexico(3), S.Korea(3)</p>
-                </div>
-            </div>
-        </div>
+        <div id="history" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-6 text-xl">
+             </div>
 
-        <footer class="text-center text-slate-500 py-16 border-t border-slate-800">
-            <p class="text-4xl font-bold">Craftivo Studio 2026 ©</p>
-            <p class="text-5xl mt-6">LMS 🤍</p>
-        </footer>
+        <div id="upcoming" class="tab-content hidden text-center p-10 bg-[#1a1f2e] rounded-3xl border border-slate-700 text-2xl">
+             </div>
     </div>
 
     <script>
+        // دالة التبديل
         function showTab(id) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
             document.getElementById(id).classList.remove('hidden');
         }
+
+        // كود الـ JavaScript الاحترافي الذي أرسلتِه
+        let previousHomeScore = 0; let previousAwayScore = 0;
+        
+        function triggerGoalAlert(teamName) {
+            const alertBox = document.createElement("div");
+            alertBox.innerHTML = `<div class="fixed top-10 left-1/2 -translate-x-1/2 z-50 bg-green-600 text-white px-10 py-6 rounded-3xl text-3xl font-black shadow-2xl">⚽ هــــــــدف !<br>${teamName}</div>`;
+            document.body.appendChild(alertBox);
+            const liveCard = document.getElementById("live");
+            liveCard.classList.add("goal-flash");
+            setTimeout(() => { liveCard.classList.remove("goal-flash"); }, 3000);
+            setTimeout(() => { alertBox.remove(); }, 5000);
+        }
+
+        async function fetchLiveMatch() {
+            try {
+                const response = await fetch('رابط_الـ_API_الخاص_بالموقع');
+                const data = await response.json();
+                if (data.isLive) {
+                    if (data.homeScore > previousHomeScore || data.awayScore > previousAwayScore) {
+                        triggerGoalAlert(data.homeScore > previousHomeScore ? data.homeTeam : data.awayTeam);
+                    }
+                    previousHomeScore = data.homeScore; previousAwayScore = data.awayScore;
+                    document.getElementById('match-data').innerHTML = `
+                        <div class="space-y-6"><div class="flex justify-center items-center gap-8">
+                        <div class="text-center"><div class="text-6xl">${data.homeFlag || '🏳️'}</div><div class="text-3xl font-bold">${data.homeTeam}</div></div>
+                        <div class="text-center"><div class="text-7xl font-black text-yellow-500">${data.homeScore} - ${data.awayScore}</div>
+                        <div class="text-xl text-red-500 mt-3 animate-pulse">🔴 LIVE</div></div>
+                        <div class="text-center"><div class="text-6xl">${data.awayFlag || '🏳️'}</div><div class="text-3xl font-bold">${data.awayTeam}</div></div>
+                        </div><div class="text-2xl text-slate-300">⏱ ${data.minute}'</div>
+                        <div class="text-lg text-slate-400">آخر تحديث: ${new Date().toLocaleTimeString('ar-SA')}</div></div>`;
+                } else {
+                    document.getElementById('match-data').innerHTML = `<div class="space-y-4"><div class="text-5xl">⚽</div><div class="text-3xl font-bold">لا توجد مباريات مباشرة حالياً</div></div>`;
+                }
+            } catch (error) {
+                document.getElementById('match-data').innerHTML = `<div class="text-red-500 text-2xl">⚠️ تعذر الاتصال بالخادم</div>`;
+            }
+        }
+        setInterval(fetchLiveMatch, 15000);
+        fetchLiveMatch();
     </script>
 </body>
 </html>
