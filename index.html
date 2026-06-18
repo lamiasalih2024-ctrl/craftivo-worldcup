@@ -9,15 +9,17 @@
   
   .header-container { text-align: center; margin-top: 30px; margin-bottom: 40px; }
   
-  /* هنا تعديل اللون الذهبي والخط */
+  /* هنا جعلنا الكتابة بارزة (ذهبي متدرج + ظل قوي) */
   .title { 
-    font-size: 55px; font-weight: 900; 
-    color: #ffd700; /* لون ذهبي */
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    font-size: 60px; font-weight: 900; 
+    background: linear-gradient(to bottom, #ffd700, #b8860b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(184, 134, 11, 0.5);
     margin: 0;
   }
   
-  .subtitle { font-size: 24px; color: #00ff88; margin-top: 10px; }
+  .subtitle { font-size: 24px; color: #00ff88; margin-top: 10px; font-weight: 600; }
   
   .nav-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
   .nav-btn { 
@@ -49,7 +51,7 @@
 <body>
 
 <div class="header-container">
-  <div class="title">🪶 Craftivo ⚽</div>
+  <div class="title">Craftivo ⚽</div>
   <div class="subtitle">تغطية كأس العالم 2026</div>
 </div>
 
@@ -93,8 +95,4 @@ async function loadMatches(endpoint, boxId) {
 }
 
 loadMatches("fixtures?live=all", "live-matches");
-loadMatches("fixtures?league=1&season=2026&status=FT", "archive-matches");
-loadMatches("fixtures?league=1&season=2026&status=NS", "upcoming-matches");
-</script>
-</body>
-</html>
+loadMatches("fixtures?league=1&
