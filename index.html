@@ -8,41 +8,57 @@
         body { background-color: #0b0e17; color: white; font-family: sans-serif; }
         .page { display: none; padding: 20px; }
         .page.active { display: block; }
-        .nav-btn { background: #1e293b; padding: 15px 25px; border-radius: 15px; font-weight: bold; font-size: 1.5rem; color: white; }
+        .nav-btn { background: #1e293b; padding: 12px 20px; border-radius: 12px; font-weight: bold; font-size: 1.2rem; margin: 5px; }
         .nav-btn.active { background: #eab308; color: black; }
-        .data-card { background: #1a1f2e; padding: 30px; border-radius: 20px; margin-bottom: 20px; border: 2px solid #334155; font-size: 2rem; }
+        .group-card { background: #1a1f2e; padding: 20px; border-radius: 15px; border: 1px solid #334155; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-    <!-- أزرار التنقل -->
-    <div class="flex justify-center gap-4 mt-6">
+    <div class="flex justify-center flex-wrap mt-4">
         <button id="btn-live" class="nav-btn active" onclick="show('live', 'btn-live')">بث مباشر</button>
-        <button id="btn-archive" class="nav-btn" onclick="show('archive', 'btn-archive')">السابقة</button>
-        <button id="btn-upcoming" class="nav-btn" onclick="show('upcoming', 'btn-upcoming')">القادمة</button>
+        <button id="btn-archive" class="nav-btn" onclick="show('archive', 'btn-archive')">المباريات السابقة</button>
+        <button id="btn-upcoming" class="nav-btn" onclick="show('upcoming', 'btn-upcoming')">المباريات القادمة</button>
     </div>
 
-    <!-- صفحة المباشر -->
-    <div id="live" class="page active text-center mt-10">
-        <div class="data-card text-5xl font-black text-slate-500">لا توجد مباراة مباشرة حالياً</div>
+    <div id="live" class="page active text-center mt-6">
+        <div class="group-card text-3xl font-bold text-slate-400 p-10">لا توجد مباراة مباشرة حالياً</div>
     </div>
 
-    <!-- صفحة الأرشيف (النتائج) -->
-    <div id="archive" class="page mt-10">
-        <h2 class="text-4xl font-bold text-center mb-10 text-yellow-500">نتائج المباريات السابقة</h2>
-        <div class="data-card">🇲🇽 المكسيك 2 - 0 جنوب أفريقيا | 🇰🇷 كوريا الجنوبية 2 - 1 التشيك</div>
-        <div class="data-card">🇨🇦 كندا 1 - 1 البوسنة | 🇶🇦 قطر 1 - 1 سويسرا</div>
-        <div class="data-card">🇧🇷 البرازيل 1 - 1 المغرب | 🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا 1 - 0 هايتي</div>
-        <!-- (يتم إضافة باقي المجموعات بنفس هذا التنسيق الكبير) -->
-    </div>
-
-    <!-- صفحة القادمة -->
-    <div id="upcoming" class="page mt-10">
-        <div class="text-center mb-10">
-            <h2 class="text-4xl font-bold">المباريات القادمة</h2>
-            <p class="text-yellow-500 text-3xl font-bold mt-4">بتوقيت مكة المكرمة 🕋</p>
+    <div id="archive" class="page mt-6">
+        <h2 class="text-3xl font-bold text-center mb-6 text-yellow-500">نتائج المباريات السابقة</h2>
+        <div class="group-card">
+            <h3 class="text-xl font-bold text-yellow-400 mb-3 border-b border-slate-700">المجموعة A</h3>
+            <p>🇲🇽 المكسيك 2 - 0 جنوب أفريقيا 🇿🇦</p>
+            <p>🇰🇷 كوريا الجنوبية 2 - 1 التشيك 🇨🇿</p>
         </div>
-        <div class="data-card">دور الـ 32 - موعد قريب جداً</div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة B</h3><p>🇨🇦 كندا 1 - 1 البوسنة 🇧🇦</p><p>🇶🇦 قطر 1 - 1 سويسرا 🇨🇭</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة C</h3><p>🇧🇷 البرازيل 1 - 1 المغرب 🇲🇦</p><p>🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا 1 - 0 هايتي 🇭🇹</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة D</h3><p>🇺🇸 أمريكا 4 - 1 باراغواي 🇵🇾</p><p>🇦🇺 أستراليا 2 - 0 تركيا 🇹🇷</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة E</h3><p>🇩🇪 ألمانيا 7 - 1 كوراساو 🇨🇼</p><p>🇨🇮 كوت ديفوار 1 - 0 الإكوادور 🇪🇨</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة F</h3><p>🇳🇱 هولندا 2 - 2 اليابان 🇯🇵</p><p>🇸🇪 السويد 5 - 1 تونس 🇹🇳</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة G</h3><p>🇧🇪 بلجيكا 1 - 1 مصر 🇪🇬</p><p>🇮🇷 إيران 2 - 2 نيوزيلندا 🇳🇿</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة H</h3><p>🇸🇦 السعودية 1 - 1 أوروغواي 🇺🇾</p><p>🇪🇸 إسبانيا 0 - 0 الرأس الأخضر 🇨🇻</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة I</h3><p>🇫🇷 فرنسا 3 - 1 السنغال 🇸🇳</p><p>🇮🇶 العراق 1 - 4 النرويج 🇳🇴</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة J</h3><p>🇦🇷 الأرجنتين 3 - 0 الجزائر 🇩🇿</p><p>🇦🇹 النمسا 3 - 1 الأردن 🇯🇴</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة K</h3><p>🇵🇹 البرتغال 1 - 1 الكونغو الديمقراطية 🇨🇩</p><p>🇺🇿 أوزبكستان 1 - 3 كولومبيا 🇨🇴</p></div>
+        <div class="group-card"><h3 class="text-xl font-bold text-yellow-400">المجموعة L</h3><p>🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا 4 - 2 كرواتيا 🇭🇷</p><p>🇬🇭 غانا 1 - 0 بنما 🇵🇦</p></div>
+    </div>
+
+    <div id="upcoming" class="page mt-6">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl font-bold">المباريات القادمة</h2>
+            <p class="text-yellow-500 text-xl font-bold mt-2">بتوقيت مكة المكرمة 🕋</p>
+        </div>
+        <div class="group-card">
+            <p class="font-bold border-b border-slate-700 mb-2">مباريات المجموعات المتبقية:</p>
+            <p>سوف تظهر هنا فور تحديث البيانات...</p>
+        </div>
+        <div class="group-card">
+            <p class="font-bold border-b border-slate-700 mb-2">الأدوار الإقصائية:</p>
+            <p>دور الـ 32: قريباً...</p>
+            <p>دور الـ 16: قريباً...</p>
+        </div>
     </div>
 
     <script>
