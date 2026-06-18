@@ -2,38 +2,56 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .page { display: none; }
+        body { background-color: #0b0e17; color: white; font-family: sans-serif; }
+        .page { display: none; padding: 20px; }
         .page.active { display: block; }
-        .goal-flash { animation: goalFlash 2s ease-in-out; }
-        @keyframes goalFlash { 0% { box-shadow: 0 0 0px #22c55e; border-color: #22c55e; } 50% { box-shadow: 0 0 80px #22c55e; border-color: #22c55e; transform: scale(1.02); } 100% { box-shadow: 0 0 0px #22c55e; transform: scale(1); } }
-        body { background: #0b0e17; color: white; min-height: 100vh; font-size: 1.2rem; }
-        .card { background: #1a1f2e; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #334155; }
+        .nav-btn { background: #1e293b; padding: 15px 25px; border-radius: 15px; font-weight: bold; font-size: 1.5rem; color: white; }
+        .nav-btn.active { background: #eab308; color: black; }
+        .data-card { background: #1a1f2e; padding: 30px; border-radius: 20px; margin-bottom: 20px; border: 2px solid #334155; font-size: 2rem; }
     </style>
 </head>
-<body class="p-4">
-    <nav class="flex justify-center gap-2 mb-8">
-        <button onclick="switchPage('live')" class="bg-yellow-500 text-black px-6 py-3 rounded-full font-black text-xl">بث مباشر</button>
-        <button onclick="switchPage('archive')" class="bg-slate-700 px-6 py-3 rounded-full font-black text-xl">السابقة</button>
-        <button onclick="switchPage('upcoming')" class="bg-slate-700 px-6 py-3 rounded-full font-black text-xl">القادمة</button>
-    </nav>
+<body>
 
-    <div id="live" class="page active text-center pt-10">
-        <div id="match-data" class="card border-4 border-slate-700 p-10">
-            <h1 class="text-5xl font-black text-slate-500">لا توجد مباراة مباشرة الآن</h1>
-        </div>
+    <!-- أزرار التنقل -->
+    <div class="flex justify-center gap-4 mt-6">
+        <button id="btn-live" class="nav-btn active" onclick="show('live', 'btn-live')">بث مباشر</button>
+        <button id="btn-archive" class="nav-btn" onclick="show('archive', 'btn-archive')">السابقة</button>
+        <button id="btn-upcoming" class="nav-btn" onclick="show('upcoming', 'btn-upcoming')">القادمة</button>
     </div>
 
-    <div id="archive" class="page max-w-4xl mx-auto space-y-6">
-        <h2 class="text-4xl font-black text-center text-yellow-500 mb-8">نتائج المجموعات A - L</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="card"><strong>Group A:</strong> 🇲🇽 Mexico 2-0 S.Africa | 🇰🇷 S.Korea 2-1 Czech</div>
-            <div class="card"><strong>Group B:</strong> 🇨🇦 Canada 1-1 Bosnia | 🇶🇦 Qatar 1-1 Switzerland</div>
-            <div class="card"><strong>Group C:</strong> 🇧🇷 Brazil 1-1 Morocco | 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland 1-0 Haiti</div>
-            <div class="card"><strong>Group D:</strong> 🇺🇸 USA 4-1 Paraguay | 🇦🇺 Australia 2-0 Turkey</div>
-            <div class="card"><strong>Group E:</strong> 🇩🇪 Germany 7-1 Curacao | 🇨🇮 Ivory Coast 1-0 Ecuador</div>
-            <div class="card"><strong>Group F:</strong> 🇳🇱 Netherlands 2-2 Japan | 🇸🇪 Sweden 5-1 Tunisia</div>
-            <div class="card"><strong>Group G:</strong> 🇧🇪 Belgium 1-1 Egypt | 🇮🇷 Iran 2-2 New Zealand</div>
-            <div class="card"><strong>Group H:</strong> 🇸🇦 Saudi Arabia 1-1 Uruguay | 🇪🇸 Spain 0-0 Cape Verde</div>
-            <div
+    <!-- صفحة المباشر -->
+    <div id="live" class="page active text-center mt-10">
+        <div class="data-card text-5xl font-black text-slate-500">لا توجد مباراة مباشرة حالياً</div>
+    </div>
+
+    <!-- صفحة الأرشيف (النتائج) -->
+    <div id="archive" class="page mt-10">
+        <h2 class="text-4xl font-bold text-center mb-10 text-yellow-500">نتائج المباريات السابقة</h2>
+        <div class="data-card">🇲🇽 المكسيك 2 - 0 جنوب أفريقيا | 🇰🇷 كوريا الجنوبية 2 - 1 التشيك</div>
+        <div class="data-card">🇨🇦 كندا 1 - 1 البوسنة | 🇶🇦 قطر 1 - 1 سويسرا</div>
+        <div class="data-card">🇧🇷 البرازيل 1 - 1 المغرب | 🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا 1 - 0 هايتي</div>
+        <!-- (يتم إضافة باقي المجموعات بنفس هذا التنسيق الكبير) -->
+    </div>
+
+    <!-- صفحة القادمة -->
+    <div id="upcoming" class="page mt-10">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-bold">المباريات القادمة</h2>
+            <p class="text-yellow-500 text-3xl font-bold mt-4">بتوقيت مكة المكرمة 🕋</p>
+        </div>
+        <div class="data-card">دور الـ 32 - موعد قريب جداً</div>
+    </div>
+
+    <script>
+        function show(pageId, btnId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById(btnId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
