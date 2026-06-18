@@ -4,63 +4,36 @@
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .page { display: none; }
+        .page.active { display: block; }
         .goal-flash { animation: goalFlash 2s ease-in-out; }
         @keyframes goalFlash { 0% { box-shadow: 0 0 0px #22c55e; border-color: #22c55e; } 50% { box-shadow: 0 0 80px #22c55e; border-color: #22c55e; transform: scale(1.02); } 100% { box-shadow: 0 0 0px #22c55e; transform: scale(1); } }
-        body { background: radial-gradient(circle at top, #15203a, #0b0e17 60%); min-height: 100vh; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        body { background: #0b0e17; color: white; min-height: 100vh; font-size: 1.2rem; }
+        .card { background: #1a1f2e; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #334155; }
     </style>
 </head>
-<body class="text-white p-6">
-    <div class="max-w-4xl mx-auto space-y-8">
-        <header class="text-center py-6">
-            <h1 class="text-7xl font-black text-yellow-500">Craftivo</h1>
-            <p class="text-slate-400 text-3xl">تغطية كأس العالم 2026</p>
-        </header>
+<body class="p-4">
+    <nav class="flex justify-center gap-2 mb-8">
+        <button onclick="switchPage('live')" class="bg-yellow-500 text-black px-6 py-3 rounded-full font-black text-xl">بث مباشر</button>
+        <button onclick="switchPage('archive')" class="bg-slate-700 px-6 py-3 rounded-full font-black text-xl">السابقة</button>
+        <button onclick="switchPage('upcoming')" class="bg-slate-700 px-6 py-3 rounded-full font-black text-xl">القادمة</button>
+    </nav>
 
-        <div class="flex justify-center gap-4 bg-[#1a1f2e]/50 p-3 rounded-full border border-slate-700">
-            <button onclick="showTab('live')" class="bg-yellow-600 text-black px-8 py-3 rounded-full font-bold text-xl">بث مباشر</button>
-            <button onclick="showTab('history')" class="text-slate-300 px-8 py-3 rounded-full font-bold text-xl">المباريات السابقة</button>
-            <button onclick="showTab('upcoming')" class="text-slate-300 px-8 py-3 rounded-full font-bold text-xl">المباريات القادمة</button>
-        </div>
-
-        <div id="live" class="tab-content active text-center py-12 border-4 border-slate-700 rounded-[3rem] bg-[#1a1f2e]/80">
-            <div id="match-data" class="text-3xl text-slate-400">في انتظار تفعيل رابط الـ API للبدء.</div>
-        </div>
-
-        <div id="history" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-6 text-xl">
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group A</h3><p>🇲🇽 Mexico 2 - 0 S.Africa | 🇰🇷 S.Korea 2 - 1 Czech</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group B</h3><p>🇨🇦 Canada 1 - 1 Bosnia | 🇶🇦 Qatar 1 - 1 Switzerland</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group C</h3><p>🇧🇷 Brazil 1 - 1 Morocco | 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland 1 - 0 Haiti</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group D</h3><p>🇺🇸 USA 4 - 1 Paraguay | 🇦🇺 Australia 2 - 0 Turkey</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group E</h3><p>🇩🇪 Germany 7 - 1 Curacao | 🇨🇮 Ivory Coast 1 - 0 Ecuador</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group F</h3><p>🇳🇱 Netherlands 2 - 2 Japan | 🇸🇪 Sweden 5 - 1 Tunisia</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group G</h3><p>🇧🇪 Belgium 1 - 1 Egypt | 🇮🇷 Iran 2 - 2 New Zealand</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group H</h3><p>🇸🇦 Saudi Arabia 1 - 1 Uruguay | 🇪🇸 Spain 0 - 0 Cape Verde</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group I</h3><p>🇫🇷 France 3 - 1 Senegal | 🇮🇶 Iraq 1 - 4 Norway</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group J</h3><p>🇦🇷 Argentina 3 - 0 Algeria | 🇦🇹 Austria 3 - 1 Jordan</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group K</h3><p>🇵🇹 Portugal 1 - 1 DR Congo | 🇺🇿 Uzbekistan 1 - 3 Colombia</p></div>
-            <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700"><h3 class="text-yellow-500 font-bold">Group L</h3><p>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England 4 - 2 Croatia | 🇬🇭 Ghana 1 - 0 Panama</p></div>
-        </div>
-
-        <div id="upcoming" class="tab-content text-center p-10 bg-[#1a1f2e] rounded-3xl border border-slate-700 text-2xl">
-            <h2 class="text-yellow-500 font-bold mb-6">جدول المباريات القادمة (توقيت مكة المكرمة)</h2>
-            <p>📍 دور الـ 32: سيبدأ قريباً...</p>
-            <p>📍 دور الـ 16: خارطة الطريق في انتظار التحديث.</p>
+    <div id="live" class="page active text-center pt-10">
+        <div id="match-data" class="card border-4 border-slate-700 p-10">
+            <h1 class="text-5xl font-black text-slate-500">لا توجد مباراة مباشرة الآن</h1>
         </div>
     </div>
 
-    <script>
-        function showTab(id) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-        // دالة الـ API محمية لمنع ظهور الأخطاء
-        async function fetchLiveMatch() {
-            const url = 'ضع_رابط_الـ_API_هنا';
-            if(url.includes('ضع')) return; 
-            try { /* منطق التحديث */ } catch (e) { /* كتم الخطأ */ }
-        }
-    </script>
-</body>
-</html>
+    <div id="archive" class="page max-w-4xl mx-auto space-y-6">
+        <h2 class="text-4xl font-black text-center text-yellow-500 mb-8">نتائج المجموعات A - L</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="card"><strong>Group A:</strong> 🇲🇽 Mexico 2-0 S.Africa | 🇰🇷 S.Korea 2-1 Czech</div>
+            <div class="card"><strong>Group B:</strong> 🇨🇦 Canada 1-1 Bosnia | 🇶🇦 Qatar 1-1 Switzerland</div>
+            <div class="card"><strong>Group C:</strong> 🇧🇷 Brazil 1-1 Morocco | 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland 1-0 Haiti</div>
+            <div class="card"><strong>Group D:</strong> 🇺🇸 USA 4-1 Paraguay | 🇦🇺 Australia 2-0 Turkey</div>
+            <div class="card"><strong>Group E:</strong> 🇩🇪 Germany 7-1 Curacao | 🇨🇮 Ivory Coast 1-0 Ecuador</div>
+            <div class="card"><strong>Group F:</strong> 🇳🇱 Netherlands 2-2 Japan | 🇸🇪 Sweden 5-1 Tunisia</div>
+            <div class="card"><strong>Group G:</strong> 🇧🇪 Belgium 1-1 Egypt | 🇮🇷 Iran 2-2 New Zealand</div>
+            <div class="card"><strong>Group H:</strong> 🇸🇦 Saudi Arabia 1-1 Uruguay | 🇪🇸 Spain 0-0 Cape Verde</div>
+            <div
