@@ -8,49 +8,48 @@
 <body class="bg-[#0b0e17] text-white p-6">
     <div class="max-w-4xl mx-auto space-y-10">
         <header class="text-center py-6">
-            <h1 class="text-5xl font-black text-yellow-500 mb-3">Craftivo</h1>
-            <p class="text-slate-400 text-xl">تغطية كأس العالم 2026</p>
+            <h1 class="text-6xl font-black text-yellow-500 mb-4">Craftivo</h1>
+            <p class="text-slate-400 text-2xl">تغطية كأس العالم 2026</p>
         </header>
 
-        <div class="flex justify-center gap-2 mb-8 bg-[#1a1f2e] p-2 rounded-full border border-slate-700">
-            <button onclick="showTab('live')" class="bg-yellow-600 text-black px-6 py-2 rounded-full font-bold">بث مباشر</button>
-            <button onclick="showTab('history')" class="text-slate-300 hover:text-white px-6 py-2 rounded-full font-bold">المباريات السابقة</button>
-            <button onclick="showTab('upcoming')" class="text-slate-300 hover:text-white px-6 py-2 rounded-full font-bold">القادمة</button>
+        <div class="flex justify-center gap-4 mb-8 bg-[#1a1f2e] p-3 rounded-full border border-slate-700">
+            <button onclick="showTab('live')" class="bg-yellow-600 text-black px-8 py-3 rounded-full font-bold text-xl">بث مباشر</button>
+            <button onclick="showTab('history')" class="text-slate-300 hover:text-white px-8 py-3 rounded-full font-bold text-xl">المباريات السابقة</button>
+            <button onclick="showTab('upcoming')" class="text-slate-300 hover:text-white px-8 py-3 rounded-full font-bold text-xl">القادمة</button>
         </div>
 
         <div id="live" class="tab-content">
-            <div class="bg-[#1a1f2e] p-8 rounded-3xl border-2 border-yellow-500 text-center">
-                <h2 class="text-2xl font-bold text-yellow-500">جاري تحميل البث المباشر...</h2>
+            <div class="bg-[#1a1f2e] p-10 rounded-3xl border-2 border-yellow-500 text-center">
+                <h2 class="text-4xl font-bold text-yellow-500">جاري تحميل البث المباشر...</h2>
             </div>
         </div>
+
         <div id="history" class="tab-content hidden">
-            <div class="bg-[#1a1f2e] p-8 rounded-3xl border border-slate-700 text-center">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700">
-            <h3 class="text-yellow-500 font-bold text-xl mb-3 border-b border-slate-700 pb-2">المجموعة A</h3>
-            <p>🇲🇽 المكسيك 2 - 0 ج.أفريقيا</p>
-            <p>🇰🇷 كوريا الجنوبية 2 - 1 التشيك</p>
-            <p class="text-yellow-500 text-sm mt-2 font-bold">النقاط: المكسيك(3)، كوريا(3)، التشيك(0)، ج.أفريقيا(0)</p>
-        </div>
-        <div class="bg-[#1a1f2e] p-6 rounded-2xl border border-slate-700">
-            <h3 class="text-yellow-500 font-bold text-xl mb-3 border-b border-slate-700 pb-2">المجموعة B</h3>
-            <p>🇨🇦 كندا 1 - 1 البوسنة</p>
-            <p>🇶🇦 قطر 1 - 1 سويسرا</p>
-            <p class="text-yellow-500 text-sm mt-2 font-bold">النقاط: كندا(1)، البوسنة(1)، قطر(1)، سويسرا(1)</p>
-        </div>
-        </div>
-
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[#1a1f2e] p-8 rounded-3xl border border-slate-700">
+                    <h3 class="text-yellow-500 font-bold text-3xl mb-4 border-b border-slate-700 pb-3">المجموعة A</h3>
+                    <p class="text-2xl mb-2">🇲🇽 المكسيك 2 - 0 ج.أفريقيا</p>
+                    <p class="text-2xl">🇰🇷 كوريا الجنوبية 2 - 1 التشيك</p>
+                    <p class="text-yellow-500 text-xl mt-4 font-bold">النقاط: المكسيك(3)، كوريا(3)، التشيك(0)، ج.أفريقيا(0)</p>
+                </div>
+                <div class="bg-[#1a1f2e] p-8 rounded-3xl border border-slate-700">
+                    <h3 class="text-yellow-500 font-bold text-3xl mb-4 border-b border-slate-700 pb-3">المجموعة B</h3>
+                    <p class="text-2xl mb-2">🇨🇦 كندا 1 - 1 البوسنة</p>
+                    <p class="text-2xl">🇶🇦 قطر 1 - 1 سويسرا</p>
+                    <p class="text-yellow-500 text-xl mt-4 font-bold">النقاط: كندا(1)، البوسنة(1)، قطر(1)، سويسرا(1)</p>
+                </div>
             </div>
         </div>
+
         <div id="upcoming" class="tab-content hidden">
-            <div class="bg-[#1a1f2e] p-8 rounded-3xl border border-slate-700 text-center">
-                <h2 class="text-xl text-slate-300">هنا ستظهر المباريات القادمة</h2>
+            <div class="bg-[#1a1f2e] p-10 rounded-3xl border border-slate-700 text-center">
+                <h2 class="text-3xl text-slate-300">لا توجد مباريات قادمة حالياً.</h2>
             </div>
         </div>
 
-        <footer class="text-center text-slate-500 py-10 border-t border-slate-800">
-            <p class="text-lg font-bold">Craftivo Studio 2026 ©</p>
-            <p class="text-2xl mt-1">LMS 🤍</p>
+        <footer class="text-center text-slate-500 py-12 border-t border-slate-800">
+            <p class="text-2xl font-bold">Craftivo Studio 2026 ©</p>
+            <p class="text-4xl mt-3">LMS 🤍</p>
         </footer>
     </div>
 
