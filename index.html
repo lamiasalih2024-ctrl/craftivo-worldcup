@@ -2,23 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Craftivo | تغطية كأس العالم 2026</title>
+<title>Craftivo | 2026</title>
 <style>
-body{margin:0;font-family:system-ui, sans-serif;background: radial-gradient(circle at top, #070b16, #03040a);color:#fff;}
-.header{text-align:center;font-size:46px;font-weight:900;padding:28px;}
-.nav-bar{display:flex;justify-content:center;gap:12px;margin-bottom:25px;flex-wrap:wrap;}
-.nav-btn{padding:16px 32px;font-size:22px;font-weight:800;border-radius:14px;cursor:pointer;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;transition:0.25s;}
-.nav-btn:hover{transform:scale(1.07);background:#1f2a44;}
-.page{display:none;}
+body{margin:0;font-family:system-ui, sans-serif;background:#070b16;color:#fff;}
+.header{text-align:center;font-size:32px;padding:20px;font-weight:900;}
+.nav-bar{display:flex;justify-content:center;gap:10px;margin-bottom:20px;}
+.nav-btn{padding:10px 20px;background:#1f2a44;border:none;border-radius:10px;color:white;cursor:pointer;}
+.page{display:none;padding:20px;}
 .active{display:block;}
-.card{margin:15px;padding:24px;border-radius:18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);backdrop-filter: blur(12px);}
-.match{display:flex;justify-content:space-between;align-items:center;padding:18px;margin:12px 0;border-radius:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);font-size:20px;}
-.team{width:40%;display:flex;gap:10px;align-items:center;font-weight:600;}
-.center{width:20%;text-align:center;font-size:24px;font-weight:900;color:#00ff88;}
-.live-dot{width:12px;height:12px;background:red;border-radius:50%;display:inline-block;animation:blink 1s infinite;}
-@keyframes blink{50%{opacity:0.2;}}
-.footer{text-align:center;margin:40px 0 20px;opacity:0.6;}
+.match{background:rgba(255,255,255,0.05);padding:15px;margin:10px 0;border-radius:10px;display:flex;justify-content:space-between;align-items:center;}
 </style>
 </head>
 <body>
@@ -31,11 +23,9 @@ body{margin:0;font-family:system-ui, sans-serif;background: radial-gradient(circ
   <button class="nav-btn" onclick="show('upcoming')">⏳ القادمة</button>
 </div>
 
-<div id="live" class="page active"><div class="card"><h2>🔥 المباشرة <span class="live-dot"></span></h2><div id="live-matches">جاري التحميل...</div></div></div>
-<div id="archive" class="page"><div class="card"><h2>📺 السابقة</h2><div id="archive-matches">جاري التحميل...</div></div></div>
-<div id="upcoming" class="page"><div class="card"><h2>⏳ القادمة</h2><div id="upcoming-matches">جاري التحميل...</div></div></div>
-
-<div class="footer">LMS 🤍</div>
+<div id="live" class="page active"><h2>🔥 المباريات المباشرة</h2><div id="live-matches">جاري البحث عن مباريات حالية...</div></div>
+<div id="archive" class="page"><h2>📺 النتائج السابقة</h2><div id="archive-matches">جاري تحميل النتائج...</div></div>
+<div id="upcoming" class="page"><h2>⏳ المباريات القادمة</h2><div id="upcoming-matches">جاري تحميل المواعيد...</div></div>
 
 <script>
 function show(id){
@@ -43,31 +33,34 @@ function show(id){
   document.getElementById(id).classList.add('active');
 }
 
-const API_KEY = "PUT_YOUR_API_KEY_HERE"; // ضعي مفتاحك هنا
+// ضعي مفتاحك هنا بدقة
+const KEY = "PUT_YOUR_API_KEY_HERE";
 
-async function fetchMatches(endpoint, boxId) {
+async function loadMatches(endpoint, boxId) {
   const box = document.getElementById(boxId);
   try {
     const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
-      headers: {"x-apisports-key": API_KEY}
+      headers: {"x-apisports-key": KEY}
     });
     const data = await res.json();
-    if(!data.response || data.response.length === 0) { box.innerHTML = "لا توجد مباريات."; return; }
-    
+    if(!data.response || data.response.length === 0) {
+      box.innerHTML = "لا توجد بيانات متاحة حالياً.";
+      return;
+    }
     box.innerHTML = data.response.map(m => `
       <div class="match">
-        <div class="team">${m.teams.home.name}</div>
-        <div class="center">${m.goals.home ?? 0} - ${m.goals.away ?? 0}</div>
-        <div class="team" style="justify-content:flex-end">${m.teams.away.name}</div>
+        <span>${m.teams.home.name}</span>
+        <b>${m.goals.home ?? '-'} : ${m.goals.away ?? '-'}</b>
+        <span>${m.teams.away.name}</span>
       </div>
     `).join('');
-  } catch(e) { box.innerHTML = "خطأ في الاتصال"; }
+  } catch(e) { box.innerHTML = "خطأ في الاتصال بالسيرفر."; }
 }
 
-fetchMatches("fixtures?live=all", "live-matches");
-fetchMatches("fixtures?league=1&season=2026&status=FT", "archive-matches");
-fetchMatches("fixtures?league=1&season=2026&status=NS", "upcoming-matches");
+// روابط البحث (تأكدي من صحة league=1 إذا كان هو كأس العالم في حسابك)
+loadMatches("fixtures?live=all", "live-matches");
+loadMatches("fixtures?league=1&season=2026&status=FT", "archive-matches");
+loadMatches("fixtures?league=1&season=2026&status=NS", "upcoming-matches");
 </script>
-
 </body>
 </html>
