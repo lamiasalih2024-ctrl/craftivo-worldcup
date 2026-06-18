@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Craftivo | تغطية كأس العالم 2026</title>
+<title>Craftivo | World Cup 2026</title>
 
 <style>
 body{
@@ -14,9 +14,10 @@ body{
   padding:20px;
 }
 
+/* HEADER */
 .header{
   text-align:center;
-  margin:30px 0;
+  margin:30px 0 20px;
 }
 
 .title{
@@ -33,67 +34,117 @@ body{
   font-weight:600;
 }
 
-/* tabs */
+/* NAV */
 .nav-bar{
   display:flex;
   justify-content:center;
   gap:12px;
-  margin:30px 0;
+  margin:25px 0;
   flex-wrap:wrap;
 }
 
 .nav-btn{
-  padding:15px 25px;
+  padding:14px 22px;
   border-radius:50px;
   border:1px solid #2d3e66;
   background:#1a2238;
   color:#fff;
   cursor:pointer;
+  font-weight:700;
+  transition:0.2s;
 }
 
-/* cards */
-.match{
-  background:linear-gradient(145deg,#111827,#070b16);
-  margin:12px auto;
-  max-width:520px;
-  padding:18px;
-  border-radius:16px;
-  border:1px solid #1f2a44;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.nav-btn:hover{
+  background:#2d3e66;
 }
 
-.team{
-  width:40%;
-  text-align:center;
-}
-
-.score{
-  color:#00ff88;
-  font-size:26px;
-  font-weight:900;
-}
-
-/* LIVE animation */
+/* LIVE DOT */
 .live{
-  display:inline-block;
   width:10px;
   height:10px;
   background:red;
   border-radius:50%;
-  animation:blink 1s infinite;
+  display:inline-block;
   margin-left:6px;
+  animation:blink 1.2s infinite;
 }
 
 @keyframes blink{
   50%{opacity:0.2;}
 }
 
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;}
+
+/* MATCH CARD */
+.match{
+  background:linear-gradient(145deg,#111827,#070b16);
+  padding:16px;
+  margin:12px auto;
+  max-width:560px;
+  border-radius:18px;
+  border:1px solid #1f2a44;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:0.2s;
+  position:relative;
+  overflow:hidden;
+}
+
+.match:hover{
+  transform:scale(1.02);
+  border-color:#2d3e66;
+}
+
+/* LIVE BAR */
+.match.live::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:4px;
+  height:100%;
+  background:#ff3333;
+}
+
+/* TEAMS */
+.team{
+  flex:1;
+  text-align:center;
+  font-weight:600;
+}
+
+/* SCORE */
+.score{
+  font-size:26px;
+  font-weight:900;
+  color:#00ff88;
+  min-width:90px;
+  text-align:center;
+}
+
+/* STATUS */
+.status{
+  font-size:12px;
+  opacity:0.7;
+  margin-top:4px;
+}
+
+/* FOOTER */
 .footer{
   text-align:center;
   margin-top:40px;
-  opacity:0.6;
+  opacity:0.5;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .match{
+    flex-direction:column;
+    gap:10px;
+  }
 }
 </style>
 </head>
@@ -106,51 +157,110 @@ body{
 </div>
 
 <div class="nav-bar">
-  <button class="nav-btn" onclick="show('live')">🔴 مباشر</button>
-  <button class="nav-btn" onclick="show('past')">📺 السابقة</button>
-  <button class="nav-btn" onclick="show('next')">⏳ القادمة</button>
+  <button class="nav-btn" onclick="show('live')"><span class="live"></span> مباشر</button>
+  <button class="nav-btn" onclick="show('archive')">📺 السابقة</button>
+  <button class="nav-btn" onclick="show('upcoming')">⏳ القادمة</button>
 </div>
 
-<div id="live">
-  <div class="match">
-    <div class="team">السعودية</div>
-    <div class="score">2 - 1</div>
-    <div class="team">الأرجنتين</div>
-  </div>
-
-  <div class="match">
-    <div class="team">فرنسا</div>
-    <div class="score">1 - 0</div>
-    <div class="team">البرازيل</div>
-  </div>
+<!-- PAGES -->
+<div id="live" class="page active">
+  <div id="live-matches" style="text-align:center;">⏳ جاري تحميل المباريات...</div>
 </div>
 
-<div id="past" style="display:none;">
-  <div class="match">
-    <div class="team">ألمانيا</div>
-    <div class="score">0 - 2</div>
-    <div class="team">إسبانيا</div>
-  </div>
+<div id="archive" class="page">
+  <div id="archive-matches" style="text-align:center;">⏳ جاري التحميل...</div>
 </div>
 
-<div id="next" style="display:none;">
-  <div class="match">
-    <div class="team">إيطاليا</div>
-    <div class="score">--</div>
-    <div class="team">هولندا</div>
-  </div>
+<div id="upcoming" class="page">
+  <div id="upcoming-matches" style="text-align:center;">⏳ جاري التحميل...</div>
 </div>
 
-<div class="footer">LMS 🤍</div>
+<div class="footer">Craftivo | LMS 🤍</div>
 
 <script>
-function show(id){
-  document.getElementById('live').style.display='none';
-  document.getElementById('past').style.display='none';
-  document.getElementById('next').style.display='none';
 
-  document.getElementById(id).style.display='block';
+const KEY = "PUT_YOUR_API_KEY_HERE";
+
+/* NAV */
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
+
+/* SAFE API LOADER */
+async function loadMatches(endpoint, boxId, filter){
+
+  const box = document.getElementById(boxId);
+  box.innerHTML = "⏳ جاري التحميل...";
+
+  try{
+
+    const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
+      headers:{ "x-apisports-key": KEY }
+    });
+
+    const data = await res.json();
+
+    if(!data.response || !Array.isArray(data.response)){
+      box.innerHTML = "⚠️ لا توجد بيانات";
+      return;
+    }
+
+    let matches = data.response;
+
+    // فلترة ذكية
+    if(filter){
+      matches = matches.filter(m => m.fixture.status.short === filter);
+    }
+
+    if(matches.length === 0){
+      box.innerHTML = "⚽ لا توجد مباريات حالياً";
+      return;
+    }
+
+    box.innerHTML = matches.map(m => {
+
+      const home = m.teams.home.name;
+      const away = m.teams.away.name;
+      const hg = m.goals.home ?? "-";
+      const ag = m.goals.away ?? "-";
+      const status = m.fixture.status.short;
+
+      const isLive = status === "1H" || status === "2H" || status === "LIVE";
+
+      return `
+        <div class="match ${isLive ? 'live' : ''}">
+          <div class="team">${home}</div>
+
+          <div>
+            <div class="score">${hg} - ${ag}</div>
+            <div class="status">${status}</div>
+          </div>
+
+          <div class="team">${away}</div>
+        </div>
+      `;
+    }).join('');
+
+  }catch(e){
+    box.innerHTML = "⚠️ خطأ في الاتصال بالـ API";
+  }
+}
+
+/* AUTO LIVE UPDATE */
+function startLive(){
+  loadMatches("fixtures?live=all", "live-matches", "LIVE");
+
+  setInterval(()=>{
+    loadMatches("fixtures?live=all", "live-matches", "LIVE");
+  }, 20000);
+}
+
+/* START */
+startLive();
+loadMatches("fixtures?status=FT&season=2024", "archive-matches", "FT");
+loadMatches("fixtures?status=NS&season=2024", "upcoming-matches", "NS");
+
 </script>
 
 </body>
