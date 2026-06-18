@@ -13,13 +13,12 @@ body{margin:0;font-family:system-ui, sans-serif;background: radial-gradient(circ
 .page{display:none;}
 .active{display:block;}
 .card{margin:15px;padding:24px;border-radius:18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);backdrop-filter: blur(12px);}
-.match{display:flex;justify-content:space-between;align-items:center;padding:18px;margin:12px 0;border-radius:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:0.3s;font-size:22px;}
+.match{display:flex;justify-content:space-between;align-items:center;padding:18px;margin:12px 0;border-radius:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);font-size:20px;}
 .team{width:40%;display:flex;gap:10px;align-items:center;font-weight:600;}
-.center{width:20%;text-align:center;font-size:30px;font-weight:900;color:#00ff88;}
-.live-dot{width:12px;height:12px;background:red;border-radius:50%;display:inline-block;margin-left:8px;animation:blink 1s infinite;}
+.center{width:20%;text-align:center;font-size:24px;font-weight:900;color:#00ff88;}
+.live-dot{width:12px;height:12px;background:red;border-radius:50%;display:inline-block;animation:blink 1s infinite;}
 @keyframes blink{50%{opacity:0.2;}}
-.loading{opacity:0.7;font-size:18px;}
-.footer{text-align:center;margin:40px 0 20px;font-size:16px;opacity:0.6;}
+.footer{text-align:center;margin:40px 0 20px;opacity:0.6;}
 </style>
 </head>
 <body>
@@ -32,26 +31,9 @@ body{margin:0;font-family:system-ui, sans-serif;background: radial-gradient(circ
   <button class="nav-btn" onclick="show('upcoming')">⏳ القادمة</button>
 </div>
 
-<div id="live" class="page active">
-  <div class="card">
-    <h2>🔥 المباريات المباشرة <span class="live-dot"></span></h2>
-    <div id="live-matches" class="loading">جاري تحميل المباريات...</div>
-  </div>
-</div>
-
-<div id="archive" class="page">
-  <div class="card">
-    <h2>📺 المباريات السابقة</h2>
-    <div id="archive-matches" class="loading">جاري تحميل النتائج...</div>
-  </div>
-</div>
-
-<div id="upcoming" class="page">
-  <div class="card">
-    <h2>⏳ المباريات القادمة</h2>
-    <div>سيتم إضافة البيانات لاحقاً</div>
-  </div>
-</div>
+<div id="live" class="page active"><div class="card"><h2>🔥 المباشرة <span class="live-dot"></span></h2><div id="live-matches">جاري التحميل...</div></div></div>
+<div id="archive" class="page"><div class="card"><h2>📺 السابقة</h2><div id="archive-matches">جاري التحميل...</div></div></div>
+<div id="upcoming" class="page"><div class="card"><h2>⏳ القادمة</h2><div id="upcoming-matches">جاري التحميل...</div></div></div>
 
 <div class="footer">LMS 🤍</div>
 
@@ -61,32 +43,30 @@ function show(id){
   document.getElementById(id).classList.add('active');
 }
 
-async function fetchData(endpoint, boxId, type) {
+const API_KEY = "PUT_YOUR_API_KEY_HERE"; // ضعي مفتاحك هنا
+
+async function fetchMatches(endpoint, boxId) {
   const box = document.getElementById(boxId);
   try {
     const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
-      headers: {"x-apisports-key":"PUT_YOUR_API_KEY_HERE"}
+      headers: {"x-apisports-key": API_KEY}
     });
     const data = await res.json();
-    if(!data.response || data.response.length === 0){
-      box.innerHTML = "لا توجد مباريات حالياً";
-      return;
-    }
-    box.innerHTML = "";
-    data.response.forEach(m => {
-      box.innerHTML += `
-        <div class="match">
-          <div class="team">🏠 ${m.teams.home.name}</div>
-          <div class="center">${m.goals.home ?? 0} - ${m.goals.away ?? 0}</div>
-          <div class="team" style="justify-content:flex-end;">${m.teams.away.name} 🌍</div>
-        </div>
-      `;
-    });
-  } catch(e) { box.innerHTML = "⚠️ حدث خطأ"; }
+    if(!data.response || data.response.length === 0) { box.innerHTML = "لا توجد مباريات."; return; }
+    
+    box.innerHTML = data.response.map(m => `
+      <div class="match">
+        <div class="team">${m.teams.home.name}</div>
+        <div class="center">${m.goals.home ?? 0} - ${m.goals.away ?? 0}</div>
+        <div class="team" style="justify-content:flex-end">${m.teams.away.name}</div>
+      </div>
+    `).join('');
+  } catch(e) { box.innerHTML = "خطأ في الاتصال"; }
 }
 
-fetchData("fixtures?live=all", "live-matches");
-fetchData("fixtures?league=1&season=2026&status=FT", "archive-matches");
+fetchMatches("fixtures?live=all", "live-matches");
+fetchMatches("fixtures?league=1&season=2026&status=FT", "archive-matches");
+fetchMatches("fixtures?league=1&season=2026&status=NS", "upcoming-matches");
 </script>
 
 </body>
