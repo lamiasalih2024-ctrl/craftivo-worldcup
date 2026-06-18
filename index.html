@@ -4,129 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Craftivo | تغطية كأس العالم 2026</title>
-
 <style>
-body{
-  margin:0;
-  font-family:system-ui, sans-serif;
-  background: radial-gradient(circle at top, #070b16, #03040a);
-  color:#fff;
-}
-
-/* الهيدر */
-.header{
-  text-align:center;
-  font-size:46px;
-  font-weight:900;
-  padding:28px;
-}
-
-/* التبويبات */
-.nav-bar{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin-bottom:25px;
-  flex-wrap:wrap;
-}
-
-.nav-btn{
-  padding:16px 32px;
-  font-size:22px;
-  font-weight:800;
-  border-radius:14px;
-  cursor:pointer;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.1);
-  color:#fff;
-  transition:0.25s;
-}
-
-.nav-btn:hover{
-  transform:scale(1.07);
-  background:#1f2a44;
-}
-
-/* الصفحات */
+body{margin:0;font-family:system-ui, sans-serif;background: radial-gradient(circle at top, #070b16, #03040a);color:#fff;}
+.header{text-align:center;font-size:46px;font-weight:900;padding:28px;}
+.nav-bar{display:flex;justify-content:center;gap:12px;margin-bottom:25px;flex-wrap:wrap;}
+.nav-btn{padding:16px 32px;font-size:22px;font-weight:800;border-radius:14px;cursor:pointer;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;transition:0.25s;}
+.nav-btn:hover{transform:scale(1.07);background:#1f2a44;}
 .page{display:none;}
 .active{display:block;}
-
-/* الكارد */
-.card{
-  margin:15px;
-  padding:24px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-}
-
-/* المباراة */
-.match{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px;
-  margin:12px 0;
-  border-radius:14px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.06);
-  transition:0.3s;
-  font-size:22px;
-}
-
-.match:hover{
-  transform:scale(1.02);
-  background:rgba(255,255,255,0.06);
-}
-
-.team{
-  width:40%;
-  display:flex;
-  gap:10px;
-  align-items:center;
-  font-weight:600;
-}
-
-.center{
-  width:20%;
-  text-align:center;
-  font-size:30px;
-  font-weight:900;
-  color:#00ff88;
-}
-
-/* LIVE */
-.live-dot{
-  width:12px;
-  height:12px;
-  background:red;
-  border-radius:50%;
-  display:inline-block;
-  margin-left:8px;
-  animation:blink 1s infinite;
-}
-
-@keyframes blink{
-  50%{opacity:0.2;}
-}
-
-/* تحميل */
-.loading{
-  opacity:0.7;
-  font-size:18px;
-}
-
-/* footer */
-.footer{
-  text-align:center;
-  margin:40px 0 20px;
-  font-size:16px;
-  opacity:0.6;
-}
+.card{margin:15px;padding:24px;border-radius:18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);backdrop-filter: blur(12px);}
+.match{display:flex;justify-content:space-between;align-items:center;padding:18px;margin:12px 0;border-radius:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:0.3s;font-size:22px;}
+.team{width:40%;display:flex;gap:10px;align-items:center;font-weight:600;}
+.center{width:20%;text-align:center;font-size:30px;font-weight:900;color:#00ff88;}
+.live-dot{width:12px;height:12px;background:red;border-radius:50%;display:inline-block;margin-left:8px;animation:blink 1s infinite;}
+@keyframes blink{50%{opacity:0.2;}}
+.loading{opacity:0.7;font-size:18px;}
+.footer{text-align:center;margin:40px 0 20px;font-size:16px;opacity:0.6;}
 </style>
 </head>
-
 <body>
 
 <div class="header">⚽ Craftivo - تغطية كأس العالم 2026</div>
@@ -137,7 +32,6 @@ body{
   <button class="nav-btn" onclick="show('upcoming')">⏳ القادمة</button>
 </div>
 
-<!-- LIVE -->
 <div id="live" class="page active">
   <div class="card">
     <h2>🔥 المباريات المباشرة <span class="live-dot"></span></h2>
@@ -145,15 +39,13 @@ body{
   </div>
 </div>
 
-<!-- ARCHIVE -->
 <div id="archive" class="page">
   <div class="card">
     <h2>📺 المباريات السابقة</h2>
-    <div>سيتم إضافة البيانات لاحقاً</div>
+    <div id="archive-matches" class="loading">جاري تحميل النتائج...</div>
   </div>
 </div>
 
-<!-- UPCOMING -->
 <div id="upcoming" class="page">
   <div class="card">
     <h2>⏳ المباريات القادمة</h2>
@@ -161,76 +53,40 @@ body{
   </div>
 </div>
 
-<div class="footer">
-LMS 🤍
-</div>
+<div class="footer">LMS 🤍</div>
 
 <script>
-
-/* التبويبات */
 function show(id){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-/* المباريات المباشرة */
-async function loadLive(){
-
-  const box = document.getElementById("live-matches");
-  box.innerHTML = "⏳ جاري التحديث...";
-
-  try{
-
-    const res = await fetch("https://v3.football.api-sports.io/fixtures?live=all", {
-      headers:{
-        "x-apisports-key":"PUT_YOUR_API_KEY_HERE"
-      }
+async function fetchData(endpoint, boxId, type) {
+  const box = document.getElementById(boxId);
+  try {
+    const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
+      headers: {"x-apisports-key":"PUT_YOUR_API_KEY_HERE"}
     });
-
     const data = await res.json();
-
     if(!data.response || data.response.length === 0){
-      box.innerHTML = "⚽ لا توجد مباريات مباشرة حالياً";
+      box.innerHTML = "لا توجد مباريات حالياً";
       return;
     }
-
     box.innerHTML = "";
-
     data.response.forEach(m => {
-
-      const home = m.teams.home.name;
-      const away = m.teams.away.name;
-
-      const hg = m.goals.home ?? 0;
-      const ag = m.goals.away ?? 0;
-
-      const status = m.fixture.status.short;
-
       box.innerHTML += `
         <div class="match">
-          <div class="team">🏠 ${home}</div>
-
-          <div class="center">
-            ${hg} - ${ag}
-            <div style="font-size:14px;opacity:0.7">${status}</div>
-          </div>
-
-          <div class="team" style="justify-content:flex-end;">
-            ${away} 🌍
-          </div>
+          <div class="team">🏠 ${m.teams.home.name}</div>
+          <div class="center">${m.goals.home ?? 0} - ${m.goals.away ?? 0}</div>
+          <div class="team" style="justify-content:flex-end;">${m.teams.away.name} 🌍</div>
         </div>
       `;
     });
-
-  }catch(e){
-    box.innerHTML = "⚠️ حدث خطأ في جلب البيانات";
-  }
+  } catch(e) { box.innerHTML = "⚠️ حدث خطأ"; }
 }
 
-/* تشغيل تلقائي */
-loadLive();
-setInterval(loadLive, 30000);
-
+fetchData("fixtures?live=all", "live-matches");
+fetchData("fixtures?league=1&season=2026&status=FT", "archive-matches");
 </script>
 
 </body>
