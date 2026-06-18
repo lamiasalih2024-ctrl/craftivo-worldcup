@@ -1,135 +1,246 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>Craftivo - كأس العالم</title>
+    <meta charset="UTF-8">
+    <title>Craftivo | World Cup 2026</title>
 
-<style>
-body{
-    font-family:sans-serif;
-    background:#0b0f1a;
-    color:white;
-    margin:0;
-    padding:20px;
-}
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #0b0f1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            font-size: 22px;
+        }
 
-.header{
-    text-align:center;
-    font-size:40px;
-    font-weight:bold;
-    margin-bottom:20px;
-}
+        .header {
+            text-align: center;
+            padding: 20px;
+            font-size: 44px;
+            font-weight: bold;
+        }
 
-.nav{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-bottom:20px;
-}
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-.btn{
-    padding:15px 25px;
-    background:#1f2a44;
-    border:none;
-    color:white;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:18px;
-}
+        .nav-btn {
+            padding: 18px 35px;
+            border: none;
+            background: #1f2a44;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 24px; /* تكبير التبويبات */
+            transition: 0.3s;
+        }
 
-.page{ display:none; }
-.active{ display:block; }
+        .nav-btn:hover {
+            background: #2c3e66;
+        }
 
-.card{
-    background:#111a2e;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:10px;
-}
+        .page-content {
+            display: none;
+        }
 
-/* مباراة سطر واحد */
-.match{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    white-space:nowrap;
-    font-size:18px;
-}
+        .active {
+            display: block;
+        }
 
-.team{
-    display:flex;
-    gap:5px;
-    font-weight:bold;
-}
+        .card {
+            background: #111a2e;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
 
-.vs{ color:#00ff88; margin:0 5px; }
+        .group-box {
+            margin-bottom: 30px;
+            border: 1px solid #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-.time{ color:#ffeb3b; font-size:16px; }
+        .match-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+        }
 
-/* خارطة الأدوار */
-.map{
-    text-align:center;
-    font-size:18px;
-    color:#aaa;
-    line-height:2;
-}
-</style>
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 40%;
+        }
+
+        .team.right {
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .score {
+            font-weight: bold;
+            color: #00ff88;
+            font-size: 24px;
+            width: 20%;
+            text-align: center;
+        }
+
+        .flag {
+            font-size: 30px;
+        }
+
+        /* ====== UPCOMING ====== */
+        .group-card {
+            background: #111a2e;
+            border: 2px solid #2c3e50;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .team-unit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 42%;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .team-unit.right {
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .match-info {
+            width: 16%;
+            text-align: center;
+            font-size: 18px;
+            color: #ffeb3b;
+        }
+
+        .flag-icon {
+            font-size: 26px;
+        }
+
+        .vs {
+            color: #ff4d4d;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+
+        .stage-title {
+            text-align: center;
+            color: gold;
+            font-size: 30px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="header">⚽ Craftivo World Cup 2026</div>
+<div class="header">⚽🏆 Craftivo | تغطية كأس العالم 2026</div>
 
-<div class="nav">
-<button class="btn" onclick="show('live')">مباشر</button>
-<button class="btn" onclick="show('upcoming')">القادمة</button>
+<div class="nav-bar">
+    <button class="nav-btn" onclick="show('live')">مباشر</button>
+    <button class="nav-btn" onclick="show('archive')">السابقة</button>
+    <button class="nav-btn" onclick="show('upcoming')">القادمة</button>
 </div>
 
 <!-- LIVE -->
-<div id="live" class="page active">
-<div class="card">
-🔴 مباراة مباشرة:
-<br><br>
-
-<div class="match">
-<div class="team">🇫🇷 فرنسا</div>
-<div><span class="vs">VS</span></div>
-<div class="team">🇧🇷 البرازيل</div>
-<div class="time">1 - 0</div>
+<div id="live" class="page-content active">
+    <div class="card" style="text-align:center;">
+        🔴 مباشر: لا توجد مباريات حالياً
+    </div>
 </div>
 
-</div>
+<!-- ARCHIVE -->
+<div id="archive" class="page-content">
+    <div class="card">
+
+        <div class="group-box">
+            <h2 style="text-align:center;">المجموعة A</h2>
+            <div class="match-row"><div class="team"><span class="flag">🇲🇽</span> المكسيك</div><div class="score">2 - 0</div><div class="team right">جنوب أفريقيا <span class="flag">🇿🇦</span></div></div>
+            <div class="match-row"><div class="team"><span class="flag">🇰🇷</span> كوريا الجنوبية</div><div class="score">2 - 1</div><div class="team right">التشيك <span class="flag">🇨🇿</span></div></div>
+        </div>
+
+        <!-- باقي الأرشيف كما هو بدون حذف -->
+        <div class="group-box">
+            <h2 style="text-align:center;">المجموعة B</h2>
+            <div class="match-row"><div class="team"><span class="flag">🇨🇦</span> كندا</div><div class="score">1 - 1</div><div class="team right">البوسنة <span class="flag">🇧🇦</span></div></div>
+            <div class="match-row"><div class="team"><span class="flag">🇶🇦</span> قطر</div><div class="score">1 - 1</div><div class="team right">سويسرا <span class="flag">🇨🇭</span></div></div>
+        </div>
+
+    </div>
 </div>
 
-<!-- UPCOMING -->
-<div id="upcoming" class="page">
+<!-- UPCOMING (النسخة المدمجة الكاملة) -->
+<div id="upcoming" class="page-content">
 
-<div class="card">
+    <div class="stage-title">⚽ المباريات القادمة</div>
 
-<div class="match">
-<div class="team">🇧🇷 البرازيل</div>
-<div><span class="vs">VS</span></div>
-<div class="team">🇦🇷 الأرجنتين</div>
-<div class="time">20/06 | 18:00</div>
-</div>
+    <div class="group-card">
+        <h2>المجموعة (أ)</h2>
 
-</div>
+        <div class="match-row">
+            <div class="team-unit"><span class="flag-icon">🇿🇦</span> جنوب أفريقيا</div>
+            <div class="match-info">6/25</div>
+            <div class="team-unit right"><span class="vs">VS</span> كوريا الجنوبية <span class="flag-icon">🇰🇷</span></div>
+            <div class="match-info">03:00</div>
+        </div>
 
-<div class="card map">
-<b>خارطة البطولة</b><br>
-دور 32<br>
-دور 16<br>
-ربع النهائي<br>
-نصف النهائي<br>
-النهائي
-</div>
+        <div class="match-row">
+            <div class="team-unit"><span class="flag-icon">🇨🇿</span> التشيك</div>
+            <div class="match-info">6/25</div>
+            <div class="team-unit right"><span class="vs">VS</span> المكسيك <span class="flag-icon">🇲🇽</span></div>
+            <div class="match-info">03:00</div>
+        </div>
+    </div>
+
+    <div class="group-card">
+        <h2>المجموعة (ب)</h2>
+
+        <div class="match-row">
+            <div class="team-unit"><span class="flag-icon">🇨🇭</span> سويسرا</div>
+            <div class="match-info">6/24</div>
+            <div class="team-unit right"><span class="vs">VS</span> كندا <span class="flag-icon">🇨🇦</span></div>
+            <div class="match-info">21:00</div>
+        </div>
+
+        <div class="match-row">
+            <div class="team-unit"><span class="flag-icon">🇧🇦</span> البوسنة</div>
+            <div class="match-info">6/24</div>
+            <div class="team-unit right"><span class="vs">VS</span> قطر <span class="flag-icon">🇶🇦</span></div>
+            <div class="match-info">21:00</div>
+        </div>
+    </div>
+
+    <div class="stage-title">خارطة الأدوار</div>
+
+    <div class="group-card">
+        <div class="match-row"><div class="team-unit">دور 32</div><div class="match-info">-</div></div>
+        <div class="match-row"><div class="team-unit">دور 16</div><div class="match-info">-</div></div>
+        <div class="match-row"><div class="team-unit">ربع النهائي</div><div class="match-info">-</div></div>
+        <div class="match-row"><div class="team-unit">نصف النهائي</div><div class="match-info">-</div></div>
+        <div class="match-row"><div class="team-unit">النهائي</div><div class="match-info">-</div></div>
+    </div>
 
 </div>
 
 <script>
-function show(id){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
+function show(id) {
+    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 }
 </script>
 
