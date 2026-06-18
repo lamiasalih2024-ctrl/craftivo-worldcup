@@ -2,17 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #0b0e17; color: #fff; font-family: sans-serif; }
         .page { display: none; } .page.active { display: block; }
-        .nav-btn { flex: 1; padding: 12px; font-weight: 800; border-radius: 12px; background: #1f2937; color: #9ca3af; transition: 0.3s; }
+        .nav-btn { flex: 1; padding: 12px; font-weight: 800; border-radius: 12px; background: #1f2937; color: #9ca3af; }
         .nav-btn.active { background: #eab308; color: #000; }
-        .card { background: #111827; border: 1px solid #374151; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
-        .row { display: grid; grid-template-columns: 30px 1fr 60px; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .live-pulse { width: 14px; height: 14px; background: #ef4444; border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } }
+        .group-card { background: #111827; border: 1px solid #374151; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .match-divider { border-top: 1px solid #374151; margin: 15px 0; padding-top: 15px; }
+        .team-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     </style>
 </head>
 <body class="p-4">
@@ -23,35 +21,33 @@
         <button id="btn-upcoming" class="nav-btn" onclick="show('upcoming', 'btn-upcoming')">القادمة</button>
     </nav>
 
+    <!-- المباشر -->
     <div id="live" class="page active text-center">
-        <div class="card py-16">
-            <div class="flex items-center justify-center gap-2 mb-4"><span class="live-pulse"></span> <span class="text-red-500 font-bold">مباشر الآن</span></div>
-            <p class="text-xl text-slate-400">لا توجد مباراة مباشرة حالياً</p>
-        </div>
+        <div class="group-card py-16"><p class="text-slate-400">لا توجد مباريات مباشرة حالياً</p></div>
     </div>
 
+    <!-- السابقة (المجموعات من A لـ L) -->
     <div id="archive" class="page">
-        <h2 class="text-2xl font-bold text-center mb-6 text-yellow-500">نتائج المجموعات A - L</h2>
-        <div class="card">
-            <h3 class="text-yellow-400 font-bold mb-4 border-b border-gray-700 pb-2">المجموعة A</h3>
-            <div class="row"><span>🇲🇽</span> <span>المكسيك</span> <span>2</span></div>
-            <div class="row"><span>🇿🇦</span> <span>جنوب أفريقيا</span> <span>0</span></div>
-            <div class="row"><span>🇰🇷</span> <span>كوريا الجنوبية</span> <span>2</span></div>
-            <div class="row"><span>🇨🇿</span> <span>التشيك</span> <span>1</span></div>
+        <!-- تكرار هذا الكارد للمجموعات -->
+        <div class="group-card">
+            <h3 class="text-yellow-500 font-bold mb-4">المجموعة A</h3>
+            <div class="team-row"><span>🇲🇽 المكسيك</span> <span>2</span></div>
+            <div class="team-row"><span>🇿🇦 جنوب أفريقيا</span> <span>0</span></div>
+            <div class="match-divider"></div>
+            <div class="team-row"><span>🇰🇷 كوريا الجنوبية</span> <span>2</span></div>
+            <div class="team-row"><span>🇨🇿 التشيك</span> <span>1</span></div>
         </div>
-        <div class="card"><h3 class="text-yellow-400 font-bold mb-4">المجموعة B</h3>
-            <div class="row"><span>🇨🇦</span> <span>كندا</span> <span>1</span></div><div class="row"><span>🇧🇦</span> <span>البوسنة</span> <span>1</span></div>
-            <div class="row"><span>🇶🇦</span> <span>قطر</span> <span>1</span></div><div class="row"><span>🇨🇭</span> <span>سويسرا</span> <span>1</span></div>
+        
+        <!-- يمكنكِ نسخ الكارد أعلاه وتغيير البيانات للمجموعات B, C...L -->
+        <div class="group-card">
+            <h3 class="text-yellow-500 font-bold mb-4">المجموعة B</h3>
+            <div class="team-row"><span>🇨🇦 كندا</span> <span>1</span></div>
+            <div class="team-row"><span>🇧🇦 البوسنة</span> <span>1</span></div>
+            <div class="match-divider"></div>
+            <div class="team-row"><span>🇶🇦 قطر</span> <span>1</span></div>
+            <div class="team-row"><span>🇨🇭 سويسرا</span> <span>1</span></div>
         </div>
-    </div>
-
-    <div id="upcoming" class="page text-center">
-        <h2 class="text-2xl font-bold text-yellow-500 mb-2">المباريات القادمة</h2>
-        <p class="text-sm text-slate-400 mb-6">جميع التوقيتات بتوقيت مكة المكرمة 🕋</p>
-        <div class="card">
-            <div class="row"><span>🌍</span> <span>مباراة مرتقبة</span> <span>20:00</span></div>
-            <div class="row"><span>⏳</span> <span>دور الـ 32</span> <span>قريباً</span></div>
-        </div>
+        <!-- وهكذا لكل المجموعات -->
     </div>
 
     <script>
