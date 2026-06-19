@@ -1,72 +1,75 @@
 <style>
-    /* التنسيقات العامة للترتيب */
-    .match-container {
-        padding: 20px;
-        margin-top: 20px;
-        background-color: #1a1a2e;
-        border-radius: 15px;
-        color: white;
-        font-family: sans-serif;
-    }
-    .match-card {
-        background-color: #16213e;
-        padding: 15px;
-        margin-bottom: 15px;
-        border-radius: 10px;
-        border-left: 5px solid #4ecca3;
-    }
-    h3 { color: #4ecca3; margin-top: 0; }
-    .match-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: bold; }
-    .match-details { font-size: 0.9em; color: #ccc; }
-    .status-live { color: #e94560; }
-    .status-past { color: #888; }
-    .status-upcoming { color: #f9d423; }
-    .notify-btn { background: #4ecca3; border: none; padding: 5px 10px; border-radius: 5px; color: #1a1a2e; cursor: pointer; margin-top: 5px; }
+    body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; }
+    
+    /* العنوان الرئيسي */
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .brand-title { color: #f1c40f; font-size: 2.5em; font-weight: bold; margin: 0; }
+    .event-title { color: #ffffff; font-size: 1.5em; margin: 5px 0; }
+
+    /* الحاويات والكروت */
+    .match-container { padding: 20px; margin-bottom: 25px; background-color: #1c222d; border-radius: 15px; }
+    .match-card { background-color: #262d3a; padding: 20px; border-radius: 12px; border-left: 6px solid #f1c40f; }
+    
+    h3 { color: #f1c40f; font-size: 1.4em; margin-bottom: 15px; }
+    .match-info { display: flex; justify-content: space-between; font-size: 1.2em; font-weight: bold; margin-bottom: 15px; }
+    .match-details { font-size: 1.1em; color: #bdc3c7; }
+    
+    .status-live { color: #e74c3c; }
+    .status-past { color: #95a5a6; }
+    .status-upcoming { color: #2ecc71; }
+    
+    .notify-btn { background: #f1c40f; border: none; padding: 10px 20px; border-radius: 8px; color: #0b0e14; font-weight: bold; cursor: pointer; margin-top: 10px; }
+
+    /* التذييل */
+    .footer { text-align: center; margin-top: 40px; color: #7f8c8d; font-size: 1.1em; }
 </style>
 
-<!-- الجزء الأول: المباريات المباشرة -->
+<!-- العنوان -->
+<div class="header-section">
+    <h1 class="brand-title">Craftivo</h1>
+    <h2 class="event-title">تغطية كأس العالم 2026</h2>
+</div>
+
+<!-- المحتوى -->
 <div id="live-matches-section" class="match-container">
     <h3>المباريات المباشرة الآن</h3>
-    <div class="match-card live">
+    <div class="match-card">
         <div class="match-info">
-            <span class="status-live">مباشر</span>
-            <span class="teams">الفريق أ vs الفريق ب</span>
-            <span class="score">1 - 0</span>
+            <span class="status-live">● مباشر</span>
+            <span>الفريق ب vs الفريق أ</span>
+            <span>1 - 0</span>
         </div>
-        <div class="match-details">
-            <span>الدقيقة: 45'</span>
-        </div>
+        <div class="match-details">الدقيقة: 45'</div>
     </div>
 </div>
 
-<!-- الجزء الثاني: المباريات السابقة -->
 <div id="past-matches-section" class="match-container">
     <h3>نتائج المباريات السابقة</h3>
-    <div class="match-card past">
+    <div class="match-card">
         <div class="match-info">
             <span class="status-past">انتهت</span>
-            <span class="teams">الفريق ج vs الفريق د</span>
-            <span class="score">2 - 1</span>
+            <span>الفريق د vs الفريق ج</span>
+            <span>2 - 1</span>
         </div>
-        <div class="match-details">
-            <span>التاريخ: 18 يونيو 2026</span>
-        </div>
+        <div class="match-details">التاريخ: 18 يونيو 2026</div>
     </div>
 </div>
 
-<!-- الجزء الثالث: المباريات القادمة -->
 <div id="upcoming-matches-section" class="match-container">
     <h3>المباريات القادمة</h3>
-    <div class="match-card upcoming">
+    <div class="match-card">
         <div class="match-info">
             <span class="status-upcoming">قريباً</span>
-            <span class="teams">الفريق هـ vs الفريق و</span>
+            <span>الفريق و vs الفريق هـ</span>
         </div>
         <div class="match-details">
-            <span>التاريخ: 20 يونيو 2026</span>
-            <span>الوقت: 09:00 مساءً</span>
-            <br>
+            التاريخ: 20 يونيو 2026 | الوقت: 09:00 مساءً<br>
             <button class="notify-btn">تذكير</button>
         </div>
     </div>
+</div>
+
+<!-- التذييل -->
+<div class="footer">
+    <p>❤ LMS</p>
 </div>
