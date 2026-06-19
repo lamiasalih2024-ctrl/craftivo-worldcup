@@ -1,29 +1,36 @@
 <style>
     body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; direction: rtl; }
-    .brand-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #D4AF37; padding-bottom: 15px; }
-    .brand-title { color: #D4AF37; font-size: 3.5em; font-weight: 900; margin: 0; text-transform: uppercase; }
-    .event-title { color: #ffffff; font-size: 1.8em; margin: 10px 0; font-weight: bold; }
-    .tabs { display: flex; justify-content: space-around; margin-bottom: 20px; }
-    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 12px; flex: 1; margin: 0 5px; border-radius: 10px; cursor: pointer; font-size: 1.2em; font-weight: bold; }
+    .brand-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; }
+    .brand-title { color: #D4AF37; font-size: 4em; font-weight: 900; text-transform: uppercase; margin: 0; }
+    .event-title { color: #ffffff; font-size: 2.2em; margin: 15px 0; font-weight: bold; }
+    .timezone { color: #D4AF37; font-size: 1.6em; font-weight: bold; }
+    
+    .tabs { display: flex; justify-content: space-around; margin-bottom: 30px; }
+    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 18px; flex: 1; margin: 0 5px; border-radius: 12px; cursor: pointer; font-size: 1.4em; font-weight: bold; }
     .tab-btn.active { background: #D4AF37; color: #000; }
+    
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .group-card { background: #1a1a1a; border: 3px solid #D4AF37; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
-    .group-title { color: #D4AF37; font-size: 1.8em; text-align: center; margin-bottom: 15px; font-weight: bold; display: flex; justify-content: center; align-items: center; gap: 10px; }
-    .match-row { text-align: center; font-size: 1.4em; padding: 12px; border-bottom: 1px dashed #444; color: #fff; }
-    .points-bar { background: #000; padding: 15px; border-radius: 10px; font-size: 1.2em; color: #D4AF37; text-align: center; margin-top: 10px; font-weight: bold; }
-    .live-container { text-align: center; padding: 40px; }
-    .live-label { color: #ff0000; font-size: 2.5em; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; }
+    
+    .group-card { background: #1a1a1a; border: 4px solid #D4AF37; border-radius: 25px; padding: 25px; margin-bottom: 30px; }
+    .group-title { color: #D4AF37; font-size: 2.4em; text-align: center; margin-bottom: 20px; font-weight: bold; }
+    .match-row { text-align: center; font-size: 1.8em; padding: 20px 0; border-bottom: 1px dashed #444; color: #fff; }
+    .points-bar { background: #000; padding: 20px; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 1.4em; color: #D4AF37; font-weight: bold; margin-top: 15px; text-align: center; }
+    
+    /* تعديل المباشر بالوميض */
+    .live-indicator { color: #FF0000; font-size: 2.5em; font-weight: bold; text-align: center; padding: 40px; display: flex; justify-content: center; align-items: center; gap: 15px; }
     .pulse { width: 25px; height: 25px; background: red; border-radius: 50%; animation: pulse 1s infinite; }
-    .loading-text { color: #ffffff; font-size: 2em; margin-top: 20px; animation: blink 1.5s infinite; }
+    .blink-text { animation: blink 1.5s infinite; }
     @keyframes pulse { 0% { transform: scale(0.9); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } 100% { transform: scale(0.9); opacity: 1; } }
     @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-    .footer { text-align: center; margin-top: 40px; color: #ffffff; font-size: 1.4em; }
+    
+    .footer { text-align: center; margin-top: 50px; color: #ffffff; font-size: 1.6em; }
 </style>
 
 <div class="brand-header">
     <h1 class="brand-title">CRAFTIVO</h1>
     <h2 class="event-title">تغطية كأس العالم 2026</h2>
+    <p class="timezone">بتوقيت مكة المكرمة</p>
 </div>
 
 <div class="tabs">
@@ -34,55 +41,53 @@
 </div>
 
 <div id="live" class="tab-content active">
-    <div class="live-container">
-        <div class="live-label"><div class="pulse"></div> مباشر</div>
-        <div class="loading-text">جاري التحديث...</div>
-    </div>
+    <div class="live-indicator"><div class="pulse"></div> مباشر</div>
+    <h3 style="text-align:center; font-size: 1.8em;" class="blink-text">جاري التحديث...</h3>
 </div>
 
 <div id="archive" class="tab-content">
     <script>
         const groups = [
-            {n: "A", m: ["🇿🇦 جنوب أفريقيا (2) - (0) 🇲🇽 المكسيك", "🇨🇿 التشيك (1) - (2) 🇰🇷 كوريا الجنوبية"], p: "المكسيك: 3 | كوريا: 3 | ج.أفريقيا: 0 | التشيك: 0"},
-            {n: "B", m: ["🇨🇦 كندا (1) - (1) 🇧🇦 البوسنة", "🇶🇦 قطر (1) - (1) 🇨🇭 سويسرا"], p: "كندا: 1 | البوسنة: 1 | قطر: 1 | سويسرا: 1"},
-            {n: "C", m: ["🇧🇷 البرازيل (1) - (1) 🇲🇦 المغرب", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا (1) - (0) 🇭🇹 هايتي"], p: "البرازيل: 1 | المغرب: 1 | اسكتلندا: 3 | هايتي: 0"},
-            {n: "D", m: ["🇺🇸 أمريكا (4) - (1) 🇵🇾 باراغواي", "🇦🇺 أستراليا (2) - (0) 🇹🇷 تركيا"], p: "أمريكا: 3 | باراغواي: 0 | أستراليا: 3 | تركيا: 0"},
-            {n: "E", m: ["🇩🇪 ألمانيا (7) - (1) 🇨🇼 كوراساو", "🇨🇮 كوت ديفوار (1) - (0) 🇪🇨 الإكوادور"], p: "ألمانيا: 3 | كوراساو: 0 | كوت ديفوار: 3 | الإكوادور: 0"},
-            {n: "F", m: ["🇳🇱 هولندا (2) - (2) 🇯🇵 اليابان", "🇸🇪 السويد (5) - (1) 🇹🇳 تونس"], p: "هولندا: 1 | اليابان: 1 | السويد: 3 | تونس: 0"},
-            {n: "G", m: ["🇧🇪 بلجيكا (1) - (1) 🇪🇬 مصر", "🇮🇷 إيران (2) - (2) 🇳🇿 نيوزيلندا"], p: "بلجيكا: 1 | مصر: 1 | إيران: 1 | نيوزيلندا: 1"},
-            {n: "H", m: ["🇸🇦 السعودية (1) - (1) 🇺🇾 أوروغواي", "🇪🇸 إسبانيا (0) - (0) 🇨🇻 الرأس الأخضر"], p: "السعودية: 1 | أوروغواي: 1 | إسبانيا: 1 | الرأس الأخضر: 1"},
-            {n: "I", m: ["🇫🇷 فرنسا (3) - (1) 🇸🇳 السنغال", "🇮🇶 العراق (1) - (4) 🇳🇴 النرويج"], p: "فرنسا: 3 | السنغال: 0 | النرويج: 3 | العراق: 0"},
-            {n: "J", m: ["🇦🇷 الأرجنتين (3) - (0) 🇩🇿 الجزائر", "🇦🇹 النمسا (3) - (1) 🇯🇴 الأردن"], p: "الأرجنتين: 3 | الجزائر: 0 | النمسا: 3 | الأردن: 0"},
-            {n: "K", m: ["🇵🇹 البرتغال (1) - (1) 🇨🇩 الكونغو الديمقراطية", "🇺🇿 أوزبكستان (1) - (3) 🇨🇴 كولومبيا"], p: "البرتغال: 1 | الكونغو: 1 | كولومبيا: 3 | أوزبكستان: 0"},
-            {n: "L", m: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا (4) - (2) 🇭🇷 كرواتيا", "🇬🇭 غانا (1) - (0) 🇵🇦 بنما"], p: "إنجلترا: 3 | كرواتيا: 0 | غانا: 3 | بنما: 0"}
+            {name: "A", matches: ["🇿🇦 جنوب أفريقيا (2) - (0) 🇲🇽 المكسيك", "🇨🇿 التشيك (1) - (2) 🇰🇷 كوريا الجنوبية"], points: "المكسيك: 3 | كوريا: 3 | ج.أفريقيا: 0 | التشيك: 0"},
+            {name: "B", matches: ["🇨🇦 كندا (1) - (1) 🇧🇦 البوسنة", "🇶🇦 قطر (1) - (1) 🇨🇭 سويسرا"], points: "كندا: 1 | البوسنة: 1 | قطر: 1 | سويسرا: 1"},
+            {name: "C", matches: ["🇧🇷 البرازيل (1) - (1) 🇲🇦 المغرب", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا (1) - (0) 🇭🇹 هايتي"], points: "البرازيل: 1 | المغرب: 1 | اسكتلندا: 3 | هايتي: 0"},
+            {name: "D", matches: ["🇺🇸 أمريكا (4) - (1) 🇵🇾 باراغواي", "🇦🇺 أستراليا (2) - (0) 🇹🇷 تركيا"], points: "أمريكا: 3 | باراغواي: 0 | أستراليا: 3 | تركيا: 0"},
+            {name: "E", matches: ["🇩🇪 ألمانيا (7) - (1) 🇨🇼 كوراساو", "🇨🇮 كوت ديفوار (1) - (0) 🇪🇨 الإكوادور"], points: "ألمانيا: 3 | كوراساو: 0 | كوت ديفوار: 3 | الإكوادور: 0"},
+            {name: "F", matches: ["🇳🇱 هولندا (2) - (2) 🇯🇵 اليابان", "🇸🇪 السويد (5) - (1) 🇹🇳 تونس"], points: "هولندا: 1 | اليابان: 1 | السويد: 3 | تونس: 0"},
+            {name: "G", matches: ["🇧🇪 بلجيكا (1) - (1) 🇪🇬 مصر", "🇮🇷 إيران (2) - (2) 🇳🇿 نيوزيلندا"], points: "بلجيكا: 1 | مصر: 1 | إيران: 1 | نيوزيلندا: 1"},
+            {name: "H", matches: ["🇸🇦 السعودية (1) - (1) 🇺🇾 أوروغواي", "🇪🇸 إسبانيا (0) - (0) 🇨🇻 الرأس الأخضر"], points: "السعودية: 1 | أوروغواي: 1 | إسبانيا: 1 | الرأس الأخضر: 1"},
+            {name: "I", matches: ["🇫🇷 فرنسا (3) - (1) 🇸🇳 السنغال", "🇮🇶 العراق (1) - (4) 🇳🇴 النرويج"], points: "فرنسا: 3 | السنغال: 0 | النرويج: 3 | العراق: 0"},
+            {name: "J", matches: ["🇦🇷 الأرجنتين (3) - (0) 🇩🇿 الجزائر", "🇦🇹 النمسا (3) - (1) 🇯🇴 الأردن"], points: "الأرجنتين: 3 | الجزائر: 0 | النمسا: 3 | الأردن: 0"},
+            {name: "K", matches: ["🇵🇹 البرتغال (1) - (1) 🇨🇩 الكونغو الديمقراطية", "🇺🇿 أوزبكستان (1) - (3) 🇨🇴 كولومبيا"], points: "البرتغال: 1 | الكونغو: 1 | كولومبيا: 3 | أوزبكستان: 0"},
+            {name: "L", matches: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا (4) - (2) 🇭🇷 كرواتيا", "🇬🇭 غانا (1) - (0) 🇵🇦 بنما"], points: "إنجلترا: 3 | كرواتيا: 0 | غانا: 3 | بنما: 0"}
         ];
         groups.forEach(g => {
-            document.write(`<div class="group-card"><div class="group-title">المجموعة ${g.n}</div>`);
-            g.m.forEach(m => document.write(`<div class="match-row">${m}</div>`));
-            document.write(`<div class="points-bar">${g.p}</div></div>`);
+            document.write(`<div class="group-card"><div class="group-title">المجموعة ${g.name}</div>`);
+            g.matches.forEach(m => document.write(`<div class="match-row">${m}</div>`));
+            document.write(`<div class="points-bar">${g.points}</div></div>`);
         });
     </script>
 </div>
 
 <div id="upcoming" class="tab-content">
     <script>
-        const upcoming = [
-            {g: "المجموعة A", m: ["🇿🇦 جنوب أفريقيا vs 🇰🇷 كوريا الجنوبية | 6/25 - 03:00", "🇨🇿 التشيك vs 🇲🇽 المكسيك | 6/25 - 03:00"]},
-            {g: "المجموعة B", m: ["🇨🇭 سويسرا vs 🇨🇦 كندا | 6/24 - 21:00", "🇧🇦 البوسنة vs 🇶🇦 قطر | 6/24 - 21:00"]},
-            {g: "المجموعة C", m: ["🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇲🇦 المغرب | 6/20 - 00:00", "🇧🇷 البرازيل vs 🇭🇹 هايتي | 6/20 - 02:30", "🇲🇦 المغرب vs 🇭🇹 هايتي | 6/25 - 00:00", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇧🇷 البرازيل | 6/25 - 00:00"]},
-            {g: "المجموعة D", m: ["🇹🇷 تركيا vs 🇵🇾 باراغواي | 6/20 - 05:00", "🇹🇷 تركيا vs 🇺🇸 الولايات المتحدة | 6/26 - 04:00", "🇵🇾 باراغواي vs 🇦🇺 أستراليا | 6/26 - 04:00"]},
-            {g: "المجموعة E", m: ["🇩🇪 ألمانيا vs 🇨🇮 ساحل العاج | 6/20 - 22:00", "🇪🇨 الإكوادور vs 🇨🇼 كوراساو | 6/21 - 02:00", "🇨🇼 كوراساو vs 🇨🇮 ساحل العاج | 6/25 - 22:00", "🇪🇨 الإكوادور vs 🇩🇪 ألمانيا | 6/25 - 22:00"]},
-            {g: "المجموعة F", m: ["🇳🇱 هولندا vs 🇸🇪 السويد | 6/20 - 19:00", "🇹🇳 تونس vs 🇯🇵 اليابان | 6/21 - 06:00", "🇹🇳 تونس vs 🇳🇱 هولندا | 6/26 - 01:00", "🇯🇵 اليابان vs 🇸🇪 السويد | 6/26 - 01:00"]},
-            {g: "المجموعة G", m: ["🇧🇪 بلجيكا vs 🇮🇷 إيران | 6/21 - 21:00", "🇳🇿 نيوزيلندا vs 🇪🇬 مصر | 6/22 - 03:00", "🇳🇿 نيوزيلندا vs 🇧🇪 بلجيكا | 6/27 - 05:00", "🇪🇬 مصر vs 🇮🇷 إيران | 6/27 - 05:00"]},
-            {g: "المجموعة H", m: ["🇪🇸 إسبانيا vs 🇸🇦 السعودية | 6/21 - 18:00", "🇺🇾 أوروغواي vs 🇨🇻 الرأس الأخضر | 6/22 - 00:00", "🇨🇻 الرأس الأخضر vs 🇸🇦 السعودية | 6/27 - 02:00", "🇺🇾 أوروغواي vs 🇪🇸 إسبانيا | 6/27 - 02:00"]},
-            {g: "المجموعة I", m: ["🇫🇷 فرنسا vs 🇮🇶 العراق | 6/22 - 23:00", "🇳🇴 النرويج vs 🇸🇳 السنغال | 6/23 - 02:00", "🇳🇴 النرويج vs 🇫🇷 فرنسا | 6/26 - 21:00", "🇸🇳 السنغال vs 🇮🇶 العراق | 6/26 - 21:00"]},
-            {g: "المجموعة J", m: ["🇦🇷 الأرجنتين vs 🇦🇹 النمسا | 6/22 - 19:00", "🇯🇴 الأردن vs 🇩🇿 الجزائر | 6/23 - 05:00", "🇩🇿 الجزائر vs 🇦🇹 النمسا | 6/28 - 04:00", "🇯🇴 الأردن vs 🇦🇷 الأرجنتين | 6/28 - 04:00"]},
-            {g: "المجموعة K", m: ["🇵🇹 البرتغال vs 🇺🇿 أوزبكستان | 6/23 - 19:00", "🇨🇴 كولومبيا vs 🇨🇩 الكونغو الديمقراطية | 6/24 - 04:00", "🇨🇴 كولومبيا vs 🇵🇹 البرتغال | 6/28 - 01:30", "🇨🇩 الكونغو الديمقراطية vs 🇺🇿 أوزبكستان | 6/28 - 01:30"]},
-            {g: "المجموعة L", m: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا vs 🇬🇭 غانا | 6/23 - 22:00", "🇵🇦 بنما vs 🇭🇷 كرواتيا | 6/24 - 01:00", "🇵🇦 بنما vs 🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا | 6/27 - 23:00", "🇭🇷 كرواتيا vs 🇬🇭 غانا | 6/27 - 23:00"]}
+        const upcomingMatches = [
+            {group: "المجموعة A", matches: ["🇿🇦 جنوب أفريقيا vs 🇰🇷 كوريا الجنوبية | 6/25 - 03:00", "🇨🇿 التشيك vs 🇲🇽 المكسيك | 6/25 - 03:00"]},
+            {group: "المجموعة B", matches: ["🇨🇭 سويسرا vs 🇨🇦 كندا | 6/24 - 21:00", "🇧🇦 البوسنة vs 🇶🇦 قطر | 6/24 - 21:00"]},
+            {group: "المجموعة C", matches: ["🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇲🇦 المغرب | 6/20 - 00:00", "🇧🇷 البرازيل vs 🇭🇹 هايتي | 6/20 - 02:30", "🇲🇦 المغرب vs 🇭🇹 هايتي | 6/25 - 00:00", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇧🇷 البرازيل | 6/25 - 00:00"]},
+            {group: "المجموعة D", matches: ["🇹🇷 تركيا vs 🇵🇾 باراغواي | 6/20 - 05:00", "🇹🇷 تركيا vs 🇺🇸 الولايات المتحدة | 6/26 - 04:00", "🇵🇾 باراغواي vs 🇦🇺 أستراليا | 6/26 - 04:00"]},
+            {group: "المجموعة E", matches: ["🇩🇪 ألمانيا vs 🇨🇮 ساحل العاج | 6/20 - 22:00", "🇪🇨 الإكوادور vs 🇨🇼 كوراساو | 6/21 - 02:00", "🇨🇼 كوراساو vs 🇨🇮 ساحل العاج | 6/25 - 22:00", "🇪🇨 الإكوادور vs 🇩🇪 ألمانيا | 6/25 - 22:00"]},
+            {group: "المجموعة F", matches: ["🇳🇱 هولندا vs 🇸🇪 السويد | 6/20 - 19:00", "🇹🇳 تونس vs 🇯🇵 اليابان | 6/21 - 06:00", "🇹🇳 تونس vs 🇳🇱 هولندا | 6/26 - 01:00", "🇯🇵 اليابان vs 🇸🇪 السويد | 6/26 - 01:00"]},
+            {group: "المجموعة G", matches: ["🇧🇪 بلجيكا vs 🇮🇷 إيران | 6/21 - 21:00", "🇳🇿 نيوزيلندا vs 🇪🇬 مصر | 6/22 - 03:00", "🇳🇿 نيوزيلندا vs 🇧🇪 بلجيكا | 6/27 - 05:00", "🇪🇬 مصر vs 🇮🇷 إيران | 6/27 - 05:00"]},
+            {group: "المجموعة H", matches: ["🇪🇸 إسبانيا vs 🇸🇦 السعودية | 6/21 - 18:00", "🇺🇾 أوروغواي vs 🇨🇻 الرأس الأخضر | 6/22 - 00:00", "🇨🇻 الرأس الأخضر vs 🇸🇦 السعودية | 6/27 - 02:00", "🇺🇾 أوروغواي vs 🇪🇸 إسبانيا | 6/27 - 02:00"]},
+            {group: "المجموعة I", matches: ["🇫🇷 فرنسا vs 🇮🇶 العراق | 6/22 - 23:00", "🇳🇴 النرويج vs 🇸🇳 السنغال | 6/23 - 02:00", "🇳🇴 النرويج vs 🇫🇷 فرنسا | 6/26 - 21:00", "🇸🇳 السنغال vs 🇮🇶 العراق | 6/26 - 21:00"]},
+            {group: "المجموعة J", matches: ["🇦🇷 الأرجنتين vs 🇦🇹 النمسا | 6/22 - 19:00", "🇯🇴 الأردن vs 🇩🇿 الجزائر | 6/23 - 05:00", "🇩🇿 الجزائر vs 🇦🇹 النمسا | 6/28 - 04:00", "🇯🇴 الأردن vs 🇦🇷 الأرجنتين | 6/28 - 04:00"]},
+            {group: "المجموعة K", matches: ["🇵🇹 البرتغال vs 🇺🇿 أوزبكستان | 6/23 - 19:00", "🇨🇴 كولومبيا vs 🇨🇩 الكونغو الديمقراطية | 6/24 - 04:00", "🇨🇴 كولومبيا vs 🇵🇹 البرتغال | 6/28 - 01:30", "🇨🇩 الكونغو الديمقراطية vs 🇺🇿 أوزبكستان | 6/28 - 01:30"]},
+            {group: "المجموعة L", matches: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا vs 🇬🇭 غانا | 6/23 - 22:00", "🇵🇦 بنما vs 🇭🇷 كرواتيا | 6/24 - 01:00", "🇵🇦 بنما vs 🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا | 6/27 - 23:00", "🇭🇷 كرواتيا vs 🇬🇭 غانا | 6/27 - 23:00"]}
         ];
-        upcoming.forEach(g => {
-            document.write(`<div class="group-card"><div class="group-title">${g.g}</div>`);
-            g.m.forEach(m => document.write(`<div class="match-row">${m}</div>`));
+        upcomingMatches.forEach(g => {
+            document.write(`<div class="group-card"><div class="group-title">${g.group}</div>`);
+            g.matches.forEach(m => document.write(`<div class="match-row">${m}</div>`));
             document.write(`</div>`);
         });
     </script>
@@ -90,4 +95,24 @@
 
 <div id="knockout" class="tab-content">
     <div class="group-card">
-        <div class
+        <div class="group-title">شجرة الإحصائيات ⏳</div>
+        <div class="match-row">دور الـ 32</div>
+        <div class="match-row">دور الـ 16</div>
+        <div class="match-row">دور الـ 8 (ربع النهائي)</div>
+        <div class="match-row">دور الـ 4 (نصف النهائي)</div>
+        <div class="match-row" style="color: #D4AF37; font-weight: bold; border: none;">🏆 النهائي الكبير</div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Craftivo - 🤍LMS</p>
+</div>
+
+<script>
+function showTab(evt, id) {
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    evt.currentTarget.classList.add('active');
+}
+</script>
