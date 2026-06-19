@@ -1,57 +1,46 @@
 <style>
-    /* اعتماد الهوية البصرية: الأسود الملكي والذهبي */
-    body { 
-        background-color: #0b0e14; 
-        color: #ffffff; 
-        font-family: 'Arial', sans-serif; 
-        padding: 20px; 
-        line-height: 1.6; 
-    }
+    /* اعتماد الهوية البصرية: الأسود الملكي، الذهبي، واللمسات المتدرجة */
+    body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; }
     
     .brand-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; }
     
+    /* عنوان Craftivo بارز وثلاثي الأبعاد */
     .brand-title { 
-        color: #D4AF37; /* لون ذهبي */
-        font-size: 3.5em; 
-        font-weight: 800; 
+        color: #D4AF37; 
+        font-size: 4em; 
+        font-weight: 900; 
         margin: 0; 
         text-transform: uppercase;
-        letter-spacing: 2px;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 10px rgba(212, 175, 55, 0.5);
     }
     
-    .event-title { color: #ffffff; font-size: 1.8em; margin: 10px 0; }
-    .timezone { color: #D4AF37; font-size: 1.3em; font-weight: bold; margin-top: 10px; }
+    .event-title { color: #ffffff; font-size: 2em; margin: 10px 0; font-weight: bold; }
+    .timezone { color: #D4AF37; font-size: 1.4em; font-weight: bold; }
 
-    /* التبويبات باللون الذهبي والأسود */
+    /* تبويبات احترافية */
     .tabs { display: flex; justify-content: space-around; margin-bottom: 25px; }
-    .tab-btn { 
-        background: #1a1a1a; 
-        color: #fff; 
-        border: 2px solid #D4AF37; 
-        padding: 15px; 
-        flex: 1; 
-        margin: 0 5px; 
-        border-radius: 10px; 
-        cursor: pointer; 
-        font-size: 1.2em; 
-        font-weight: bold; 
-    }
+    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 15px; flex: 1; margin: 0 5px; border-radius: 10px; cursor: pointer; font-size: 1.3em; font-weight: bold; }
     .tab-btn.active { background: #D4AF37; color: #000; }
 
-    /* محتوى التبويبات */
-    .tab-content { display: none; padding: 20px; background: #161b22; border-radius: 10px; border: 1px solid #333; }
-    .tab-content.active { display: block; }
+    /* تنسيق قسم المباشر مع الوميض الأحمر */
+    .live-indicator { color: #FF0000; font-size: 1.8em; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .pulse-circle { width: 20px; height: 20px; background-color: #FF0000; border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); } }
 
-    /* التذييل */
-    .footer { text-align: center; margin-top: 60px; color: #ffffff; font-size: 1.4em; padding-top: 20px; border-top: 1px solid #333; }
+    .tab-content { display: none; padding: 30px; background: #161b22; border-radius: 15px; border: 1px solid #D4AF37; }
+    .tab-content.active { display: block; }
+    
+    .footer { text-align: center; margin-top: 60px; color: #ffffff; font-size: 1.4em; }
 </style>
 
+<!-- العنوان -->
 <div class="brand-header">
     <h1 class="brand-title">Craftivo</h1>
     <h2 class="event-title">تغطية كأس العالم 2026</h2>
-    <p class="timezone">جميع المباريات بتوقيت مكة المكرمة</p>
+    <p class="timezone">بتوقيت مكة المكرمة</p>
 </div>
 
+<!-- التبويبات -->
 <div class="tabs">
     <button class="tab-btn active" onclick="openTab(event, 'live')">مباشر</button>
     <button class="tab-btn" onclick="openTab(event, 'archive')">الأرشيف</button>
@@ -59,13 +48,17 @@
     <button class="tab-btn" onclick="openTab(event, 'knockout')">الإقصائيات</button>
 </div>
 
-<div id="live" class="tab-content active"><h3>مباريات اليوم</h3><p>جاري التحديث...</p></div>
-<div id="archive" class="tab-content"><h3>أرشيف النتائج</h3><p>المجموعات (A-L) ستظهر هنا.</p></div>
-<div id="upcoming" class="tab-content"><h3>المباريات القادمة</h3><p>جدول المواجهات...</p></div>
-<div id="knockout" class="tab-content"><h3>خارطة الإقصائيات</h3><p>مسار البطولة...</p></div>
+<!-- المحتوى -->
+<div id="live" class="tab-content active">
+    <div class="live-indicator"><div class="pulse-circle"></div> مباشر</div>
+    <h3 style="text-align:center; font-size: 1.5em;">جاري التحديث ...</h3>
+</div>
+<div id="archive" class="tab-content"><h3>أرشيف النتائج</h3><p style="font-size: 1.2em;">بانتظار بيانات المباريات السابقة...</p></div>
+<div id="upcoming" class="tab-content"><h3>المباريات القادمة</h3></div>
+<div id="knockout" class="tab-content"><h3>خارطة الإقصائيات</h3></div>
 
 <div class="footer">
-    <p>Craftivo - LMS <span style="color: #ff4d4d;">❤️</span></p>
+    <p>Craftivo - LMS <span style="color: #FF0000;">❤️</span></p>
 </div>
 
 <script>
