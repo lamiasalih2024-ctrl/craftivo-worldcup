@@ -10,12 +10,17 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
     .group-card { background: #1a1a1a; border: 4px solid #D4AF37; border-radius: 25px; padding: 25px; margin-bottom: 30px; }
-    .group-title { color: #D4AF37; font-size: 2.4em; text-align: center; margin-bottom: 20px; font-weight: bold; }
+    .group-title { color: #D4AF37; font-size: 2.4em; text-align: center; margin-bottom: 20px; font-weight: bold; display: flex; justify-content: center; align-items: center; gap: 15px; }
     .match-row { text-align: center; font-size: 1.8em; padding: 20px 0; border-bottom: 1px dashed #444; color: #fff; }
     .points-bar { background: #000; padding: 20px; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 1.4em; color: #D4AF37; font-weight: bold; margin-top: 15px; text-align: center; }
-    .live-indicator { color: #FF0000; font-size: 2.2em; font-weight: bold; text-align: center; padding: 40px; display: flex; justify-content: center; align-items: center; gap: 15px; }
+    
+    /* المباشر ووميض */
+    .live-indicator { color: #FF0000; font-size: 2.5em; font-weight: bold; text-align: center; padding: 40px; display: flex; justify-content: center; align-items: center; gap: 15px; }
     .pulse { width: 25px; height: 25px; background: red; border-radius: 50%; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); animation: pulse 1.5s infinite; }
     @keyframes pulse { 0% { transform: scale(0.9); } 70% { box-shadow: 0 0 0 20px rgba(255, 0, 0, 0); } 100% { transform: scale(0.9); } }
+    .status-text { animation: blink 1.5s infinite; }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    
     .footer { text-align: center; margin-top: 50px; color: #ffffff; font-size: 1.6em; }
 </style>
 
@@ -33,8 +38,7 @@
 </div>
 
 <div id="live" class="tab-content active">
-    <div class="live-indicator"><div class="pulse"></div> مباشر</div>
-    <h3 style="text-align:center; font-size: 1.8em;">جاري التحديث...</h3>
+    <div class="live-indicator"><div class="pulse"></div> <span class="status-text">جاري التحديث...</span></div>
 </div>
 
 <div id="archive" class="tab-content">
@@ -55,60 +59,4 @@
         ];
         groups.forEach(g => {
             document.write(`<div class="group-card"><div class="group-title">المجموعة ${g.name}</div>`);
-            g.matches.forEach(m => document.write(`<div class="match-row">${m}</div>`));
-            document.write(`<div class="points-bar">${g.points}</div></div>`);
-        });
-    </script>
-</div>
-
-<div id="upcoming" class="tab-content">
-    <script>
-        const upcomingMatches = [
-            {group: "المجموعة A", matches: ["🇿🇦 جنوب أفريقيا vs 🇰🇷 كوريا الجنوبية | 6/25 - 03:00", "🇨🇿 التشيك vs 🇲🇽 المكسيك | 6/25 - 03:00"]},
-            {group: "المجموعة B", matches: ["🇨🇭 سويسرا vs 🇨🇦 كندا | 6/24 - 21:00", "🇧🇦 البوسنة vs 🇶🇦 قطر | 6/24 - 21:00"]},
-            {group: "المجموعة C", matches: ["🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇲🇦 المغرب | 6/20 - 00:00", "🇧🇷 البرازيل vs 🇭🇹 هايتي | 6/20 - 02:30", "🇲🇦 المغرب vs 🇭🇹 هايتي | 6/25 - 00:00", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇧🇷 البرازيل | 6/25 - 00:00"]},
-            {group: "المجموعة D", matches: ["🇹🇷 تركيا vs 🇵🇾 باراغواي | 6/20 - 05:00", "🇹🇷 تركيا vs 🇺🇸 الولايات المتحدة | 6/26 - 04:00", "🇵🇾 باراغواي vs 🇦🇺 أستراليا | 6/26 - 04:00"]},
-            {group: "المجموعة E", matches: ["🇩🇪 ألمانيا vs 🇨🇮 ساحل العاج | 6/20 - 22:00", "🇪🇨 الإكوادور vs 🇨🇼 كوراساو | 6/21 - 02:00", "🇨🇼 كوراساو vs 🇨🇮 ساحل العاج | 6/25 - 22:00", "🇪🇨 الإكوادور vs 🇩🇪 ألمانيا | 6/25 - 22:00"]},
-            {group: "المجموعة F", matches: ["🇳🇱 هولندا vs 🇸🇪 السويد | 6/20 - 19:00", "🇹🇳 تونس vs 🇯🇵 اليابان | 6/21 - 06:00", "🇹🇳 تونس vs 🇳🇱 هولندا | 6/26 - 01:00", "🇯🇵 اليابان vs 🇸🇪 السويد | 6/26 - 01:00"]},
-            {group: "المجموعة G", matches: ["🇧🇪 بلجيكا vs 🇮🇷 إيران | 6/21 - 21:00", "🇳🇿 نيوزيلندا vs 🇪🇬 مصر | 6/22 - 03:00", "🇳🇿 نيوزيلندا vs 🇧🇪 بلجيكا | 6/27 - 05:00", "🇪🇬 مصر vs 🇮🇷 إيران | 6/27 - 05:00"]},
-            {group: "المجموعة H", matches: ["🇪🇸 إسبانيا vs 🇸🇦 السعودية | 6/21 - 18:00", "🇺🇾 أوروغواي vs 🇨🇻 الرأس الأخضر | 6/22 - 00:00", "🇨🇻 الرأس الأخضر vs 🇸🇦 السعودية | 6/27 - 02:00", "🇺🇾 أوروغواي vs 🇪🇸 إسبانيا | 6/27 - 02:00"]},
-            {group: "المجموعة I", matches: ["🇫🇷 فرنسا vs 🇮🇶 العراق | 6/22 - 23:00", "🇳🇴 النرويج vs 🇸🇳 السنغال | 6/23 - 02:00", "🇳🇴 النرويج vs 🇫🇷 فرنسا | 6/26 - 21:00", "🇸🇳 السنغال vs 🇮🇶 العراق | 6/26 - 21:00"]},
-            {group: "المجموعة J", matches: ["🇦🇷 الأرجنتين vs 🇦🇹 النمسا | 6/22 - 19:00", "🇯🇴 الأردن vs 🇩🇿 الجزائر | 6/23 - 05:00", "🇩🇿 الجزائر vs 🇦🇹 النمسا | 6/28 - 04:00", "🇯🇴 الأردن vs 🇦🇷 الأرجنتين | 6/28 - 04:00"]},
-            {group: "المجموعة K", matches: ["🇵🇹 البرتغال vs 🇺🇿 أوزبكستان | 6/23 - 19:00", "🇨🇴 كولومبيا vs 🇨🇩 الكونغو الديمقراطية | 6/24 - 04:00", "🇨🇴 كولومبيا vs 🇵🇹 البرتغال | 6/28 - 01:30", "🇨🇩 الكونغو الديمقراطية vs 🇺🇿 أوزبكستان | 6/28 - 01:30"]},
-            {group: "المجموعة L", matches: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا vs 🇬🇭 غانا | 6/23 - 22:00", "🇵🇦 بنما vs 🇭🇷 كرواتيا | 6/24 - 01:00", "🇵🇦 بنما vs 🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا | 6/27 - 23:00", "🇭🇷 كرواتيا vs 🇬🇭 غانا | 6/27 - 23:00"]}
-        ];
-        upcomingMatches.forEach(g => {
-            document.write(`<div class="group-card"><div class="group-title">${g.group}</div>`);
-            g.matches.forEach(m => document.write(`<div class="match-row">${m}</div>`));
-            document.write(`</div>`);
-        });
-    </script>
-</div>
-
-<div id="knockout" class="tab-content">
-    <div class="group-card">
-        <div class="group-title">شجرة الإقصائيات</div>
-        <div class="match-row" style="color: #D4AF37; font-weight: bold;">دور الـ 32</div>
-        <div class="match-row">مباراة (1) - ⏳ قريباً</div>
-        <div class="match-row" style="color: #D4AF37; font-weight: bold; margin-top: 20px;">دور الـ 16</div>
-        <div class="match-row">ترقبوا المواجهات - ⏳ قريباً</div>
-        <div class="match-row" style="color: #D4AF37; font-weight: bold; margin-top: 20px;">ربع النهائي</div>
-        <div class="match-row">مباريات حاسمة - ⏳ قريباً</div>
-        <div class="match-row" style="color: #D4AF37; font-weight: bold; margin-top: 20px;">نصف النهائي</div>
-        <div class="match-row">طريق النهائي - ⏳ قريباً</div>
-        <div class="match-row" style="color: #D4AF37; font-weight: bold; margin-top: 20px; font-size: 2.2em;">🏆 النهائي الكبير - ⏳ قريباً</div>
-    </div>
-</div>
-
-<div class="footer">
-    <p>Craftivo - 🤍LMS</p>
-</div>
-
-<script>
-function showTab(evt, id) {
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    evt.currentTarget.classList.add('active');
-}
-</script>
+            g.matches.forEach(m
