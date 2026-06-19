@@ -1,67 +1,74 @@
 <style>
-    /* كرت المجموعات المحدث */
-    .group-card {
-        background: #1a1a1a;
-        border: 3px solid #D4AF37;
-        border-radius: 20px;
-        padding: 20px;
-        margin-bottom: 30px;
-        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-    }
-    .group-title { color: #D4AF37; font-size: 2.2em; text-align: center; margin-bottom: 20px; font-weight: 900; }
+    body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; }
     
-    .match-row {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.4em;
-        padding: 12px 0;
-        border-bottom: 1px dashed #444;
-        color: #fff;
-        text-align: center;
-    }
-    
-    .points-bar {
-        background: #000;
-        padding: 15px;
-        border-radius: 12px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        font-size: 1.1em;
-        color: #D4AF37;
-        font-weight: bold;
-        margin-top: 15px;
-        text-align: center;
-    }
+    /* الهيدر */
+    .brand-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; }
+    .brand-title { color: #D4AF37; font-size: 3.5em; font-weight: 900; text-shadow: 3px 3px 6px rgba(0,0,0,0.8); text-transform: uppercase; }
+    .event-title { color: #ffffff; font-size: 1.8em; margin: 10px 0; font-weight: bold; }
+    .timezone { color: #D4AF37; font-size: 1.3em; font-weight: bold; }
 
-    /* التوقيع السفلي */
-    .footer { 
-        text-align: center; 
-        margin-top: 40px; 
-        padding-top: 20px; 
-        border-top: 2px solid #D4AF37; 
-        color: #ffffff; 
-        font-size: 1.4em; 
-    }
+    /* التبويبات */
+    .tabs { display: flex; justify-content: space-around; margin-bottom: 25px; }
+    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 15px; flex: 1; margin: 0 5px; border-radius: 10px; cursor: pointer; font-size: 1.2em; font-weight: bold; }
+    .tab-btn.active { background: #D4AF37; color: #000; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* كروت الأرشيف */
+    .group-card { background: #1a1a1a; border: 3px solid #D4AF37; border-radius: 20px; padding: 20px; margin-bottom: 25px; }
+    .group-title { color: #D4AF37; font-size: 2em; text-align: center; margin-bottom: 15px; font-weight: bold; }
+    .match-row { text-align: center; font-size: 1.4em; padding: 10px 0; border-bottom: 1px dashed #444; color: #fff; }
+    .points-bar { background: #000; padding: 15px; border-radius: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 1.1em; color: #D4AF37; font-weight: bold; margin-top: 10px; text-align: center; }
+
+    /* المباشر والوميض */
+    .live-indicator { color: #FF0000; font-size: 1.8em; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .pulse { width: 20px; height: 20px; background: red; border-radius: 50%; animation: pulse 1s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); } 100% { transform: scale(1); } }
+
+    /* التوقيع */
+    .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #D4AF37; color: #ffffff; font-size: 1.4em; }
 </style>
 
-<div class="group-card">
-    <div class="group-title">المجموعة A</div>
-    
-    <div class="match-row">
-        🇲🇽 المكسيك (2) - (0) 🇿🇦 جنوب أفريقيا
-    </div>
-    <div class="match-row">
-        🇰🇷 كوريا الجنوبية (2) - (1) 🇨🇿 التشيك
-    </div>
+<div class="brand-header">
+    <h1 class="brand-title">CRAFTIVO</h1>
+    <h2 class="event-title">تغطية كأس العالم 2026</h2>
+    <p class="timezone">بتوقيت مكة المكرمة</p>
+</div>
 
-    <div class="points-bar">
-        <span>المكسيك: 3</span> <span>كوريا: 3</span>
-        <span>ج.أفريقيا: 0</span> <span>التشيك: 0</span>
+<div class="tabs">
+    <button class="tab-btn active" onclick="showTab(event, 'live')">مباشر</button>
+    <button class="tab-btn" onclick="showTab(event, 'archive')">الأرشيف</button>
+    <button class="tab-btn" onclick="showTab(event, 'upcoming')">القادمة</button>
+    <button class="tab-btn" onclick="showTab(event, 'knockout')">الإقصائيات</button>
+</div>
+
+<div id="live" class="tab-content active">
+    <div class="live-indicator"><div class="pulse"></div> مباشر</div>
+    <h3 style="text-align:center;">جاري التحديث...</h3>
+</div>
+
+<div id="archive" class="tab-content">
+    <div class="group-card">
+        <div class="group-title">المجموعة A</div>
+        <div class="match-row">🇲🇽 المكسيك (2) - (0) 🇿🇦 جنوب أفريقيا</div>
+        <div class="match-row">🇰🇷 كوريا الجنوبية (2) - (1) 🇨🇿 التشيك</div>
+        <div class="points-bar">
+            <span>المكسيك: 3</span> <span>كوريا: 3</span>
+            <span>ج.أفريقيا: 0</span> <span>التشيك: 0</span>
+        </div>
     </div>
 </div>
 
 <div class="footer">
     <p>Craftivo - LMS <span style="color: white;">❤️</span></p>
 </div>
+
+<script>
+function showTab(evt, id) {
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    evt.currentTarget.classList.add('active');
+}
+</script>
