@@ -1,3 +1,29 @@
+<style>
+    /* التنسيقات العامة للترتيب */
+    .match-container {
+        padding: 20px;
+        margin-top: 20px;
+        background-color: #1a1a2e;
+        border-radius: 15px;
+        color: white;
+        font-family: sans-serif;
+    }
+    .match-card {
+        background-color: #16213e;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border-left: 5px solid #4ecca3;
+    }
+    h3 { color: #4ecca3; margin-top: 0; }
+    .match-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: bold; }
+    .match-details { font-size: 0.9em; color: #ccc; }
+    .status-live { color: #e94560; }
+    .status-past { color: #888; }
+    .status-upcoming { color: #f9d423; }
+    .notify-btn { background: #4ecca3; border: none; padding: 5px 10px; border-radius: 5px; color: #1a1a2e; cursor: pointer; margin-top: 5px; }
+</style>
+
 <!-- الجزء الأول: المباريات المباشرة -->
 <div id="live-matches-section" class="match-container">
     <h3>المباريات المباشرة الآن</h3>
@@ -12,6 +38,7 @@
         </div>
     </div>
 </div>
+
 <!-- الجزء الثاني: المباريات السابقة -->
 <div id="past-matches-section" class="match-container">
     <h3>نتائج المباريات السابقة</h3>
@@ -26,6 +53,7 @@
         </div>
     </div>
 </div>
+
 <!-- الجزء الثالث: المباريات القادمة -->
 <div id="upcoming-matches-section" class="match-container">
     <h3>المباريات القادمة</h3>
@@ -37,6 +65,7 @@
         <div class="match-details">
             <span>التاريخ: 20 يونيو 2026</span>
             <span>الوقت: 09:00 مساءً</span>
+            <br>
             <button class="notify-btn">تذكير</button>
         </div>
     </div>
