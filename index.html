@@ -1,33 +1,22 @@
 <style>
     body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; direction: rtl; }
-    
-    /* الهيدر والعناوين */
     .brand-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; }
-    .brand-title { color: #D4AF37; font-size: 4em; font-weight: 900; text-transform: uppercase; margin: 0; }
-    .event-title { color: #ffffff; font-size: 2em; margin: 15px 0; font-weight: bold; }
-    .timezone { color: #D4AF37; font-size: 1.4em; font-weight: bold; }
-
-    /* التبويبات */
-    .tabs { display: flex; justify-content: space-around; margin-bottom: 30px; }
-    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 15px; flex: 1; margin: 0 5px; border-radius: 10px; cursor: pointer; font-size: 1.3em; font-weight: bold; }
+    .brand-title { color: #D4AF37; font-size: 3.5em; font-weight: 900; text-transform: uppercase; margin: 0; }
+    .event-title { color: #ffffff; font-size: 1.8em; margin: 10px 0; font-weight: bold; }
+    .timezone { color: #D4AF37; font-size: 1.3em; font-weight: bold; }
+    .tabs { display: flex; justify-content: space-around; margin-bottom: 25px; }
+    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 12px; flex: 1; margin: 0 5px; border-radius: 10px; cursor: pointer; font-size: 1.2em; font-weight: bold; }
     .tab-btn.active { background: #D4AF37; color: #000; }
-
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-
-    /* كروت الأرشيف - زيادة حجم الخط */
     .group-card { background: #1a1a1a; border: 3px solid #D4AF37; border-radius: 20px; padding: 20px; margin-bottom: 25px; }
-    .group-title { color: #D4AF37; font-size: 2em; text-align: center; margin-bottom: 20px; font-weight: bold; }
-    .match-row { text-align: center; font-size: 1.6em; padding: 15px 0; border-bottom: 1px dashed #444; color: #fff; }
-    .points-bar { background: #000; padding: 15px; border-radius: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 1.2em; color: #D4AF37; font-weight: bold; margin-top: 15px; text-align: center; }
-
-    /* المباشر ووميض واضح */
-    .live-indicator { color: #FF0000; font-size: 2em; font-weight: bold; text-align: center; padding: 30px; display: flex; justify-content: center; align-items: center; gap: 15px; }
-    .pulse { width: 25px; height: 25px; background: #FF0000; border-radius: 50%; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); animation: pulse-animation 1.5s infinite; }
-    @keyframes pulse-animation { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); } }
-
-    /* التوقيع */
-    .footer { text-align: center; margin-top: 40px; color: #ffffff; font-size: 1.4em; padding: 10px; }
+    .group-title { color: #D4AF37; font-size: 2em; text-align: center; margin-bottom: 15px; font-weight: bold; }
+    .match-row { text-align: center; font-size: 1.4em; padding: 12px 0; border-bottom: 1px dashed #444; color: #fff; }
+    .points-bar { background: #000; padding: 15px; border-radius: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 1.1em; color: #D4AF37; font-weight: bold; margin-top: 10px; text-align: center; }
+    .live-indicator { color: #FF0000; font-size: 1.8em; font-weight: bold; text-align: center; padding: 30px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+    .pulse { width: 20px; height: 20px; background: red; border-radius: 50%; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { transform: scale(0.9); } 70% { box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); } 100% { transform: scale(0.9); } }
+    .footer { text-align: center; margin-top: 40px; color: #ffffff; font-size: 1.4em; }
 </style>
 
 <div class="brand-header">
@@ -37,18 +26,18 @@
 </div>
 
 <div class="tabs">
-    <button class="tab-btn" onclick="showTab(event, 'live')">مباشر</button>
-    <button class="tab-btn active" onclick="showTab(event, 'archive')">الأرشيف</button>
+    <button class="tab-btn active" onclick="showTab(event, 'live')">مباشر</button>
+    <button class="tab-btn" onclick="showTab(event, 'archive')">الأرشيف</button>
     <button class="tab-btn" onclick="showTab(event, 'upcoming')">القادمة</button>
     <button class="tab-btn" onclick="showTab(event, 'knockout')">الإقصائيات</button>
 </div>
 
-<div id="live" class="tab-content">
+<div id="live" class="tab-content active">
     <div class="live-indicator"><div class="pulse"></div> مباشر</div>
-    <h3 style="text-align:center; font-size: 1.5em;">جاري التحديث...</h3>
+    <h3 style="text-align:center;">جاري التحديث...</h3>
 </div>
 
-<div id="archive" class="tab-content active">
+<div id="archive" class="tab-content">
     <script>
         const groups = [
             {name: "A", matches: ["🇿🇦 جنوب أفريقيا (2) - (0) 🇲🇽 المكسيك", "🇨🇿 التشيك (1) - (2) 🇰🇷 كوريا الجنوبية"], points: "المكسيك: 3 | كوريا: 3 | ج.أفريقيا: 0 | التشيك: 0"},
@@ -70,6 +59,34 @@
             document.write(`<div class="points-bar">${g.points}</div></div>`);
         });
     </script>
+</div>
+
+<div id="upcoming" class="tab-content">
+    <script>
+        const upcomingMatches = [
+            {group: "المجموعة A", matches: ["🇿🇦 جنوب أفريقيا vs 🇰🇷 كوريا الجنوبية | 6/25 - 03:00", "🇨🇿 التشيك vs 🇲🇽 المكسيك | 6/25 - 03:00"]},
+            {group: "المجموعة B", matches: ["🇨🇭 سويسرا vs 🇨🇦 كندا | 6/24 - 21:00", "🇧🇦 البوسنة vs 🇶🇦 قطر | 6/24 - 21:00"]},
+            {group: "المجموعة C", matches: ["🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇲🇦 المغرب | 6/20 - 00:00", "🇧🇷 البرازيل vs 🇭🇹 هايتي | 6/20 - 02:30", "🇲🇦 المغرب vs 🇭🇹 هايتي | 6/25 - 00:00", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 اسكتلندا vs 🇧🇷 البرازيل | 6/25 - 00:00"]},
+            {group: "المجموعة D", matches: ["🇹🇷 تركيا vs 🇵🇾 باراغواي | 6/20 - 05:00", "🇹🇷 تركيا vs 🇺🇸 الولايات المتحدة | 6/26 - 04:00", "🇵🇾 باراغواي vs 🇦🇺 أستراليا | 6/26 - 04:00"]},
+            {group: "المجموعة E", matches: ["🇩🇪 ألمانيا vs 🇨🇮 ساحل العاج | 6/20 - 22:00", "🇪🇨 الإكوادور vs 🇨🇼 كوراساو | 6/21 - 02:00", "🇨🇼 كوراساو vs 🇨🇮 ساحل العاج | 6/25 - 22:00", "🇪🇨 الإكوادور vs 🇩🇪 ألمانيا | 6/25 - 22:00"]},
+            {group: "المجموعة F", matches: ["🇳🇱 هولندا vs 🇸🇪 السويد | 6/20 - 19:00", "🇹🇳 تونس vs 🇯🇵 اليابان | 6/21 - 06:00", "🇹🇳 تونس vs 🇳🇱 هولندا | 6/26 - 01:00", "🇯🇵 اليابان vs 🇸🇪 السويد | 6/26 - 01:00"]},
+            {group: "المجموعة G", matches: ["🇧🇪 بلجيكا vs 🇮🇷 إيران | 6/21 - 21:00", "🇳🇿 نيوزيلندا vs 🇪🇬 مصر | 6/22 - 03:00", "🇳🇿 نيوزيلندا vs 🇧🇪 بلجيكا | 6/27 - 05:00", "🇪🇬 مصر vs 🇮🇷 إيران | 6/27 - 05:00"]},
+            {group: "المجموعة H", matches: ["🇪🇸 إسبانيا vs 🇸🇦 السعودية | 6/21 - 18:00", "🇺🇾 أوروغواي vs 🇨🇻 الرأس الأخضر | 6/22 - 00:00", "🇨🇻 الرأس الأخضر vs 🇸🇦 السعودية | 6/27 - 02:00", "🇺🇾 أوروغواي vs 🇪🇸 إسبانيا | 6/27 - 02:00"]},
+            {group: "المجموعة I", matches: ["🇫🇷 فرنسا vs 🇮🇶 العراق | 6/22 - 23:00", "🇳🇴 النرويج vs 🇸🇳 السنغال | 6/23 - 02:00", "🇳🇴 النرويج vs 🇫🇷 فرنسا | 6/26 - 21:00", "🇸🇳 السنغال vs 🇮🇶 العراق | 6/26 - 21:00"]},
+            {group: "المجموعة J", matches: ["🇦🇷 الأرجنتين vs 🇦🇹 النمسا | 6/22 - 19:00", "🇯🇴 الأردن vs 🇩🇿 الجزائر | 6/23 - 05:00", "🇩🇿 الجزائر vs 🇦🇹 النمسا | 6/28 - 04:00", "🇯🇴 الأردن vs 🇦🇷 الأرجنتين | 6/28 - 04:00"]},
+            {group: "المجموعة K", matches: ["🇵🇹 البرتغال vs 🇺🇿 أوزبكستان | 6/23 - 19:00", "🇨🇴 كولومبيا vs 🇨🇩 الكونغو الديمقراطية | 6/24 - 04:00", "🇨🇴 كولومبيا vs 🇵🇹 البرتغال | 6/28 - 01:30", "🇨🇩 الكونغو الديمقراطية vs 🇺🇿 أوزبكستان | 6/28 - 01:30"]},
+            {group: "المجموعة L", matches: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا vs 🇬🇭 غانا | 6/23 - 22:00", "🇵🇦 بنما vs 🇭🇷 كرواتيا | 6/24 - 01:00", "🇵🇦 بنما vs 🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا | 6/27 - 23:00", "🇭🇷 كرواتيا vs 🇬🇭 غانا | 6/27 - 23:00"]}
+        ];
+        upcomingMatches.forEach(g => {
+            document.write(`<div class="group-card"><div class="group-title">${g.group}</div>`);
+            g.matches.forEach(m => document.write(`<div class="match-row" style="font-size: 1.2em;">${m}</div>`));
+            document.write(`</div>`);
+        });
+    </script>
+</div>
+
+<div id="knockout" class="tab-content">
+    <h3 style="text-align:center; color: #D4AF37;">ترقبوا مراحل الإقصائيات قريباً...</h3>
 </div>
 
 <div class="footer">
