@@ -20,6 +20,7 @@
         .points-row { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #444; text-align: center; color: #D4AF37; font-size: 0.8em; }
         .upcoming-item { padding: 8px; text-align: center; border-bottom: 1px solid #333; font-size: 0.85em; }
         .live-dot { height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        .update-text { color: white; animation: blink 1s infinite; font-weight: bold; }
         @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
@@ -34,7 +35,11 @@
     <div class="tab" onclick="showPage('knockout', this)">الإقصائيات</div>
 </div>
 
-<div id="live" class="page"><h2 style="color:red">مباشر <span class="live-dot"></span></h2><p>جاري التحديث...</p></div>
+<div id="live" class="page">
+    <h2 style="color:red">مباشر <span class="live-dot"></span></h2>
+    <p class="update-text">جاري التحديث الآن...</p>
+</div>
+
 <div id="archive" class="page active"><div id="archiveContainer"></div></div>
 <div id="upcoming" class="page"><div id="upcomingContainer"></div></div>
 <div id="knockout" class="page">
