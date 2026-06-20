@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <title>تغطية كأس العالم 2026 | Craftivo</title>
     <style>
-        body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; }
-        .header { text-align: center; padding: 25px; border-bottom: 2px solid #D4AF37; }
-        .main-title { font-size: 3em; font-weight: 900; color: #D4AF37; text-shadow: 0 0 20px #D4AF37; margin: 0; }
-        .sub-title { color: #aaa; margin: 10px 0; }
-        .tabs { display: flex; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: wrap; }
-        .tab { padding: 10px 20px; background: #222; border: 1px solid #444; cursor: pointer; color: #D4AF37; border-radius: 5px; transition: 0.3s; font-weight: bold; }
-        .tab.active { background: #D4AF37; color: #000; }
-        .page { display: none; padding: 20px; max-width: 900px; margin: auto; }
+        body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; font-size: 18px; }
+        .header { text-align: center; padding: 30px; border-bottom: 2px solid #D4AF37; }
+        .main-title { font-size: 4em; font-weight: 900; color: #D4AF37; text-shadow: 0 0 20px #D4AF37; margin: 0; }
+        .sub-title { font-size: 1.5em; color: #aaa; margin: 15px 0; }
+        .tabs { display: flex; justify-content: center; gap: 10px; margin: 30px 0; flex-wrap: wrap; }
+        .tab { padding: 15px 30px; background: #222; border: 2px solid #444; cursor: pointer; color: #D4AF37; border-radius: 8px; transition: 0.3s; font-size: 1.3em; font-weight: bold; }
+        .tab.active { background: #D4AF37; color: #000; border-color: #D4AF37; }
+        .page { display: none; padding: 25px; max-width: 900px; margin: auto; line-height: 1.6; }
         .page.active { display: block; }
-        .group-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-        .group-title { color: #D4AF37; font-weight: bold; text-align: center; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; }
-        .match-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #222; }
-        .footer { text-align: center; padding: 30px; border-top: 1px solid #333; margin-top: 50px; color: #D4AF37; font-weight: bold; }
+        .group-card { background: #1a1a1a; border: 2px solid #333; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .group-title { color: #D4AF37; font-size: 1.6em; font-weight: bold; text-align: center; margin-bottom: 15px; border-bottom: 2px solid #444; padding-bottom: 10px; }
+        .match-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #222; font-size: 1.3em; }
+        .footer { text-align: center; padding: 40px; border-top: 2px solid #333; margin-top: 60px; color: #D4AF37; font-size: 1.5em; font-weight: bold; }
         @keyframes blink { 50% { opacity: 0; } }
-        .live-dot { height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        .live-dot { height: 15px; width: 15px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
     </style>
 </head>
 <body>
@@ -36,8 +36,8 @@
 </div>
 
 <div id="live" class="page active">
-    <h3>مباشر <span class="live-dot"></span></h3>
-    <p style="animation: blink 2s infinite;">جاري التحديث...</p>
+    <h2 style="font-size: 2em;">مباشر <span class="live-dot"></span></h2>
+    <p style="font-size: 1.5em; animation: blink 2s infinite;">جاري التحديث...</p>
 </div>
 
 <div id="archive" class="page">
@@ -49,15 +49,13 @@
 </div>
 
 <div id="knockout" class="page">
-    <h3 style="text-align: center; color: #D4AF37;">خارطة الإقصائيات 🏆⏳</h3>
+    <h2 style="text-align: center; color: #D4AF37; font-size: 2em;">خارطة الإقصائيات 🏆⏳</h2>
     <div class="group-card">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <div style="font-size: 1.5em; font-weight: bold; color: #D4AF37;">🏆 النهائي 🏆</div>
-        </div>
-        <div class="match-row"><span>دور الـ 4 (نصف النهائي)</span><span>2 مباراة</span></div>
-        <div class="match-row"><span>دور الـ 8 (ربع النهائي)</span><span>4 مباريات</span></div>
-        <div class="match-row"><span>دور الـ 16</span><span>8 مباريات</span></div>
         <div class="match-row"><span>دور الـ 32</span><span>16 مباراة</span></div>
+        <div class="match-row"><span>دور الـ 16</span><span>8 مباريات</span></div>
+        <div class="match-row"><span>دور الـ 8 (ربع النهائي)</span><span>4 مباريات</span></div>
+        <div class="match-row"><span>دور الـ 4 (نصف النهائي)</span><span>2 مباراة</span></div>
+        <div class="match-row" style="color: #D4AF37; font-weight: bold;"><span>🏆 النهائي 🏆</span><span>مباراة واحدة</span></div>
     </div>
 </div>
 
