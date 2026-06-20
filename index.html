@@ -1,94 +1,57 @@
 <style>
     body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; direction: rtl; }
     .brand-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; }
-    .brand-title { color: #D4AF37; font-size: 4em; font-weight: 900; text-transform: uppercase; margin: 0; }
-    .event-title { color: #ffffff; font-size: 2.2em; margin: 15px 0; font-weight: bold; }
-    .timezone { color: #D4AF37; font-size: 1.6em; font-weight: bold; }
+    .brand-title { color: #D4AF37; font-size: 3em; font-weight: 900; text-transform: uppercase; margin: 0; }
     
-    .tabs { display: flex; justify-content: space-around; margin-bottom: 30px; }
-    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 18px; flex: 1; margin: 0 5px; border-radius: 12px; cursor: pointer; font-size: 1.4em; font-weight: bold; }
-    .tab-btn.active { background: #D4AF37; color: #000; }
+    /* Live Section */
+    .live-container { border: 2px solid #ff0000; padding: 15px; text-align: center; margin-bottom: 20px; border-radius: 10px; }
+    .live-text { color: #ff0000; font-size: 1.8em; font-weight: bold; display: inline-block; }
+    .blink-red { width: 15px; height: 15px; background: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; margin-left: 10px; }
+    .status-text { color: #ffffff; font-size: 1.4em; animation: flash-white 1.5s infinite; }
+
+    /* Tabs & Content */
+    .group-card { background: #1a1a1a; border: 3px solid #D4AF37; border-radius: 15px; padding: 20px; margin-bottom: 20px; }
+    .group-title { color: #D4AF37; font-size: 1.8em; text-align: center; margin-bottom: 15px; font-weight: bold; }
+    .match-row { display: flex; justify-content: space-between; align-items: center; font-size: 1.3em; padding: 10px 0; border-bottom: 1px solid #333; }
+    .team { display: flex; align-items: center; width: 40%; }
+    .score { font-weight: bold; color: #D4AF37; width: 20%; text-align: center; }
     
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    
-    .group-card { background: #1a1a1a; border: 4px solid #D4AF37; border-radius: 25px; padding: 25px; margin-bottom: 30px; }
-    .group-title { color: #D4AF37; font-size: 2.4em; text-align: center; margin-bottom: 20px; font-weight: bold; }
-    .match-row { text-align: center; font-size: 1.8em; padding: 15px 0; border-bottom: 1px dashed #444; color: #fff; }
-    .points-bar { background: #000; padding: 20px; border-radius: 12px; font-size: 1.4em; color: #D4AF37; font-weight: bold; margin-top: 15px; text-align: center; }
-    
-    .footer { text-align: center; margin-top: 50px; color: #ffffff; font-size: 1.6em; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes flash-white { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 </style>
 
 <div class="brand-header">
     <h1 class="brand-title">CRAFTIVO</h1>
-    <h2 class="event-title">تغطية كأس العالم 2026</h2>
 </div>
 
-<div class="tabs">
-    <button class="tab-btn active" onclick="showTab(event, 'live')">مباشر</button>
-    <button class="tab-btn" onclick="showTab(event, 'archive')">الأرشيف</button>
-    <button class="tab-btn" onclick="showTab(event, 'upcoming')">القادمة</button>
-    <button class="tab-btn" onclick="showTab(event, 'knockout')">الإقصائيات</button>
+<!-- Live Section -->
+<div class="live-container">
+    <div class="live-text">مباشر <span class="blink-red"></span></div>
+    <div class="status-text">جاري التحديث...</div>
 </div>
-
-<!-- تبويب الأرشيف -->
-<div id="archive" class="tab-content">
-    <script>
-        const archiveGroups = [
-            {name: "A", matches: ["🇿🇦 جنوب أفريقيا (2) - (0) 🇲🇽 المكسيك", "🇰🇷 كوريا الجنوبية (2) - (1) 🇨🇿 التشيك", "🇿🇦 جنوب أفريقيا (2) - (1) 🇨🇿 التشيك", "🇲🇽 المكسيك (1) - (0) 🇰🇷 كوريا الجنوبية"], points: "المكسيك: 6 | جنوب أفريقيا: 3 | كوريا الجنوبية: 3 | التشيك: 0"},
-            {name: "B", matches: ["🇨🇦 كندا (1) - (1) 🇧🇦 البوسنة والهرسك", "🇶🇦 قطر (1) - (1) 🇨🇭 سويسرا", "🇨🇭 سويسرا (4) - (2) 🇧🇦 البوسنة والهرسك", "🇨🇦 كندا (6) - (0) 🇶🇦 قطر"], points: "كندا: 4 | سويسرا: 4 | البوسنة والهرسك: 1 | قطر: 1"},
-            {name: "C", matches: ["🇧🇷 البرازيل (1) - (1) 🇲🇦 المغرب", "🇭🇹 هايتي (0) - (1) 🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا (0) - (2) 🇲🇦 المغرب", "🇧🇷 البرازيل (3) - (0) 🇭🇹 هايتي"], points: "المغرب: 4 | البرازيل: 4 | إسكتلندا: 3 | هايتي: 0"},
-            {name: "D", matches: ["🇵🇾 باراغواي (4) - (1) 🇺🇸 الولايات المتحدة", "🇦🇺 أستراليا (2) - (0) 🇹🇷 تركيا", "🇺🇸 الولايات المتحدة (2) - (0) 🇦🇺 أستراليا", "🇹🇷 تركيا (0) - (1) 🇵🇾 باراغواي"], points: "باراغواي: 6 | أستراليا: 3 | الولايات المتحدة: 3 | تركيا: 0"},
-            {name: "E", matches: ["🇩🇪 ألمانيا (7) - (1) 🇨🇼 كوراساو", "🇨🇮 ساحل العاج (1) - (0) 🇪🇨 الإكوادور"], points: "ألمانيا: 3 | ساحل العاج: 3 | الإكوادور: 0 | كوراساو: 0"},
-            {name: "F", matches: ["🇯🇵 اليابان (2) - (2) 🇳🇱 هولندا", "🇸🇪 السويد (5) - (2) 🇹🇳 تونس"], points: "السويد: 3 | اليابان: 1 | هولندا: 1 | تونس: 0"},
-            {name: "G", matches: ["🇪🇸 إسبانيا (0) - (0) 🇨🇻 الرأس الأخضر", "🇸🇦 السعودية (1) - (1) 🇺🇾 أوروغواي"], points: "السعودية: 1 | أوروغواي: 1 | إسبانيا: 1 | الرأس الأخضر: 1"},
-            {name: "H", matches: ["🇧🇪 بلجيكا (1) - (1) 🇪🇬 مصر", "🇮🇷 إيران (2) - (2) 🇳🇿 نيوزيلندا"], points: "بلجيكا: 1 | مصر: 1 | إيران: 1 | نيوزيلندا: 1"},
-            {name: "I", matches: ["🇫🇷 فرنسا (2) - (1) 🇸🇳 السنغال", "🇮🇶 العراق (1) - (2) 🇳🇴 النرويج"], points: "فرنسا: 3 | النرويج: 3 | السنغال: 0 | العراق: 0"},
-            {name: "J", matches: ["🇦🇹 النمسا (1) - (3) 🇯🇴 الأردن", "🇦🇷 الأرجنتين (3) - (2) 🇩🇿 الجزائر"], points: "الأردن: 3 | الأرجنتين: 3 | الجزائر: 0 | النمسا: 0"},
-            {name: "K", matches: ["🇵🇹 البرتغال (1) - (1) 🇨🇩 الكونغو", "🇺🇿 أوزبكستان (1) - (3) 🇨🇴 كولومبيا"], points: "كولومبيا: 3 | البرتغال: 1 | الكونغو: 1 | أوزبكستان: 0"},
-            {name: "L", matches: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا (2) - (4) 🇭🇷 كرواتيا", "🇵🇦 بنما (0) - (1) 🇬🇭 غانا"], points: "كرواتيا: 3 | غانا: 3 | إنجلترا: 0 | بنما: 0"}
-        ];
-        archiveGroups.forEach(g => {
-            document.write(`<div class="group-card"><div class="group-title">المجموعة ${g.name}</div>`);
-            g.matches.forEach(m => document.write(`<div class="match-row">${m}</div>`));
-            document.write(`<div class="points-bar">النقاط: ${g.points}</div></div>`);
-        });
-    </script>
-</div>
-
-<!-- تبويب المباريات القادمة -->
-<div id="upcoming" class="tab-content">
-    <script>
-        const upcoming = [
-            {group: "A", m: ["🇿🇦 جنوب أفريقيا VS 🇰🇷 كوريا الجنوبية - 25 يونيو 04:00", "🇨🇿 التشيك VS 🇲🇽 المكسيك - 25 يونيو 04:00"]},
-            {group: "B", m: ["🇨🇭 سويسرا VS 🇨🇦 كندا - 24 يونيو 22:00", "🇧🇦 البوسنة والهرسك VS 🇶🇦 قطر - 24 يونيو 22:00"]},
-            {group: "C", m: ["🇲🇦 المغرب VS 🇭🇹 هايتي - 25 يونيو 01:00", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا VS 🇧🇷 البرازيل - 25 يونيو 01:00"]},
-            {group: "D", m: ["🇹🇷 تركيا VS 🇺🇸 الولايات المتحدة - 26 يونيو 05:00", "🇵🇾 باراغواي VS 🇦🇺 أستراليا - 26 يونيو 05:00"]},
-            {group: "E", m: ["🇩🇪 ألمانيا VS 🇨🇮 ساحل العاج - اليوم 23:00", "🇪🇨 الإكوادور VS 🇨🇼 كوراساو - 03:00", "🇨🇼 كوراساو VS 🇨🇮 ساحل العاج - 25 يونيو 23:00", "🇪🇨 الإكوادور VS 🇩🇪 ألمانيا - 25 يونيو 23:00"]},
-            {group: "F", m: ["🇳🇱 هولندا VS 🇸🇪 السويد - اليوم 20:00", "🇹🇳 تونس VS 🇯🇵 اليابان - 07:00", "🇹🇳 تونس VS 🇳🇱 هولندا - 26 يونيو 02:00", "🇯🇵 اليابان VS 🇸🇪 السويد - 26 يونيو 02:00"]},
-            {group: "G", m: ["🇪🇸 إسبانيا VS 🇸🇦 السعودية - 19:00", "🇺🇾 أوروغواي VS 🇨🇻 الرأس الأخضر - 22 يونيو 01:00", "🇨🇻 الرأس الأخضر VS 🇸🇦 السعودية - 27 يونيو 03:00", "🇺🇾 أوروغواي VS 🇪🇸 إسبانيا - 27 يونيو 03:00"]},
-            {group: "H", m: ["🇧🇪 بلجيكا VS 🇮🇷 إيران - 22:00", "🇳🇿 نيوزيلندا VS 🇪🇬 مصر - 22 يونيو 04:00", "🇳🇿 نيوزيلندا VS 🇧🇪 بلجيكا - 27 يونيو 06:00", "🇪🇬 مصر VS 🇮🇷 إيران - 27 يونيو 06:00"]},
-            {group: "I", m: ["🇫🇷 فرنسا VS 🇮🇶 العراق - 23 يونيو 00:00", "🇳🇴 النرويج VS 🇸🇳 السنغال - 23 يونيو 03:00", "🇳🇴 النرويج VS 🇫🇷 فرنسا - 26 يونيو 22:00", "🇸🇳 السنغال VS 🇮🇶 العراق - 26 يونيو 22:00"]},
-            {group: "J", m: ["🇦🇷 الأرجنتين VS 🇦🇹 النمسا - 22 يونيو 20:00", "🇯🇴 الأردن VS 🇩🇿 الجزائر - 23 يونيو 06:00", "🇩🇿 الجزائر VS 🇦🇹 النمسا - 28 يونيو 05:00", "🇯🇴 الأردن VS 🇦🇷 الأرجنتين - 28 يونيو 05:00"]},
-            {group: "K", m: ["🇵🇹 البرتغال VS 🇺🇿 أوزبكستان - 23 يونيو 20:00", "🇨🇴 كولومبيا VS 🇨🇩 الكونغو - 24 يونيو 05:00", "🇨🇴 كولومبيا VS 🇵🇹 البرتغال - 28 يونيو 02:30", "🇨🇩 الكونغو VS 🇺🇿 أوزبكستان - 28 يونيو 02:30"]},
-            {group: "L", m: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا VS 🇬🇭 غانا - 23 يونيو 23:00", "🇵🇦 بنما VS 🇭🇷 كرواتيا - 24 يونيو 02:00", "🇵🇦 بنما VS 🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا - 28 يونيو 00:00", "🇭🇷 كرواتيا VS 🇬🇭 غانا - 28 يونيو 00:00"]}
-        ];
-        upcoming.forEach(g => {
-            document.write(`<div class="group-card"><div class="group-title">المجموعة ${g.group}</div>`);
-            g.m.forEach(m => document.write(`<div class="match-row">${m}</div>`));
-            document.write(`</div>`);
-        });
-    </script>
-</div>
-
-<div class="footer"><p>Craftivo - 🤍LMS</p></div>
 
 <script>
-function showTab(evt, id) {
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    evt.currentTarget.classList.add('active');
-}
+    const groups = [
+        {n: "أ (A)", m: [
+            {t1: "🇿🇦 جنوب أفريقيا", s: "2 - 0", t2: "🇲🇽 المكسيك"},
+            {t1: "🇰🇷 كوريا الجنوبية", s: "2 - 1", t2: "🇨🇿 التشيك"},
+            {t1: "🇿🇦 جنوب أفريقيا", s: "1 - 1", t2: "🇨🇿 التشيك"},
+            {t1: "🇲🇽 المكسيك", s: "1 - 0", t2: "🇰🇷 كوريا الجنوبية"}
+        ], pts: "المكسيك (3)، جنوب أفريقيا (4)، كوريا الجنوبية (3)، التشيك (1)"},
+        // أضيفي باقي المجموعات بنفس هذا النسق...
+    ];
+
+    groups.forEach(g => {
+        document.write(`<div class="group-card"><div class="group-title">المجموعة ${g.n}</div>`);
+        g.m.forEach(m => {
+            document.write(`
+                <div class="match-row">
+                    <div class="team" style="justify-content: flex-end;">${m.t1}</div>
+                    <div class="score">${m.s}</div>
+                    <div class="team" style="justify-content: flex-start;">${m.t2}</div>
+                </div>
+            `);
+        });
+        document.write(`<div style="margin-top:10px; font-size: 1.1em; color:#ccc;">النقاط: ${g.pts}</div></div>`);
+    });
 </script>
