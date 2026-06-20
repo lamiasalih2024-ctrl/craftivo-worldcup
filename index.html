@@ -5,39 +5,35 @@
     <title>Craftivo | تغطية كأس العالم 2026</title>
     <style>
         body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
-        
-        /* الهيدر مع الوميض ودوران الكرة */
         .header { text-align: center; padding: 30px; border-bottom: 2px solid #D4AF37; }
-        .main-title { font-size: 3em; font-weight: 900; color: #D4AF37; animation: blink 2s infinite; }
+        .main-title { font-size: 3em; font-weight: 900; color: #D4AF37; margin: 0; animation: blink 2s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-        .ball { display: inline-block; animation: rotate 3s linear infinite; font-size: 0.8em; margin: 0 10px; }
+        .ball { display: inline-block; animation: rotate 3s linear infinite; font-size: 0.8em; margin-right: 10px; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .sub-header { color: #fff; font-size: 1.2em; }
+        .sub-header { font-size: 1.2em; margin-top: 10px; }
         .makkah-time { color: #aaa; font-size: 0.9em; }
-
-        /* التبويبات */
-        .tabs { display: flex; justify-content: center; gap: 5px; margin: 20px 0; }
-        .tab { padding: 12px; background: #222; border: 1px solid #444; cursor: pointer; color: #D4AF37; font-weight: bold; border-radius: 5px; }
-        .tab.active { background: #D4AF37; color: #000; }
-
-        /* صفحة المباشر */
-        .page { display: none; padding: 20px; max-width: 700px; margin: auto; }
-        .page.active { display: block; }
-        .live-dot { height: 15px; width: 15px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
-        .update-text { animation: blink 1.5s infinite; font-size: 1.4em; }
-
-        /* البطاقات والنتائج */
-        .group-card { background: #1a1a1a; border: 1px solid #333; padding: 15px; margin-bottom: 20px; border-radius: 10px; }
-        .group-name { color: #D4AF37; text-align: center; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #333; }
-        .match { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 10px 0; border-bottom: 1px solid #222; font-size: 1.1em; }
         
-        .footer { text-align: center; padding: 30px; border-top: 2px solid #333; font-size: 1.2em; }
+        .tabs { display: flex; justify-content: center; gap: 5px; margin: 20px 0; }
+        .tab { padding: 10px 15px; background: #222; border: 1px solid #444; cursor: pointer; color: #D4AF37; font-weight: bold; border-radius: 5px; }
+        .tab.active { background: #D4AF37; color: #000; border-color: #D4AF37; }
+        
+        .page { display: none; padding: 15px; max-width: 600px; margin: auto; }
+        .page.active { display: block; }
+        .live-wrap { text-align: center; padding: 40px; }
+        .live-dot { height: 15px; width: 15px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        .update-box { font-size: 1.5em; animation: blink 1.5s infinite; }
+        
+        .group-card { background: #151515; border: 1px solid #333; padding: 15px; margin-bottom: 15px; border-radius: 10px; }
+        .group-name { color: #D4AF37; text-align: center; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #333; }
+        .match-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 10px 0; border-bottom: 1px solid #222; }
+        
+        .footer { text-align: center; padding: 30px; border-top: 2px solid #333; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 class="main-title"><span class="ball">⚽</span> CRAFT TV</h1>
+    <h1 class="main-title"><span class="ball">⚽</span> Craftivo</h1>
     <p class="sub-header">تغطية كأس العالم 2026</p>
     <p class="makkah-time">بتوقيت مكة المكرمة</p>
 </div>
@@ -49,24 +45,24 @@
     <div class="tab" onclick="showPage('knockout', this)">الإقصائيات</div>
 </div>
 
-<div id="live" class="page active" style="text-align:center;">
+<div id="live" class="page active live-wrap">
     <span class="live-dot"></span> <span style="color:red; font-weight:bold;">مباشر</span>
-    <p class="update-text">جاري التحديث ....</p>
+    <p class="update-box">جاري التحديث ....</p>
 </div>
 
 <div id="archive" class="page"><div id="arc-content"></div></div>
 <div id="upcoming" class="page"><div id="up-content"></div></div>
 <div id="knockout" class="page">
     <div class="group-card">
-        <div class="match"><span>دور الـ 32</span><span>16 مباراة</span></div>
-        <div class="match"><span>دور الـ 16</span><span>8 مباريات</span></div>
-        <div class="match"><span>دور الـ 8</span><span>4 مباريات</span></div>
-        <div class="match"><span>دور الـ 4</span><span>2 مباراة</span></div>
-        <div class="match" style="color:#D4AF37;"><span>الفاينال 🏆</span><span>مباراة واحدة</span></div>
+        <div class="match-row"><span>دور الـ 32</span><span>16 مباراة</span></div>
+        <div class="match-row"><span>دور الـ 16</span><span>8 مباريات</span></div>
+        <div class="match-row"><span>دور الـ 8</span><span>4 مباريات</span></div>
+        <div class="match-row"><span>دور الـ 4</span><span>2 مباراة</span></div>
+        <div class="match-row" style="color:#D4AF37;"><span>النهائي 🏆</span><span>مباراة واحدة</span></div>
     </div>
 </div>
 
-<div class="footer">Craft TV 🤍 LMS</div>
+<div class="footer">Craftivo 🤍 LMS</div>
 
 <script>
     function showPage(id, el) {
@@ -76,27 +72,37 @@
         el.classList.add('active');
     }
 
-    const archData = [
+    const archiveData = [
         {n: "المجموعة أ", m: [{t1: "المكسيك 🇲🇽", s: "0-2", t2: "جنوب أفريقيا 🇿🇦"}, {t1: "كوريا الجنوبية 🇰🇷", s: "2-1", t2: "التشيك 🇨🇿"}]},
-        {n: "المجموعة ب", m: [{t1: "كندا 🇨🇦", s: "1-1", t2: "البوسنة 🇧🇦"}, {t1: "قطر 🇶🇦", s: "1-1", t2: "سويسرا 🇨🇭"}]}
+        {n: "المجموعة ب", m: [{t1: "كندا 🇨🇦", s: "1-1", t2: "البوسنة والهرسك 🇧🇦"}, {t1: "قطر 🇶🇦", s: "1-1", t2: "سويسرا 🇨🇭"}]},
+        {n: "المجموعة ج", m: [{t1: "البرازيل 🇧🇷", s: "1-1", t2: "المغرب 🇲🇦"}, {t1: "هايتي 🇭🇹", s: "0-1", t2: "إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿"}]},
+        {n: "المجموعة د", m: [{t1: "الولايات المتحدة 🇺🇸", s: "4-1", t2: "باراغواي 🇵🇾"}, {t1: "أستراليا 🇦🇺", s: "0-2", t2: "تركيا 🇹🇷"}]},
+        {n: "المجموعة هـ", m: [{t1: "ألمانيا 🇩🇪", s: "7-1", t2: "كوراساو 🇨🇼"}, {t1: "ساحل العاج 🇨🇮", s: "0-1", t2: "الإكوادور 🇪🇨"}]},
+        {n: "المجموعة و", m: [{t1: "اليابان 🇯🇵", s: "2-2", t2: "هولندا 🇳🇱"}, {t1: "السويد 🇸🇪", s: "5-1", t2: "تونس 🇹🇳"}]},
+        {n: "المجموعة ز", m: [{t1: "إسبانيا 🇪🇸", s: "0-0", t2: "الرأس الأخضر 🇨🇻"}, {t1: "السعودية 🇸🇦", s: "1-1", t2: "أوروغواي 🇺🇾"}]},
+        {n: "المجموعة ح", m: [{t1: "بلجيكا 🇧🇪", s: "1-1", t2: "مصر 🇪🇬"}, {t1: "إيران 🇮🇷", s: "2-2", t2: "نيوزيلندا 🇳🇿"}]},
+        {n: "المجموعة ط", m: [{t1: "الأرجنتين 🇦🇷", s: "0-0", t2: "السنغال 🇸🇳"}, {t1: "غانا 🇬🇭", s: "1-2", t2: "كرواتيا 🇭🇷"}]},
+        {n: "المجموعة ي", m: [{t1: "فرنسا 🇫🇷", s: "3-0", t2: "فيتنام 🇻🇳"}, {t1: "صربيا 🇷🇸", s: "1-1", t2: "نيجيريا 🇳🇬"}]},
+        {n: "المجموعة ك", m: [{t1: "إيطاليا 🇮🇹", s: "2-0", t2: "أوزبكستان 🇺🇿"}, {t1: "البيرو 🇵🇪", s: "0-1", t2: "النرويج 🇳🇴"}]},
+        {n: "المجموعة ل", m: [{t1: "إنجلترا 🏴󠁧󠁢󠁥󠁮󠁧󠁿", s: "4-0", t2: "تنزانيا 🇹🇿"}, {t1: "البرتغال 🇵🇹", s: "1-0", t2: "كولومبيا 🇨🇴"}]}
     ];
 
-    const upData = [
+    const upcomingData = [
         {n: "المجموعة هـ", m: [{t1: "ألمانيا 🇩🇪", s: "22:00 | 22 يونيو", t2: "ساحل العاج 🇨🇮"}]},
         {n: "المجموعة و", m: [{t1: "هولندا 🇳🇱", s: "19:00 | 23 يونيو", t2: "السويد 🇸🇪"}]}
     ];
 
     const arcDiv = document.getElementById('arc-content');
-    archData.forEach(g => {
+    archiveData.forEach(g => {
         let h = `<div class="group-card"><div class="group-name">${g.n}</div>`;
-        g.m.forEach(m => h += `<div class="match"><div style="text-align:right;">${m.t1}</div><div style="color:#D4AF37; font-weight:bold; padding:0 10px;">${m.s}</div><div style="text-align:left;">${m.t2}</div></div>`);
+        g.m.forEach(m => h += `<div class="match-row"><div style="text-align:right;">${m.t1}</div><div style="color:#D4AF37; font-weight:bold; padding:0 10px;">${m.s}</div><div style="text-align:left;">${m.t2}</div></div>`);
         arcDiv.innerHTML += h + `</div>`;
     });
 
     const upDiv = document.getElementById('up-content');
-    upData.forEach(g => {
+    upcomingData.forEach(g => {
         let h = `<div class="group-card"><div class="group-name">${g.n}</div>`;
-        g.m.forEach(m => h += `<div class="match"><div style="text-align:right;">${m.t1}</div><div style="color:#D4AF37; font-weight:bold; padding:0 10px;">${m.s}</div><div style="text-align:left;">${m.t2}</div></div>`);
+        g.m.forEach(m => h += `<div class="match-row"><div style="text-align:right;">${m.t1}</div><div style="color:#D4AF37; font-weight:bold; padding:0 10px;">${m.s}</div><div style="text-align:left;">${m.t2}</div></div>`);
         upDiv.innerHTML += h + `</div>`;
     });
 </script>
