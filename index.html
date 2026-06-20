@@ -1,80 +1,52 @@
-<style>
-    body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; direction: rtl; }
-    .brand-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #D4AF37; }
-    .brand-title { color: #D4AF37; font-size: 3em; font-weight: 900; margin: 0; }
-    
-    .tabs { display: flex; justify-content: space-between; margin-bottom: 25px; gap: 5px; }
-    .tab-btn { background: #1a1a1a; color: #D4AF37; border: 2px solid #D4AF37; padding: 12px; flex: 1; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9em; }
-    .tab-btn.active { background: #D4AF37; color: #000; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تغطية كأس العالم 2026 - Craftivo</title>
+    <style>
+        body { background-color: #0b0e14; color: #ffffff; font-family: 'Arial', sans-serif; padding: 20px; }
+        .brand-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #D4AF37; padding-bottom: 10px; }
+        .brand-title { color: #D4AF37; font-size: 2.5em; font-weight: 900; margin: 0; letter-spacing: 2px; }
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .group-card { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 15px; transition: 0.3s; }
+        .group-card:hover { border-color: #D4AF37; }
+        .group-title { color: #D4AF37; font-size: 1.3em; text-align: center; font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .match-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 1em; }
+        .team { width: 40%; display: flex; align-items: center; white-space: nowrap; }
+        .score { width: 20%; text-align: center; font-weight: bold; color: #D4AF37; background: #222; border-radius: 4px; padding: 2px 0; }
+    </style>
+</head>
+<body>
 
-    .live-container { border: 2px solid #ff0000; padding: 25px; text-align: center; border-radius: 15px; }
-    .live-text { color: #ff0000; font-size: 2.2em; font-weight: bold; }
-    .blink-red { width: 18px; height: 18px; background: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
-    .flash-white { animation: flash-white 1.5s infinite; color: #ffffff; font-size: 1.6em; margin-top: 10px; }
+    <div class="brand-header"><h1 class="brand-title">CRAFTIVO</h1></div>
 
-    .group-card { background: #1a1a1a; border: 2px solid #D4AF37; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
-    .group-title { color: #D4AF37; font-size: 1.5em; text-align: center; font-weight: bold; margin-bottom: 12px; }
-    .match-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #333; font-size: 1.2em; }
-    .team { width: 42%; display: flex; align-items: center; }
-    .score { width: 16%; text-align: center; font-weight: bold; color: #D4AF37; }
+    <div class="container" id="dataContainer"></div>
 
-    @keyframes blink { 50% { opacity: 0; } }
-    @keyframes flash-white { 50% { opacity: 0.3; } }
-</style>
-
-<div class="brand-header"><h1 class="brand-title">CRAFTIVO</h1></div>
-
-<div class="tabs">
-    <button class="tab-btn active" onclick="showTab('live')">المباشر</button>
-    <button class="tab-btn" onclick="showTab('archive')">الأرشيف</button>
-    <button class="tab-btn" onclick="showTab('upcoming')">القادمة</button>
-    <button class="tab-btn" onclick="showTab('knockout')">الدور الإقصائي</button>
-</div>
-
-<!-- المباشر -->
-<div id="live" class="tab-content active">
-    <div class="live-container">
-        <div class="live-text">مباشر <span class="blink-red"></span></div>
-        <div class="flash-white">جاري التحديث...</div>
-    </div>
-</div>
-
-<!-- الأرشيف -->
-<div id="archive" class="tab-content">
     <script>
-        const archiveData = [
-            {n: "أ (A)", m: [{t1: "🇿🇦 جنوب أفريقيا", s: " : t2", t0: "🇲🇽 المكسيك"}, {t1: "🇰🇷 كوريا الجنوبية", s: "2 : 1", t2: "🇨🇿 التشيك"}, {t1: "🇿🇦 جنوب أفريقيا", s: "1 : 1", t2: "🇨🇿 التشيك"}, {t1: "🇲🇽 المكسيك", s: "1 : 0", t2: "🇰🇷 كوريا الجنوبية"}], p: "المكسيك (3)، جنوب أفريقيا (4)، كوريا الجنوبية (3)، التشيك (1)"},
-            {n: "ب (B)", m: [{t1: "🇨🇦 كندا", s: "1 : 1", t2: "🇧🇦 البوسنة والهرسك"}, {t1: "🇶🇦 قطر", s: "1 : 1", t2: "🇨🇭 سويسرا"}, {t1: "🇨🇭 سويسرا", s: "4 : 1", t2: "🇧🇦 البوسنة والهرسك"}, {t1: "🇨🇦 كندا", s: "6 : 0", t2: "🇶🇦 قطر"}], p: "كندا (4)، سويسرا (4)، البوسنة والهرسك (1)، قطر (1)"},
-            {n: "ج (C)", m: [{t1: "🇧🇷 البرازيل", s: "1 : 1", t2: "🇲🇦 المغرب"}, {t1: "🇭🇹 هايتي", s: "0 : 1", t2: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا"}, {t1: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا", s: "0 : 1", t2: "🇲🇦 المغرب"}, {t1: "🇧🇷 البرازيل", s: "3 : 0", t2: "🇭🇹 هايتي"}], p: "المغرب (6)، البرازيل (4)، إسكتلندا (3)، هايتي (0)"},
-            {n: "د (D)", m: [{t1: "🇵🇾 باراغواي", s: "1 : 4", t2: "🇺🇸 الولايات المتحدة"}, {t1: "🇦🇺 أستراليا", s: "2 : 0", t2: "🇹🇷 تركيا"}, {t1: "🇺🇸 الولايات المتحدة", s: "2 : 0", t2: "🇦🇺 أستراليا"}, {t1: "🇹🇷 تركيا", s: "0 : 1", t2: "🇵🇾 باراغواي"}], p: "الولايات المتحدة (6)، باراغواي (3)، أستراليا (3)، تركيا (0)"},
-            {n: "هـ (E)", m: [{t1: "🇩🇪 ألمانيا", s: "7 : 1", t2: "🇨🇼 كوراساو"}, {t1: "🇨🇮 ساحل العاج", s: "1 : 0", t2: "🇪🇨 الإكوادور"}], p: "ألمانيا (3)، ساحل العاج (3)، الإكوادور (0)، كوراساو (0)"},
-            {n: "و (F)", m: [{t1: "🇯🇵 اليابان", s: "2 : 2", t2: "🇳🇱 هولندا"}, {t1: "🇸🇪 السويد", s: "5 : 1", t2: "🇹🇳 تونس"}], p: "السويد (3)، اليابان (1)، هولندا (1)، تونس (0)"},
-            {n: "ز (G)", m: [{t1: "🇪🇸 إسبانيا", s: "0 : 0", t2: "🇨🇻 الرأس الأخضر"}, {t1: "🇸🇦 السعودية", s: "1 : 1", t2: "🇺🇾 أوروغواي"}], p: "السعودية (1)، أوروغواي (1)، إسبانيا (1)، الرأس الأخضر (1)"},
-            {n: "ح (H)", m: [{t1: "🇧🇪 بلجيكا", s: "1 : 1", t2: "🇪🇬 مصر"}, {t1: "🇮🇷 إيران", s: "2 : 2", t2: "🇳🇿 نيوزيلندا"}], p: "بلجيكا (1)، مصر (1)، إيران (1)، نيوزيلندا (1)"},
-            {n: "ط (I)", m: [{t1: "🇫🇷 فرنسا", s: "3 : 1", t2: "🇸🇳 السنغال"}, {t1: "🇮🇶 العراق", s: "1 : 4", t2: "🇳🇴 النرويج"}], p: "فرنسا (3)، النرويج (3)، السنغال (0)، العراق (0)"},
-            {n: "ي (J)", m: [{t1: "🇦🇹 النمسا", s: "3 : 1", t2: "🇯🇴 الأردن"}, {t1: "🇦🇷 الأرجنتين", s: "3 : 0", t2: "🇩🇿 الجزائر"}], p: "النمسا (3)، الأرجنتين (3)، الأردن (0)، الجزائر (0)"},
-            {n: "ك (K)", m: [{t1: "🇵🇹 البرتغال", s: "1 : 1", t2: "🇨🇩 الكونغو"}, {t1: "🇺🇿 أوزبكستان", s: "1 : 3", t2: "🇨🇴 كولومبيا"}], p: "كولومبيا (3)، البرتغال (1)، الكونغو (1)، أوزبكستان (0)"},
-            {n: "ل (L)", m: [{t1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا", s: "4 : 2", t2: "🇭🇷 كرواتيا"}, {t1: "🇵🇦 بنما", s: "1 : 0", t2: "🇬🇭 غانا"}], p: "كرواتيا (3)، إنجلترا (3)، بنما (3)، غانا (0)"}
+        const groups = [
+            {n: "أ", m: [{t1: "🇲🇽 المكسيك", s: "2 - 0", t2: "🇿🇦 جنوب أفريقيا"}, {t1: "🇰🇷 كوريا الجنوبية", s: "2 - 1", t2: "🇨🇿 التشيك"}, {t1: "🇨🇿 التشيك", s: "1 - 1", t2: "🇿🇦 جنوب أفريقيا"}, {t1: "🇲🇽 المكسيك", s: "1 - 0", t2: "🇰🇷 كوريا الجنوبية"}]},
+            {n: "ب", m: [{t1: "🇨🇦 كندا", s: "1 - 1", t2: "🇧🇦 البوسنة والهرسك"}, {t1: "🇶🇦 قطر", s: "1 - 1", t2: "🇨🇭 سويسرا"}, {t1: "🇨🇭 سويسرا", s: "4 - 1", t2: "🇧🇦 البوسنة والهرسك"}, {t1: "🇨🇦 كندا", s: "6 - 0", t2: "🇶🇦 قطر"}]},
+            {n: "ج", m: [{t1: "🇧🇷 البرازيل", s: "1 - 1", t2: "🇲🇦 المغرب"}, {t1: "🇭🇹 هايتي", s: "0 - 1", t2: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا"}, {t1: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا", s: "0 - 1", t2: "🇲🇦 المغرب"}, {t1: "🇧🇷 البرازيل", s: "3 - 0", t2: "🇭🇹 هايتي"}]},
+            {n: "د", m: [{t1: "🇺🇸 الولايات المتحدة", s: "4 - 1", t2: "🇵🇾 باراغواي"}, {t1: "🇦🇺 أستراليا", s: "2 - 0", t2: "🇹🇷 تركيا"}, {t1: "🇺🇸 الولايات المتحدة", s: "2 - 0", t2: "🇦🇺 أستراليا"}, {t1: "🇹🇷 تركيا", s: "0 - 1", t2: "🇵🇾 باراغواي"}]},
+            {n: "هـ", m: [{t1: "🇩🇪 ألمانيا", s: "7 - 1", t2: "🇨🇼 كوراساو"}, {t1: "🇨🇮 ساحل العاج", s: "1 - 0", t2: "🇪🇨 الإكوادور"}]},
+            {n: "و", m: [{t1: "🇯🇵 اليابان", s: "2 - 2", t2: "🇳🇱 هولندا"}, {t1: "🇸🇪 السويد", s: "5 - 1", t2: "🇹🇳 تونس"}]},
+            {n: "ز", m: [{t1: "🇪🇸 إسبانيا", s: "0 - 0", t2: "🇨🇻 الرأس الأخضر"}, {t1: "🇸🇦 السعودية", s: "1 - 1", t2: "🇺🇾 أوروغواي"}]},
+            {n: "ح", m: [{t1: "🇧🇪 بلجيكا", s: "1 - 1", t2: "🇪🇬 مصر"}, {t1: "🇮🇷 إيران", s: "2 - 2", t2: "🇳🇿 نيوزيلندا"}]},
+            {n: "ط", m: [{t1: "🇫🇷 فرنسا", s: "3 - 1", t2: "🇸🇳 السنغال"}, {t1: "🇮🇶 العراق", s: "1 - 4", t2: "🇳🇴 النرويج"}]},
+            {n: "ي", m: [{t1: "🇦🇹 النمسا", s: "3 - 1", t2: "🇯🇴 الأردن"}, {t1: "🇦🇷 الأرجنتين", s: "3 - 0", t2: "🇩🇿 الجزائر"}]},
+            {n: "ك", m: [{t1: "🇵🇹 البرتغال", s: "1 - 1", t2: "🇨🇩 الكونغو"}, {t1: "🇺🇿 أوزبكستان", s: "1 - 3", t2: "🇨🇴 كولومبيا"}]},
+            {n: "ل", m: [{t1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا", s: "4 - 2", t2: "🇭🇷 كرواتيا"}, {t1: "🇵🇦 بنما", s: "1 - 0", t2: "🇬🇭 غانا"}]}
         ];
-        archiveData.forEach(g => {
-            document.write(`<div class="group-card"><div class="group-title">المجموعة ${g.n}</div>`);
-            g.m.forEach(m => document.write(`<div class="match-row"><div class="team" style="justify-content: flex-end;">${m.t1}</div><div class="score">${m.s}</div><div class="team" style="justify-content: flex-start;">${m.t2}</div></div>`));
-            document.write(`<div style="margin-top:10px; color:#D4AF37; font-size:1.1em;">النقاط: ${g.p}</div></div>`);
+
+        const container = document.getElementById('dataContainer');
+        groups.forEach(g => {
+            let html = `<div class="group-card"><div class="group-title">المجموعة ${g.n}</div>`;
+            g.m.forEach(m => {
+                html += `<div class="match-row"><div class="team" style="justify-content: flex-end;">${m.t1}</div><div class="score">${m.s}</div><div class="team" style="justify-content: flex-start;">${m.t2}</div></div>`;
+            });
+            html += `</div>`;
+            container.innerHTML += html;
         });
     </script>
-</div>
-
-<!-- القادمة & الإقصائي (مساحات مخصصة) -->
-<div id="upcoming" class="tab-content"><div class="group-card">سيتم إضافة جدول المباريات القادمة هنا...</div></div>
-<div id="knockout" class="tab-content"><div class="group-card">هيكل شجرة الدور الإقصائي (32/16) قيد الإعداد...</div></div>
-
-<script>
-    function showTab(id) {
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
-</script>
+</body>
+</html>
