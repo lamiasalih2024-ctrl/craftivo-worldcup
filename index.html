@@ -4,54 +4,65 @@
     <meta charset="UTF-8">
     <title>تغطية كأس العالم 2026 | Craftivo</title>
     <style>
-        body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; }
-        .header { text-align: center; padding: 20px; border-bottom: 2px solid #D4AF37; }
-        .main-title { font-size: 1.8em; color: #D4AF37; display: flex; align-items: center; justify-content: center; gap: 10px; flex-direction: column; }
-        .logo-ball { width: 50px; animation: rotate 3s linear infinite; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .subtitle { font-size: 0.9em; color: #aaa; margin-top: 5px; }
-        .tabs { display: flex; justify-content: center; gap: 5px; margin: 15px 0; }
-        .tab { padding: 10px; background: #222; color: #D4AF37; cursor: pointer; border-radius: 5px; border: 1px solid #444; font-size: 0.9em; }
+        body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; }
+        .header { text-align: center; padding: 25px; border-bottom: 2px solid #D4AF37; }
+        .main-title { font-size: 3em; font-weight: 900; color: #D4AF37; text-shadow: 0 0 20px #D4AF37; margin: 0; }
+        .sub-title { color: #aaa; margin: 10px 0; }
+        .tabs { display: flex; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: wrap; }
+        .tab { padding: 10px 20px; background: #222; border: 1px solid #444; cursor: pointer; color: #D4AF37; border-radius: 5px; transition: 0.3s; font-weight: bold; }
         .tab.active { background: #D4AF37; color: #000; }
-        .page { display: none; padding: 15px; }
+        .page { display: none; padding: 20px; max-width: 900px; margin: auto; }
         .page.active { display: block; }
-        .group-card { background: #1a1a1a; border-radius: 10px; padding: 15px; margin-bottom: 20px; border: 1px solid #333; }
-        .group-title { color: #D4AF37; font-weight: bold; text-align: center; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 10px; }
-        .match-row { display: grid; grid-template-columns: 2fr 1fr 2fr; align-items: center; text-align: center; padding: 10px 0; border-bottom: 1px dashed #333; }
-        .score-col { font-weight: bold; color: #D4AF37; }
-        .points-footer { margin-top: 15px; color: #D4AF37; font-size: 0.85em; border-top: 1px solid #444; padding-top: 10px; text-align: center; }
-        .live-text { color: red; text-align: center; font-weight: bold; animation: blink 1s infinite; }
+        .group-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
+        .group-title { color: #D4AF37; font-weight: bold; text-align: center; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        .match-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #222; }
+        .footer { text-align: center; padding: 30px; border-top: 1px solid #333; margin-top: 50px; color: #D4AF37; font-weight: bold; }
         @keyframes blink { 50% { opacity: 0; } }
+        .live-dot { height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <div class="main-title">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Soccerball.svg" class="logo-ball">
-        CRAFTIVO
-    </div>
-    <div class="subtitle">تغطية كأس العالم 2026 | بتوقيت مكة المكرمة</div>
+    <h1 class="main-title">CRAFTIVO ⚽</h1>
+    <p class="sub-title">تغطية كأس العالم 2026 | بتوقيت مكة المكرمة</p>
 </div>
 
 <div class="tabs">
-    <div class="tab" onclick="showPage('live', this)">المباشر</div>
+    <div class="tab active" onclick="showPage('live', this)">المباشر</div>
+    <div class="tab" onclick="showPage('archive', this)">الأرشيف</div>
     <div class="tab" onclick="showPage('upcoming', this)">المباريات القادمة</div>
-    <div class="tab active" onclick="showPage('archive', this)">الأرشيف</div>
     <div class="tab" onclick="showPage('knockout', this)">الإقصائيات</div>
 </div>
 
-<div id="live" class="page"><p class="live-text">🔴 جاري التحديث الآن...</p></div>
-<div id="upcoming" class="page"></div>
-<div id="archive" class="page active"></div>
+<div id="live" class="page active">
+    <h3>مباشر <span class="live-dot"></span></h3>
+    <p style="animation: blink 2s infinite;">جاري التحديث...</p>
+</div>
+
+<div id="archive" class="page">
+    <div id="archiveContainer"></div>
+</div>
+
+<div id="upcoming" class="page">
+    <div id="upcomingContainer"></div>
+</div>
+
 <div id="knockout" class="page">
-    <div class="group-card"><div class="group-title">نظام الإقصائيات</div>
-        <div class="match-row"><span>دور الـ 32</span><span>16</span><span>مباراة</span></div>
-        <div class="match-row"><span>دور الـ 16</span><span>8</span><span>مباريات</span></div>
-        <div class="match-row"><span>ربع النهائي</span><span>4</span><span>مباريات</span></div>
-        <div class="match-row"><span>نصف النهائي</span><span>2</span><span>مباراة</span></div>
-        <div class="match-row" style="color:#D4AF37"><span>النهائي</span><span>1</span><span>مباراة</span></div>
+    <h3 style="text-align: center; color: #D4AF37;">خارطة الإقصائيات 🏆⏳</h3>
+    <div class="group-card">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 1.5em; font-weight: bold; color: #D4AF37;">🏆 النهائي 🏆</div>
+        </div>
+        <div class="match-row"><span>دور الـ 4 (نصف النهائي)</span><span>2 مباراة</span></div>
+        <div class="match-row"><span>دور الـ 8 (ربع النهائي)</span><span>4 مباريات</span></div>
+        <div class="match-row"><span>دور الـ 16</span><span>8 مباريات</span></div>
+        <div class="match-row"><span>دور الـ 32</span><span>16 مباراة</span></div>
     </div>
+</div>
+
+<div class="footer">
+    Craft TV ♡ LMS
 </div>
 
 <script>
@@ -63,45 +74,47 @@
     }
 
     const archiveData = [
-        {name: "أ", m: [{t1: "المكسيك 🇲🇽", s1: "2", s2: "0", t2: "جنوب أفريقيا 🇿🇦"}, {t1: "كوريا الجنوبية 🇰🇷", s1: "2", s2: "1", t2: "التشيك 🇨🇿"}, {t1: "التشيك 🇨🇿", s1: "1", s2: "1", t2: "جنوب أفريقيا 🇿🇦"}, {t1: "المكسيك 🇲🇽", s1: "1", s2: "0", t2: "كوريا الجنوبية 🇰🇷"}], pts: "النقاط: المكسيك(6)، كوريا الجنوبية(3)، التشيك(1)، جنوب أفريقيا(1)"},
-        {name: "ب", m: [{t1: "كندا 🇨🇦", s1: "1", s2: "1", t2: "البوسنة والهرسك 🇧🇦"}, {t1: "قطر 🇶🇦", s1: "1", s2: "1", t2: "سويسرا 🇨🇭"}, {t1: "سويسرا 🇨🇭", s1: "4", s2: "1", t2: "البوسنة والهرسك 🇧🇦"}, {t1: "كندا 🇨🇦", s1: "6", s2: "0", t2: "قطر 🇶🇦"}], pts: "النقاط: كندا(4)، سويسرا(4)، قطر(1)، البوسنة والهرسك(1)"},
-        {name: "ج", m: [{t1: "البرازيل 🇧🇷", s1: "1", s2: "1", t2: "المغرب 🇲🇦"}, {t1: "هايتي 🇭🇹", s1: "0", s2: "1", t2: "إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿"}, {t1: "إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿", s1: "0", s2: "1", t2: "المغرب 🇲🇦"}, {t1: "البرازيل 🇧🇷", s1: "3", s2: "0", t2: "هايتي 🇭🇹"}], pts: "النقاط: المغرب(4)، البرازيل(4)، إسكتلندا(3)، هايتي(0)"},
-        {name: "د", m: [{t1: "أمريكا 🇺🇸", s1: "4", s2: "1", t2: "باراغواي 🇵🇾"}, {t1: "أستراليا 🇦🇺", s1: "2", s2: "0", t2: "تركيا 🇹🇷"}, {t1: "أمريكا 🇺🇸", s1: "2", s2: "0", t2: "أستراليا 🇦🇺"}, {t1: "تركيا 🇹🇷", s1: "0", s2: "1", t2: "باراغواي 🇵🇾"}], pts: "النقاط: أمريكا(6)، باراغواي(3)، أستراليا(3)، تركيا(0)"},
-        {name: "هـ", m: [{t1: "ألمانيا 🇩🇪", s1: "0", s2: "0", t2: "ساحل العاج 🇨🇮"}], pts: "النقاط: ألمانيا(0)، ساحل العاج(0)"},
-        {name: "و", m: [{t1: "هولندا 🇳🇱", s1: "2", s2: "2", t2: "اليابان 🇯🇵"}, {t1: "السويد 🇸🇪", s1: "5", s2: "1", t2: "تونس 🇹🇳"}, {t1: "هولندا 🇳🇱", s1: "5", s2: "1", t2: "السويد 🇸🇪"}], pts: "النقاط: هولندا(4)، السويد(3)، اليابان(1)، تونس(0)"},
-        {name: "ز", m: [{t1: "بلجيكا 🇧🇪", s1: "1", s2: "1", t2: "مصر 🇪🇬"}, {t1: "إيران 🇮🇷", s1: "2", s2: "2", t2: "نيوزيلندا 🇳🇿"}], pts: "النقاط: بلجيكا(1)، مصر(1)، إيران(1)، نيوزيلندا(1)"},
-        {name: "ح", m: [{t1: "إسبانيا 🇪🇸", s1: "0", s2: "0", t2: "الرأس الأخضر 🇨🇻"}, {t1: "السعودية 🇸🇦", s1: "1", s2: "1", t2: "أوروغواي 🇺🇾"}], pts: "النقاط: السعودية(1)، أوروغواي(1)، إسبانيا(1)، الرأس الأخضر(1)"},
-        {name: "ط", m: [{t1: "فرنسا 🇫🇷", s1: "3", s2: "1", t2: "السنغال 🇸🇳"}, {t1: "العراق 🇮🇶", s1: "1", s2: "4", t2: "النرويج 🇳🇴"}], pts: "النقاط: فرنسا(3)، النرويج(3)، السنغال(0)، العراق(0)"},
-        {name: "ي", m: [{t1: "النمسا 🇦🇹", s1: "3", s2: "1", t2: "الأردن 🇯🇴"}, {t1: "الأرجنتين 🇦🇷", s1: "3", s2: "0", t2: "الجزائر 🇩🇿"}], pts: "النقاط: النمسا(3)، الأرجنتين(3)، الأردن(0)، الجزائر(0)"},
-        {name: "ك", m: [{t1: "البرتغال 🇵🇹", s1: "1", s2: "1", t2: "الكونغو 🇨🇩"}, {t1: "أوزبكستان 🇺🇿", s1: "1", s2: "3", t2: "كولومبيا 🇨🇴"}], pts: "النقاط: كولومبيا(3)، البرتغال(1)، الكونغو(1)، أوزبكستان(0)"},
-        {name: "ل", m: [{t1: "إنجلترا 🏴󠁧󠁢󠁥󠁮󠁧󠁿", s1: "4", s2: "2", t2: "كرواتيا 🇭🇷"}, {t1: "غانا 🇬🇭", s1: "1", s2: "0", t2: "بنما 🇵🇦"}], pts: "النقاط: إنجلترا(3)، غانا(3)، كرواتيا(0)، بنما(0)"}
+        {n: "أ", m: [{t1: "🇲🇽 المكسيك", s: "2 - 0", t2: "🇿🇦 جنوب أفريقيا"}, {t1: "🇰🇷 كوريا الجنوبية", s: "2 - 1", t2: "🇨🇿 التشيك"}, {t1: "🇨🇿 التشيك", s: "1 - 1", t2: "🇿🇦 جنوب أفريقيا"}, {t1: "🇲🇽 المكسيك", s: "1 - 0", t2: "🇰🇷 كوريا الجنوبية"}]},
+        {n: "ب", m: [{t1: "🇨🇦 كندا", s: "1 - 1", t2: "🇧🇦 البوسنة والهرسك"}, {t1: "🇶🇦 قطر", s: "1 - 1", t2: "🇨🇭 سويسرا"}, {t1: "🇨🇭 سويسرا", s: "4 - 1", t2: "🇧🇦 البوسنة والهرسك"}, {t1: "🇨🇦 كندا", s: "6 - 0", t2: "🇶🇦 قطر"}]},
+        {n: "ج", m: [{t1: "🇧🇷 البرازيل", s: "1 - 1", t2: "🇲🇦 المغرب"}, {t1: "🇭🇹 هايتي", s: "0 - 1", t2: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا"}, {t1: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا", s: "0 - 1", t2: "🇲🇦 المغرب"}, {t1: "🇧🇷 البرازيل", s: "3 - 0", t2: "🇭🇹 هايتي"}]},
+        {n: "د", m: [{t1: "🇺🇸 الولايات المتحدة", s: "4 - 1", t2: "🇵🇾 باراغواي"}, {t1: "🇦🇺 أستراليا", s: "2 - 0", t2: "🇹🇷 تركيا"}, {t1: "🇺🇸 الولايات المتحدة", s: "2 - 0", t2: "🇦🇺 أستراليا"}, {t1: "🇹🇷 تركيا", s: "0 - 1", t2: "🇵🇾 باراغواي"}]},
+        {n: "هـ", m: [{t1: "🇩🇪 ألمانيا", s: "7 - 1", t2: "🇨🇼 كوراساو"}, {t1: "🇨🇮 ساحل العاج", s: "1 - 0", t2: "🇪🇨 الإكوادور"}]},
+        {n: "و", m: [{t1: "🇯🇵 اليابان", s: "2 - 2", t2: "🇳🇱 هولندا"}, {t1: "🇸🇪 السويد", s: "5 - 1", t2: "🇹🇳 تونس"}]},
+        {n: "ز", m: [{t1: "🇪🇸 إسبانيا", s: "0 - 0", t2: "🇨🇻 الرأس الأخضر"}, {t1: "🇸🇦 السعودية", s: "1 - 1", t2: "🇺🇾 أوروغواي"}]},
+        {n: "ح", m: [{t1: "🇧🇪 بلجيكا", s: "1 - 1", t2: "🇪🇬 مصر"}, {t1: "🇮🇷 إيران", s: "2 - 2", t2: "🇳🇿 نيوزيلندا"}]},
+        {n: "ط", m: [{t1: "🇫🇷 فرنسا", s: "3 - 1", t2: "🇸🇳 السنغال"}, {t1: "🇮🇶 العراق", s: "1 - 4", t2: "🇳🇴 النرويج"}]},
+        {n: "ي", m: [{t1: "🇦🇹 النمسا", s: "3 - 1", t2: "🇯🇴 الأردن"}, {t1: "🇦🇷 الأرجنتين", s: "3 - 0", t2: "🇩🇿 الجزائر"}]},
+        {n: "ك", m: [{t1: "🇵🇹 البرتغال", s: "1 - 1", t2: "🇨🇩 الكونغو"}, {t1: "🇺🇿 أوزبكستان", s: "1 - 3", t2: "🇨🇴 كولومبيا"}]},
+        {n: "ل", m: [{t1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا", s: "4 - 2", t2: "🇭🇷 كرواتيا"}, {t1: "🇵🇦 بنما", s: "1 - 0", t2: "🇬🇭 غانا"}]}
     ];
 
-    const upData = [
-        {n: "أ", m: ["جنوب أفريقيا 🇿🇦 VS كوريا الجنوبية 🇰🇷 - 25 يونيو، 04:00", "التشيك 🇨🇿 VS المكسيك 🇲🇽 - 25 يونيو، 04:00"]},
-        {n: "ب", m: ["سويسرا 🇨🇭 VS كندا 🇨🇦 - 24 يونيو، 22:00", "البوسنة والهرسك 🇧🇦 VS قطر 🇶🇦 - 24 يونيو، 22:00"]},
-        {n: "ج", m: ["المغرب 🇲🇦 VS هايتي 🇭🇹 - 25 يونيو، 01:00", "إسكتلندا 🏴󠁧󠁢󠁳󠁣󠁴󠁿 VS البرازيل 🇧🇷 - 25 يونيو، 01:00"]},
-        {n: "د", m: ["تركيا 🇹🇷 VS أمريكا 🇺🇸 - 26 يونيو، 05:00", "باراغواي 🇵🇾 VS أستراليا 🇦🇺 - 26 يونيو، 05:00"]},
-        {n: "هـ", m: ["ألمانيا 🇩🇪 VS ساحل العاج 🇨🇮 - اليوم 23:00", "الإكوادور 🇪🇨 VS كوراساو 🇨🇼 - غداً 03:00"]},
-        {n: "و", m: ["تونس 🇹🇳 VS اليابان 🇯🇵 - غداً 07:00", "اليابان 🇯🇵 VS السويد 🇸🇪 - 26 يونيو، 02:00"]},
-        {n: "ز", m: ["بلجيكا 🇧🇪 VS مصر 🇪🇬 - 22 يونيو، 19:00", "إيران 🇮🇷 VS نيوزيلندا 🇳🇿 - 22 يونيو، 04:00"]},
-        {n: "ح", m: ["إسبانيا 🇪🇸 VS السعودية 🇸🇦 - 22 يونيو، 19:00", "الرأس الأخضر 🇨🇻 VS أوروغواي 🇺🇾 - 22 يونيو، 01:00"]},
-        {n: "ط", m: ["فرنسا 🇫🇷 VS العراق 🇮🇶 - 23 يونيو، 00:00", "السنغال 🇸🇳 VS النرويج 🇳🇴 - 23 يونيو، 03:00"]},
-        {n: "ي", m: ["الأرجنتين 🇦🇷 VS النمسا 🇦🇹 - 22 يونيو، 20:00", "الأردن 🇯🇴 VS الجزائر 🇩🇿 - 23 يونيو، 06:00"]},
-        {n: "ك", m: ["البرتغال 🇵🇹 VS أوزبكستان 🇺🇿 - 23 يونيو، 20:00", "كولومبيا 🇨🇴 VS الكونغو 🇨🇩 - 24 يونيو، 05:00"]},
-        {n: "ل", m: ["إنجلترا 🏴󠁧󠁢󠁥󠁮󠁧󠁿 VS غانا 🇬🇭 - 23 يونيو، 23:00", "بنما 🇵🇦 VS كرواتيا 🇭🇷 - 24 يونيو، 02:00"]}
+    const upcomingData = [
+        {n: "أ", m: [{t: "🇿🇦 جنوب أفريقيا VS 🇰🇷 كوريا الجنوبية", d: "25 يونيو، 04:00"}, {t: "🇨🇿 التشيك VS 🇲🇽 المكسيك", d: "25 يونيو، 04:00"}]},
+        {n: "ب", m: [{t: "🇨🇭 سويسرا VS 🇨🇦 كندا", d: "24 يونيو، 22:00"}, {t: "🇧🇦 البوسنة والهرسك VS 🇶🇦 قطر", d: "24 يونيو، 22:00"}]},
+        {n: "ج", m: [{t: "🇲🇦 المغرب VS 🇭🇹 هايتي", d: "25 يونيو، 01:00"}, {t: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا VS 🇧🇷 البرازيل", d: "25 يونيو، 01:00"}]},
+        {n: "د", m: [{t: "🇹🇷 تركيا VS 🇺🇸 الولايات المتحدة", d: "26 يونيو، 05:00"}, {t: "🇵🇾 باراغواي VS 🇦🇺 أستراليا", d: "26 يونيو، 05:00"}]},
+        {n: "هـ", m: [{t: "🇩🇪 ألمانيا VS 🇨🇮 ساحل العاج", d: "اليوم، 23:00"}, {t: "🇪🇨 الإكوادور VS 🇨🇼 كوراساو", d: "غداً، 03:00"}, {t: "🇨🇼 كوراساو VS 🇨🇮 ساحل العاج", d: "25 يونيو، 23:00"}, {t: "🇪🇨 الإكوادور VS 🇩🇪 ألمانيا", d: "25 يونيو، 23:00"}]},
+        {n: "و", m: [{t: "🇳🇱 هولندا VS 🇸🇪 السويد", d: "اليوم، 20:00"}, {t: "🇹🇳 تونس VS 🇯🇵 اليابان", d: "غداً، 07:00"}, {t: "🇹🇳 تونس VS 🇳🇱 هولندا", d: "26 يونيو، 02:00"}, {t: "🇯🇵 اليابان VS 🇸🇪 السويد", d: "26 يونيو، 02:00"}]},
+        {n: "ز", m: [{t: "🇪🇸 إسبانيا VS 🇸🇦 السعودية", d: "19:00"}, {t: "🇺🇾 أوروغواي VS 🇨🇻 الرأس الأخضر", d: "22 يونيو، 01:00"}, {t: "🇨🇻 الرأس الأخضر VS 🇸🇦 السعودية", d: "27 يونيو، 03:00"}, {t: "🇺🇾 أوروغواي VS 🇪🇸 إسبانيا", d: "27 يونيو، 03:00"}]},
+        {n: "ح", m: [{t: "🇧🇪 بلجيكا VS 🇮🇷 إيران", d: "22:00"}, {t: "🇳🇿 نيوزيلندا VS 🇪🇬 مصر", d: "22 يونيو، 04:00"}, {t: "🇳🇿 نيوزيلندا VS 🇧🇪 بلجيكا", d: "27 يونيو، 06:00"}, {t: "🇪🇬 مصر VS 🇮🇷 إيران", d: "27 يونيو، 06:00"}]},
+        {n: "ط", m: [{t: "🇫🇷 فرنسا VS 🇮🇶 العراق", d: "23 يونيو، 00:00"}, {t: "🇳🇴 النرويج VS 🇸🇳 السنغال", d: "23 يونيو، 03:00"}, {t: "🇳🇴 النرويج VS 🇫🇷 فرنسا", d: "26 يونيو، 22:00"}, {t: "🇸🇳 السنغال VS 🇮🇶 العراق", d: "26 يونيو، 22:00"}]},
+        {n: "ي", m: [{t: "🇦🇷 الأرجنتين VS 🇦🇹 النمسا", d: "22 يونيو، 20:00"}, {t: "🇯🇴 الأردن VS 🇩🇿 الجزائر", d: "23 يونيو، 06:00"}, {t: "🇩🇿 الجزائر VS 🇦🇹 النمسا", d: "28 يونيو، 05:00"}, {t: "🇯🇴 الأردن VS 🇦🇷 الأرجنتين", d: "28 يونيو، 05:00"}]},
+        {n: "ك", m: [{t: "🇵🇹 البرتغال VS 🇺🇿 أوزبكستان", d: "23 يونيو، 20:00"}, {t: "🇨🇴 كولومبيا VS 🇨🇩 الكونغو", d: "24 يونيو، 05:00"}, {t: "🇨🇴 كولومبيا VS 🇵🇹 البرتغال", d: "28 يونيو، 02:30"}, {t: "🇨🇩 الكونغو VS 🇺🇿 أوزبكستان", d: "28 يونيو، 02:30"}]},
+        {n: "ل", m: [{t: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا VS 🇬🇭 غانا", d: "23 يونيو، 23:00"}, {t: "🇵🇦 بنما VS 🇭🇷 كرواتيا", d: "24 يونيو، 02:00"}, {t: "🇵🇦 بنما VS 🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا", d: "28 يونيو، 00:00"}, {t: "🇭🇷 كرواتيا VS 🇬🇭 غانا", d: "28 يونيو، 00:00"}]}
     ];
 
+    const arcCont = document.getElementById('archiveContainer');
     archiveData.forEach(g => {
-        let h = `<div class="group-card"><div class="group-title">المجموعة ${g.name}</div>`;
-        g.m.forEach(m => h += `<div class="match-row"><div>${m.t1}</div><div class="score-col"><span>${m.s1}</span><br>-<br><span>${m.s2}</span></div><div>${m.t2}</div></div>`);
-        document.getElementById('archive').innerHTML += h + `<div class="points-footer">${g.pts}</div></div>`;
+        let h = `<div class="group-card"><div class="group-title">المجموعة ${g.n}</div>`;
+        g.m.forEach(m => h += `<div class="match-row"><span>${m.t1}</span><span style="color:#D4AF37;">${m.s}</span><span>${m.t2}</span></div>`);
+        arcCont.innerHTML += h + `</div>`;
     });
 
-    upData.forEach(g => {
+    const upCont = document.getElementById('upcomingContainer');
+    upcomingData.forEach(g => {
         let h = `<div class="group-card"><div class="group-title">المجموعة ${g.n}</div>`;
-        g.m.forEach(m => h += `<div style="padding:8px; border-bottom:1px solid #333; text-align:center;">${m}</div>`);
-        document.getElementById('upcoming').innerHTML += h + `</div>`;
+        g.m.forEach(m => h += `<div class="match-row"><span>${m.t}</span><span style="font-size:0.8em; color:#888;">${m.d}</span></div>`);
+        upCont.innerHTML += h + `</div>`;
     });
 </script>
 </body>
