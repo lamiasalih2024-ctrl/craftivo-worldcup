@@ -9,9 +9,12 @@
         .main-title { font-size: 3em; color: #D4AF37; margin: 0; display: flex; align-items: center; justify-content: center; gap: 15px; }
         .logo-ball { width: 50px; animation: rotate 3s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .tabs { display: flex; justify-content: center; gap: 5px; margin: 20px 0; }
-        .tab { padding: 10px 20px; background: #222; cursor: pointer; color: #D4AF37; border-radius: 5px; font-weight: bold; }
+        
+        /* التعديلات هنا لجعل التبويبات تملاء السطر */
+        .tabs { display: flex; justify-content: space-between; margin: 20px 10px; gap: 5px; }
+        .tab { flex: 1; padding: 15px 5px; background: #222; cursor: pointer; color: #D4AF37; border-radius: 5px; font-weight: bold; text-align: center; font-size: 16px; border: 1px solid #444; }
         .tab.active { background: #D4AF37; color: #000; }
+        
         .page { display: none; padding: 20px; max-width: 800px; margin: auto; }
         .page.active { display: block; }
         .group-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
@@ -30,7 +33,7 @@
 <div class="tabs">
     <div class="tab active" onclick="showPage('live', this)">المباشر</div>
     <div class="tab" onclick="showPage('archive', this)">الأرشيف</div>
-    <div class="tab" onclick="showPage('upcoming', this)">المباريات القادمة</div>
+    <div class="tab" onclick="showPage('upcoming', this)">القادمة</div>
     <div class="tab" onclick="showPage('knockout', this)">الإقصائيات</div>
 </div>
 
