@@ -10,10 +10,10 @@
         .logo-ball { width: 50px; animation: rotate 3s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         
-        /* تم تكبير الخط في التبويبات لتصبح أوضح */
+        /* التعديلات هنا: خط عريض جداً (Bold) وحجم أكبر */
         .tabs { display: flex; justify-content: space-between; margin: 20px 10px; gap: 5px; }
-        .tab { flex: 1; padding: 20px 5px; background: #222; cursor: pointer; color: #D4AF37; border-radius: 8px; font-weight: bold; text-align: center; font-size: 22px; border: 1px solid #444; }
-        .tab.active { background: #D4AF37; color: #000; }
+        .tab { flex: 1; padding: 20px 5px; background: #222; cursor: pointer; color: #D4AF37; border-radius: 8px; font-weight: 900; text-align: center; font-size: 22px; border: 2px solid #D4AF37; }
+        .tab.active { background: #D4AF37; color: #000; border: 2px solid #D4AF37; }
         
         .page { display: none; padding: 20px; max-width: 800px; margin: auto; }
         .page.active { display: block; }
