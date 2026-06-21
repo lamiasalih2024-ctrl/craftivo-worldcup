@@ -4,45 +4,56 @@
     <meta charset="UTF-8">
     <title>تغطية كأس العالم 2026 | Craftivo</title>
     <style>
-        body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; font-size: 20px; }
+        body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; font-size: 20px; }
         .header { text-align: center; padding: 25px; border-bottom: 2px solid #D4AF37; }
-        .main-title { font-size: 4em; font-weight: 900; color: #D4AF37; text-shadow: 0 0 20px #D4AF37; margin: 0; display: flex; align-items: center; justify-content: center; gap: 15px; }
-        .logo-ball { width: 60px; animation: rotate 3s linear infinite; }
+        .main-title { font-size: 3em; color: #D4AF37; margin: 0; display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .logo-ball { width: 50px; animation: rotate 3s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .sub-title { color: #aaa; margin: 10px 0; }
-        .tabs { display: flex; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: wrap; }
-        .tab { padding: 10px 20px; background: #222; border: 1px solid #444; cursor: pointer; color: #D4AF37; border-radius: 5px; font-weight: bold; font-size: 20px; }
+        .tabs { display: flex; justify-content: center; gap: 5px; margin: 20px 0; }
+        .tab { padding: 10px 20px; background: #222; cursor: pointer; color: #D4AF37; border-radius: 5px; font-weight: bold; }
         .tab.active { background: #D4AF37; color: #000; }
-        .page { display: none; padding: 20px; max-width: 900px; margin: auto; }
+        .page { display: none; padding: 20px; max-width: 800px; margin: auto; }
         .page.active { display: block; }
         .group-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-        .group-title { color: #D4AF37; font-weight: bold; text-align: center; margin-bottom: 10px; border-bottom: 1px solid #444; font-size: 28px; }
-        .match-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #222; font-size: 20px; }
-        table { width: 100%; border-collapse: collapse; text-align: center; font-size: 18px; margin-top: 15px; }
-        th { padding: 10px; background: #D4AF37; color: black; }
-        td { padding: 8px; border-bottom: 1px solid #333; }
-        .footer { text-align: center; padding: 30px; border-top: 1px solid #333; margin-top: 50px; color: #D4AF37; font-weight: bold; }
+        .footer { text-align: center; padding: 20px; color: #D4AF37; font-weight: bold; }
         @keyframes blink { 50% { opacity: 0; } }
         .live-dot { height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
-        /* تعديل حجم العناوين داخل التبويبات */
-        .page h3 { font-size: 35px; color: #D4AF37; }
     </style>
 </head>
 <body>
+
 <div class="header">
     <h1 class="main-title"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Soccerball.svg" class="logo-ball"> CRAFTIVO</h1>
-    <p class="sub-title">تغطية كأس العالم 2026 | بتوقيت مكة المكرمة</p>
+    <p>تغطية كأس العالم 2026 | بتوقيت مكة المكرمة</p>
 </div>
+
 <div class="tabs">
     <div class="tab active" onclick="showPage('live', this)">المباشر</div>
     <div class="tab" onclick="showPage('archive', this)">الأرشيف</div>
     <div class="tab" onclick="showPage('upcoming', this)">المباريات القادمة</div>
     <div class="tab" onclick="showPage('knockout', this)">الإقصائيات</div>
 </div>
-<div id="live" class="page active"><h3>مباشر <span class="live-dot"></span></h3><p style="animation: blink 2s infinite;">جاري التحديث...</p></div>
-<div id="archive" class="page"><h3>الأرشيف</h3><div id="archiveContainer"></div></div>
-<div id="upcoming" class="page"><h3>المباريات القادمة</h3><div id="upcomingContainer"></div></div>
-<div id="knockout" class="page"><h3>الإقصائيات</h3><div id="knockoutContainer"></div></div>
-<div class="footer">Craftivo ♡ ℒℳЅ</div>
+
+<div id="live" class="page active">
+    <div class="group-card" style="text-align: center;">
+        <h3 style="color: red;">مباشر <span class="live-dot"></span></h3>
+        <p style="animation: blink 2s infinite;">جاري التحديث...</p>
+    </div>
+</div>
+
+<div id="archive" class="page"></div>
+<div id="upcoming" class="page"></div>
+<div id="knockout" class="page"></div>
+
+<div class="footer">Craft TV ♡ LMS</div>
+
+<script>
+    function showPage(id, el) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        el.classList.add('active');
+    }
+</script>
 </body>
 </html>
