@@ -10,17 +10,29 @@
         .main-title { font-size: 2.2em; color: #D4AF37; margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .logo-ball { width: 45px; animation: rotate 3s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
         .tabs { display: flex; justify-content: space-between; margin: 15px 5px; gap: 5px; }
         .tab { flex: 1; padding: 12px 2px; background: #222; cursor: pointer; color: #D4AF37; border-radius: 6px; font-weight: 900; text-align: center; font-size: 16px; border: 1px solid #D4AF37; }
         .tab.active { background: #D4AF37; color: #000; }
+        
         .page { display: none; padding: 10px; width: 100%; box-sizing: border-box; }
         .page.active { display: block; }
+        
         .group-card { background: #1a1a1a; border: 2px solid #D4AF37; border-radius: 0; padding: 15px; margin-bottom: 15px; width: 100%; box-sizing: border-box; }
         .group-title { color: #D4AF37; font-weight: 900; text-align: center; font-size: 22px; border-bottom: 1px solid #D4AF37; padding-bottom: 10px; margin-bottom: 15px; }
+        
         .match-row { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; padding: 15px 0; }
         .team { display: flex; flex-direction: row; align-items: center; width: 35%; font-weight: 900; font-size: 20px; gap: 8px; }
         .score { font-size: 30px; font-weight: 900; color: #D4AF37; width: 30%; text-align: center; }
-        .standings { margin-top: 15px; color: #eee; font-size: 13px; font-weight: 400; text-align: center; line-height: 1.5; }
+        
+        @keyframes red-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes white-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        .live-container { text-align: center; padding: 40px 20px; }
+        .live-text { color: red; font-weight: 900; font-size: 28px; animation: red-blink 1s infinite; }
+        .live-dot { height: 16px; width: 16px; background-color: red; border-radius: 50%; display: inline-block; animation: red-blink 1s infinite; margin-left: 10px; }
+        .update-text { color: white; font-size: 22px; animation: white-blink 1.5s infinite; margin-top: 10px; }
+        
         .footer { text-align: center; padding: 20px; color: #D4AF37; font-weight: bold; font-size: 14px; }
     </style>
 </head>
@@ -31,13 +43,23 @@
 <div class="tabs">
     <div class="tab active" onclick="showPage('live', this)">المباشر</div>
     <div class="tab" onclick="showPage('archive', this)">الأرشيف</div>
+    <div class="tab" onclick="showPage('upcoming', this)">القادمة</div>
+    <div class="tab" onclick="showPage('knockout', this)">الإقصائيات</div>
 </div>
-<div id="archive" class="page active">
+
+<div id="live" class="page active">
+    <div class="group-card live-container">
+        <div class="live-text">مباشر <span class="live-dot"></span></div>
+        <p class="update-text">جاري التحديث...</p>
+    </div>
+</div>
+
+<div id="archive" class="page">
     <div class="group-card"><div class="group-title">المجموعة أ</div><div class="match-row"><div class="team">🇲🇽 المكسيك</div><div class="score">٢-٠</div><div class="team">🇿🇦 ج.أفريقيا</div></div><div class="match-row"><div class="team">🇰🇷 كوريا</div><div class="score">٢-١</div><div class="team">🇨🇿 التشيك</div></div><div class="match-row"><div class="team">🇨🇿 التشيك</div><div class="score">١-١</div><div class="team">🇿🇦 ج.أفريقيا</div></div><div class="match-row"><div class="team">🇲🇽 المكسيك</div><div class="score">١-٠</div><div class="team">🇰🇷 كوريا</div></div></div>
     <div class="group-card"><div class="group-title">المجموعة ب</div><div class="match-row"><div class="team">🇨🇦 كندا</div><div class="score">١-١</div><div class="team">🇧🇦 البوسنة</div></div><div class="match-row"><div class="team">🇶🇦 قطر</div><div class="score">١-١</div><div class="team">🇨🇭 سويسرا</div></div><div class="match-row"><div class="team">🇨🇭 سويسرا</div><div class="score">٤-١</div><div class="team">🇧🇦 البوسنة</div></div><div class="match-row"><div class="team">🇨🇦 كندا</div><div class="score">٦-٠</div><div class="team">🇶🇦 قطر</div></div></div>
     <div class="group-card"><div class="group-title">المجموعة ج</div><div class="match-row"><div class="team">🇧🇷 البرازيل</div><div class="score">١-١</div><div class="team">🇲🇦 المغرب</div></div><div class="match-row"><div class="team">🇭🇹 هايتي</div><div class="score">٠-١</div><div class="team">🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا</div></div><div class="match-row"><div class="team">🏴󠁧󠁢󠁳󠁣󠁴󠁿 إسكتلندا</div><div class="score">٠-١</div><div class="team">🇲🇦 المغرب</div></div><div class="match-row"><div class="team">🇧🇷 البرازيل</div><div class="score">٣-٠</div><div class="team">🇭🇹 هايتي</div></div></div>
     <div class="group-card"><div class="group-title">المجموعة د</div><div class="match-row"><div class="team">🇺🇸 أمريكا</div><div class="score">٤-١</div><div class="team">🇵🇾 باراغواي</div></div><div class="match-row"><div class="team">🇦🇺 أستراليا</div><div class="score">٢-٠</div><div class="team">🇹🇷 تركيا</div></div><div class="match-row"><div class="team">🇺🇸 أمريكا</div><div class="score">٢-٠</div><div class="team">🇦🇺 أستراليا</div></div><div class="match-row"><div class="team">🇹🇷 تركيا</div><div class="score">٠-١</div><div class="team">🇵🇾 باراغواي</div></div></div>
-    <div class="group-card"><div class="group-title">المجموعة هـ</div><div class="match-row"><div class="team">🇩🇪 ألمانيا</div><div class="score">٧-١</div><div class="team">🇨🇼 كوراساو</div></div><div class="match-row"><div class="team">🇨🇮 ساحل العاج</div><div class="score">١-٠</div><div class="team">🇪🇨 الإكوادور</div></div><div class="match-row"><div class="team">🇩🇪 ألمانيا</div><div class="score">٢-١</div><div class="team">🇨🇮 ساحل العاج</div></div><div class="match-row"><div class="team">🇪🇨 الإكوادور</div><div class="score">٠-٠</div><div class="team">🇨🇼 كوراساو</div></div></div>
+    <div class="group-card"><div class="group-title">المجموعة هـ</div><div class="match-row"><div class="team">🇩🇪 ألمانيا</div><div class="score">٧-١</div><div class="team">🇨🇼 كوراساو</div></div><div class="match-row"><div class="team">🇨🇮 س.العاج</div><div class="score">١-٠</div><div class="team">🇪🇨 الإكوادور</div></div><div class="match-row"><div class="team">🇩🇪 ألمانيا</div><div class="score">٢-١</div><div class="team">🇨🇮 س.العاج</div></div><div class="match-row"><div class="team">🇪🇨 الإكوادور</div><div class="score">٠-٠</div><div class="team">🇨🇼 كوراساو</div></div></div>
     <div class="group-card"><div class="group-title">المجموعة و</div><div class="match-row"><div class="team">🇳🇱 هولندا</div><div class="score">٢-٢</div><div class="team">🇯🇵 اليابان</div></div><div class="match-row"><div class="team">🇸🇪 السويد</div><div class="score">٥-١</div><div class="team">🇹🇳 تونس</div></div><div class="match-row"><div class="team">🇳🇱 هولندا</div><div class="score">٥-١</div><div class="team">🇸🇪 السويد</div></div><div class="match-row"><div class="team">🇹🇳 تونس</div><div class="score">٠-٤</div><div class="team">🇯🇵 اليابان</div></div></div>
     <div class="group-card"><div class="group-title">المجموعة ز</div><div class="match-row"><div class="team">🇧🇪 بلجيكا</div><div class="score">١-١</div><div class="team">🇮🇷 إيران</div></div><div class="match-row"><div class="team">🇮🇷 إيران</div><div class="score">٢-٢</div><div class="team">🇳🇿 نيوزيلندا</div></div></div>
     <div class="group-card"><div class="group-title">المجموعة ح</div><div class="match-row"><div class="team">🇪🇸 إسبانيا</div><div class="score">٠-٠</div><div class="team">🇨🇻 الرأس</div></div><div class="match-row"><div class="team">🇸🇦 السعودية</div><div class="score">١-١</div><div class="team">🇺🇾 أورجواي</div></div></div>
@@ -46,7 +68,12 @@
     <div class="group-card"><div class="group-title">المجموعة ك</div><div class="match-row"><div class="team">🇵🇹 البرتغال</div><div class="score">١-١</div><div class="team">🇨🇩 الكونغو</div></div><div class="match-row"><div class="team">🇺🇿 أوزبكستان</div><div class="score">١-٣</div><div class="team">🇨🇴 كولومبيا</div></div></div>
     <div class="group-card"><div class="group-title">المجموعة ل</div><div class="match-row"><div class="team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا</div><div class="score">٤-٢</div><div class="team">🇭🇷 كرواتيا</div></div><div class="match-row"><div class="team">🇬🇭 غانا</div><div class="score">١-٠</div><div class="team">🇵🇦 بنما</div></div></div>
 </div>
+
+<div id="upcoming" class="page"><div class="group-card" style="text-align:center;">لا توجد مباريات قادمة حالياً</div></div>
+<div id="knockout" class="page"><div class="group-card" style="text-align:center;">قريباً...</div></div>
+
 <div class="footer">Craft TV ♡ LMS</div>
+
 <script>
     function showPage(id, el) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
