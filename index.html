@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>تغطية كأس العالم 2026 | Craftivo</title>
     <style>
-        body { background-color: #0b0e14; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        body { background-color: #0b0e14; color: #fff; font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; }
         .header { text-align: center; padding: 25px; border-bottom: 2px solid #D4AF37; }
         .main-title { font-size: 2.5em; color: #D4AF37; margin: 0; display: flex; align-items: center; justify-content: center; gap: 15px; }
         .logo-ball { width: 50px; animation: rotate 3s linear infinite; }
@@ -14,24 +15,24 @@
         .tab { flex: 1; padding: 15px 5px; background: #222; cursor: pointer; color: #D4AF37; border-radius: 8px; font-weight: 900; text-align: center; font-size: 18px; border: 2px solid #D4AF37; }
         .tab.active { background: #D4AF37; color: #000; border: 2px solid #D4AF37; }
         
-        .page { display: none; padding: 15px; max-width: 600px; margin: auto; }
+        .page { display: none; padding: 15px; max-width: 650px; margin: auto; }
         .page.active { display: block; }
         
-        .group-card { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 15px; margin-bottom: 20px; }
-        .group-title { color: #D4AF37; font-weight: 900; text-align: center; font-size: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+        .group-card { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+        .group-title { color: #D4AF37; font-weight: 900; text-align: center; font-size: 24px; border-bottom: 1px solid #333; padding-bottom: 12px; margin-bottom: 20px; }
         
-        .match-row { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; padding: 12px 0; }
-        .team { display: flex; flex-direction: column; align-items: center; width: 40%; font-weight: bold; font-size: 16px; gap: 5px; }
-        .score { font-size: 24px; font-weight: 900; color: #D4AF37; width: 20%; text-align: center; }
-        .standings { margin-top: 10px; color: #fff; font-size: 16px; font-weight: bold; text-align: center; }
+        .match-row { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; padding: 18px 0; }
+        .team { display: flex; flex-direction: row; align-items: center; justify-content: center; width: 40%; font-weight: 700; font-size: 19px; gap: 10px; }
+        .score { font-size: 28px; font-weight: 900; color: #D4AF37; width: 20%; text-align: center; }
+        .standings { margin-top: 15px; color: #ccc; font-size: 14px; font-weight: 400; text-align: center; line-height: 1.6; }
         
         @keyframes red-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes white-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
-        .live-container { text-align: center; padding: 20px; }
-        .live-text { color: red; font-weight: 900; font-size: 22px; animation: red-blink 1s infinite; }
-        .live-dot { height: 12px; width: 12px; background-color: red; border-radius: 50%; display: inline-block; animation: red-blink 1s infinite; margin-left: 8px; }
-        .update-text { color: white; font-size: 18px; animation: white-blink 1.5s infinite; }
+        .live-container { text-align: center; padding: 30px; }
+        .live-text { color: red; font-weight: 900; font-size: 26px; animation: red-blink 1s infinite; }
+        .live-dot { height: 14px; width: 14px; background-color: red; border-radius: 50%; display: inline-block; animation: red-blink 1s infinite; margin-left: 10px; }
+        .update-text { color: white; font-size: 20px; animation: white-blink 1.5s infinite; }
         
         .footer { text-align: center; padding: 20px; color: #D4AF37; font-weight: bold; }
     </style>
